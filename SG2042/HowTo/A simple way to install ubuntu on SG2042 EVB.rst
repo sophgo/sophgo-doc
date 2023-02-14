@@ -1,46 +1,69 @@
-==========================================================
-   A simple method to install ubuntu on SG2042 EVB borad
-==========================================================
+=====================================================
+A Simple Method to Install Ubuntu Image on SG2042 EVB
+=====================================================
 
 
 1. Prerequisites
-------------------------
-- Linux host machine
-- SG2042 EVB borad
-- TF card(16GB or above), TF card reader
-- NVMe SSD, 
-- Serial(usb)
-	  
+================
+- Computer with Linux OS
+- SG2042 EVB
+- microSD Card (16GB or above), microSD Card Reader
+- NVMe SSD
+- Serial Cable (Micro USB - USB)
 
-2. Steps
-------------------------
+2. Get an Ubuntu Image
+======================
+-   Dowload the `Ubuntu image <http://219.142.246.77:65000/sharing/dKlPHukbe>`_ directly.
 
--   Dowload image 
+    The image is created based on Ubuntu offical preinstall server image.
 
-    http://219.142.246.77:65000/sharing/dKlPHukbe
-    
-    The image is created based on ubuntu offical preinstall server image.
+-   Or use your own compiled ``sd.img`` exiting in the
+    ``install/soc_mango/riscv64`` directory.
 
-    The following uses sd.img to refer to the image.
+The following uses ``sd.img`` to refer to the Ubuntu image.
 
--   dd command writes image to TF card
+3. Create a Bootable microSD Card
+=================================
 
-.. highlights:: 
+Option 1: Use balenaEtcher
+--------------------------
+a. Download and install the `balenaEtcher <https://www.balena.io/etcher>`_.
 
-    .. code::
+b. Click on the **Flash from file** button and choose the ``sd.img``
+   you want to use.
+
+c. Click the **Select target** button and choose the microSD Card
+   to write the ``sd.img`` to.
+
+d. Click the **Flash!** button to begin the process.
+
+Option 2: Use ``dd`` command directly
+-------------------------------------
+-   Use ``dd`` command to write ``sd.img`` to microSD Card
+
+.. highlights::
+
+    .. code:: sh
+
+        # To find the block device name of your microSD Card.
+        # For example, the microSD Card drive is /dev/sdc. Checking the name of your device is a key step,
+        # as writing to the wrong device might corrupt or destroy your data.
 
         $ sudo dd if=sd.img of=/dev/sdc bs=32M
+
         160+0 records in
         160+0 records out
         5368709120 bytes (5.4 GB, 5.0 GiB) copied, 108.587 s, 49.4 MB/s
 
 
--   Resize root partition of TF card 
+-   Resize root partition of microSD Card (**Optional**)
 
-.. highlights:: 
+.. highlights::
 
-    .. code::    
+    .. code:: sh
 
+
+        # Change partition table of your microSD Card.
         $ sudo fdisk /dev/sdc
 
         Welcome to fdisk (util-linux 2.37.2).
@@ -72,9 +95,9 @@
         p   primary (2 primary, 0 extended, 2 free)
         e   extended (container for logical partitions)
         Select (default p): p
-        Partition number (3,4, default 3): 
-        First sector (524288-62333951, default 524288): 
-        Last sector, +/-sectors or +/-size{K,M,G,T,P} (524288-62333951, default 62333951): 
+        Partition number (3,4, default 3):
+        First sector (524288-62333951, default 524288):
+        Last sector, +/-sectors or +/-size{K,M,G,T,P} (524288-62333951, default 62333951):
 
         Created a new partition 3 of type 'Linux' and of size 29.5 GiB.
         Partition #3 contains a ext4 signature.
@@ -87,7 +110,13 @@
         Calling ioctl() to re-read partition table.
         Syncing disks.
 
+.. highlights::
+
+    .. code:: sh
+
+        # Check partitions of your microSD Card.
         $ sudo fdisk -l /dev/sdc
+
         Disk /dev/sdc: 29.72 GiB, 31914983424 bytes, 62333952 sectors
         Disk model: MassStorageClass
         Units: sectors of 1 * 512 = 512 bytes
@@ -102,11 +131,13 @@
         /dev/sdc3       524288 62333951 61809664 29.5G 83 Linux
 
 
-.. highlights:: 
+.. highlights::
 
-    .. code:: 
+    .. code:: sh
 
+        # Force checking your file system.
         $ sudo e2fsck -f /dev/sdc3
+
         e2fsck 1.46.5 (30-Dec-2021)
         Pass 1: Checking inodes, blocks, and sizes
         Pass 2: Checking directory structure
@@ -120,30 +151,34 @@
         The filesystem on /dev/sdc3 is now 7726208 (4k) blocks long.
 
 
--   Copy image to /home/ubuntu on root partition of TF card 
+-   Copy image to ``/home/ubuntu`` on the root partition of the microSD Card.
 
-.. highlights:: 
+.. highlights::
 
-    .. code:: 
+    .. code:: sh
 
         $ cp sd.img /mnt/home/ubuntu
 
+4. Boot from microSD Card
+=========================
+-   Plug the microSD Card into the SG2042 EVB,
+    connect the serial cable to your computer,
+    and power on the EVB.
+-   Enter the username ``ubuntu`` and the password ``ubuntu``.
+-   Any operation needs the ``sudo`` privilege.
 
--   Insert the TF card into the SG2042 EVB borad, connect serial to host machine, and power on the EVB
+5. Use NVMe SSD and microSD Card
+================================
+If you want to boot your system from a combination of
+NVMe SSD and microSD Card,
+the following steps also need to be done.
 
+a. Use the ``dd`` command to copy the ``sd.img`` to the NVMe disk.
 
--   Login ubuntu on TF card, using ubuntu:ubuntu which has sudo permission
+b. Resize the root partition of the NVMe disk.
 
+c. Use the ``fdisk`` command to delete the root partition of the microSD Card.
 
--   dd command write the image to NVMe disk
+    .. note:: This step is critical because the root partition of the microSD Card and the NVMe disk has the same label!
 
-
--   Resize root partition of NVMe disk
-
-
--   fdisk command deletes root partition of TF card
-
-    notes: very important because root partition of both TF card and NVMe disk have the same label
-    
-
--   Restart system to access ubuntu on NVMe disk
+d. Reboot, and access Ubuntu using the NVMe disk.
