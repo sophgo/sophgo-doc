@@ -40,11 +40,17 @@ To build uroot, you need to install **go 1.17**, refer to https://tecadmin.net/h
       $ git clone https://github.com/sophgo/bootloader-riscv.git
       $ git clone https://github.com/sophgo/linux-sophgo.git
 
-- Install cross-compilation toolchains
+- Build Cross toolchain for bsp
 
-  Create the directory called ``gcc-riscv`` in the same level as
-  ``bootloader-riscv`` and ``linux-sophgo``, and install the
-  cross-compilation toolchains to the directory.
+  Enter the bsp directory which is the same level as ``bootloader-riscv`` and
+  ``linux-sophgo``, and build Cross toolchain by the following command:
+  .. highlights::
+
+   .. code:: sh
+      $ CHIP=mango
+      $ source bootloader-riscv/scripts/envsetup.sh
+      $ build_rv_gcc
+
   You will get the following folders:
 
 .. highlights::
