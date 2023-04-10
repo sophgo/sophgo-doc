@@ -13,33 +13,33 @@ A Simple Method to Install Ubuntu Image on SG2042 EVB
 
 2. Get an Ubuntu Image
 ======================
--   Dowload the `Ubuntu image <http://219.142.246.77:65000/sharing/EFm1nWC8o>`_ directly.
+-   Dowload the `Ubuntu image <http://219.142.246.77:65000/sharing/agK6z51jP>`_ directly.
 
     The image is created based on Ubuntu offical preinstall server image.
 
--   Or use your own compiled ``sd.img`` exiting in the
+-   Or use your own compiled ``ubuntu-sophgo.img`` exiting in the
     ``install/soc_mango/riscv64`` directory.
 
-The following uses ``sd.img`` to refer to the Ubuntu image.
+The following uses ``ubuntu-sophgo.img`` to refer to the Ubuntu image.
 
-3. Create a Bootable microSD Card
+1. Create a Bootable microSD Card
 =================================
 
 Option 1: Use balenaEtcher
 --------------------------
 a. Download and install the `balenaEtcher <https://www.balena.io/etcher>`_.
 
-b. Click on the **Flash from file** button and choose the ``sd.img``
+b. Click on the **Flash from file** button and choose the ``ubuntu-sophgo.img``
    you want to use.
 
 c. Click the **Select target** button and choose the microSD Card
-   to write the ``sd.img`` to.
+   to write the ``ubuntu-sophgo.img`` to.
 
 d. Click the **Flash!** button to begin the process.
 
 Option 2: Use ``dd`` command directly
 -------------------------------------
--   Use ``dd`` command to write ``sd.img`` to microSD Card
+-   Use ``dd`` command to write ``ubuntu-sophgo.img`` to microSD Card
 
 .. highlights::
 
@@ -49,11 +49,11 @@ Option 2: Use ``dd`` command directly
         # For example, the microSD Card drive is /dev/sdc. Checking the name of your device is a key step,
         # as writing to the wrong device might corrupt or destroy your data.
 
-        $ sudo dd if=sd.img of=/dev/sdc bs=32M
+        $ sudo dd if=ubuntu-sophgo.img of=/dev/sdc bs=1M
 
-        160+0 records in
-        160+0 records out
-        5368709120 bytes (5.4 GB, 5.0 GiB) copied, 108.587 s, 49.4 MB/s
+        10240+0 records in
+        10240+0 records out
+        10737418240 bytes (11 GB, 10 GiB) copied, 1211.08 s, 8.9 MB/s
 
 
 -   Resize root partition of microSD Card (**Optional**)
@@ -157,7 +157,7 @@ Option 2: Use ``dd`` command directly
 
     .. code:: sh
 
-        $ cp sd.img /mnt/home/ubuntu
+        $ cp ubuntu-sophgo.img /mnt/home/ubuntu
 
 4. Boot from microSD Card
 =========================
@@ -173,7 +173,7 @@ If you want to boot your system from a combination of
 NVMe SSD and microSD Card,
 the following steps also need to be done.
 
-a. Use the ``dd`` command to copy the ``sd.img`` to the NVMe disk.
+a. Use the ``dd`` command to copy the ``ubuntu-sophgo.img`` to the NVMe disk.
 
 b. Resize the root partition of the NVMe disk.
 
