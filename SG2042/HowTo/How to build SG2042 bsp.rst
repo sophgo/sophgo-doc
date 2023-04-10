@@ -11,7 +11,7 @@ How to build bsp
 
    .. code:: sh
 
-      $ sudo dnf install autoconf automake curl python3 libmpc-devel mpfr-devel gmp-devel gawk bison flex texinfo gperf libtool patchutils bc openssl dkms libudev-devel golang-bin zlib-devel  qemu-user-binfmt  qemu-user-static ncurses-devel expat-devel elfutils-libelf-devel pciutils-devel openssl-devel binutils-devel qemu-system-riscv-core
+      $ sudo dnf install autoconf automake curl python3 libmpc-devel mpfr-devel gmp-devel gawk bison flex texinfo gperf libtool patchutils bc openssl dkms libudev-devel golang-bin zlib-devel qemu-user-binfmt  qemu-user-static ncurses-devel expat-devel elfutils-libelf-devel pciutils-devel openssl-devel binutils-devel qemu-system-riscv-core
       $ sudo dnf groupinstall "Development Tools" "C Development Tools and Libraries"
 
 -   on Ubuntu
@@ -33,8 +33,8 @@ To build uroot, you need to install **go 1.17**, refer to https://tecadmin.net/h
 
       go version go1.17 linux/amd64
 
-2. Build from source
-====================
+2. Build all from source
+========================
 -   Download source code
 
 .. highlights::
@@ -65,10 +65,10 @@ To build uroot, you need to install **go 1.17**, refer to https://tecadmin.net/h
       ├── opensbi
       ├── linux-riscv
       └── gcc-riscv
-               ├── gcc-riscv64-unknown-elf
-               └── gcc-riscv64-unknown-linux-gnu
+            ├── gcc-riscv64-unknown-elf
+            └── gcc-riscv64-unknown-linux-gnu
 
--  Build
+-  Build all
 
 .. highlights::
 
@@ -78,22 +78,103 @@ To build uroot, you need to install **go 1.17**, refer to https://tecadmin.net/h
       $ source bootloader-riscv/scripts/envsetup.sh
       $ build_rv_all
 
--   The output files are in the ``install/soc_mango/riscv64`` directory
+- The output files are in the ``install/soc_mango/riscv64`` directory.
+
+.. highlights::
 
    .. code:: sh
 
       .
       ├── bsp-debs
-      │        ├── linux-headers-6.1.15.deb
-      │        ├── linux-image-6.1.15-dbg.deb
-      │        └── linux-image-6.1.15.deb
+      │      ├── linux-headers-6.1.22.deb
+      │      ├── linux-image-6.1.22-dbg.deb
+      │      ├── linux-image-6.1.22.deb
+      │      └── linux-libc-dev_6.1.22.deb
       ├── fw_jump.bin
       ├── fw_jump.elf
       ├── initrd.img
       ├── mango-milkv-pioneer.dtb
+      ├── mango-sophgo-pisces.dtb
       ├── mango-sophgo-x8evb.dtb
       ├── riscv64_Image
-      ├── rootfs.cpio
-      ├── sd.img
+      ├── tools
+      │      └── perf
+      │            ├── build-perf.sh
+      │            ├── perf-6.1.22
+      │            └── perf-6.1.22.tar
+      ├── ubuntu-sophgo.img
       ├── vmlinux
       └── zsbl.bin
+
+.. note:: If you need to compile a file separately,
+   type the ``show_rv_functions`` command to
+   get the relevant instructions.
+
+3. Build perf tool on Ubuntu
+============================
+- Use the following commands to extract the perf source
+  package from ``linux-riscv`` and get the build script.
+
+.. highlights::
+
+   .. code:: sh
+
+      $ CHIP=mango
+      $ source bootloader-riscv/scripts/envsetup.sh
+      $ build_rv_ubuntu_perf_tool
+
+- Find the previously mentioned files in
+  ``install/soc_mango/riscv64/tools/perf`` directory.
+
+.. highlights::
+
+   .. code:: sh
+
+      .
+      └── tools
+             └── perf
+                   ├── build-perf.sh
+                   ├── perf-6.1.22
+                   └── perf-6.1.22.tar
+
+- Copy the ``tools`` directory to the SG2042 EVB, and
+  execute the ``build-perf.sh`` to make and install perf tool.
+  If you use the latest ``ubuntu-sophgo.img``,
+  the ``tools`` exists in the ``/home/ubuntu`` directory.
+
+.. highlights::
+
+   .. code:: sh
+
+      $ cd tools/perf/
+      $ source build-scripts.sh
+
+- Use the perf tool.
+
+.. highlights::
+
+   .. code:: sh
+
+      $ perf list
+      $ perf stat
+      $ perf bench
+
+4. Build kernel with Vector
+==================================
+- Build Ubuntu or Fedora kernel with vector.
+
+.. highlights::
+
+   .. code:: sh
+
+      $ CHIP=mango
+      $ source bootloader-riscv/scripts/envsetup.sh
+      $ build_rv_ubuntu_kernel vector
+      $ build_rv_fedora_kernel vector
+
+- The above commands will set ``CONFIG_VECTOR=y``
+  in ``/boot/config-$(uname-r)`` file.
+
+.. note::
+   Build kernel **without vector by default!**
+
