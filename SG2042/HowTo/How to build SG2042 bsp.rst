@@ -159,22 +159,3 @@ To build uroot, you need to install **go 1.17**, refer to https://tecadmin.net/h
       $ perf stat
       $ perf bench
 
-4. Build kernel with Vector
-==================================
-- Build Ubuntu or Fedora kernel with vector.
-
-.. highlights::
-
-   .. code:: sh
-
-      $ CHIP=mango
-      $ source bootloader-riscv/scripts/envsetup.sh
-      $ build_rv_ubuntu_kernel vector
-      $ build_rv_fedora_kernel vector
-
-- The above commands will set ``CONFIG_VECTOR=y``
-  in ``/boot/config-$(uname-r)`` file.
-
-.. note::
-   Build kernel **without vector by default!**
-
