@@ -42,13 +42,14 @@ To build uroot, you need to install **go 1.17**, refer to https://tecadmin.net/h
    .. code:: sh
 
       $ git clone https://github.com/sophgo/bootloader-riscv.git
+      $ git clone https://github.com/sophgo/zsbl.git
       $ git clone https://github.com/sophgo/opensbi.git
       $ git clone https://github.com/sophgo/linux-riscv.git
 
 - Build Cross toolchain for bsp
 
   Enter the bsp directory which is the same level as ``bootloader-riscv``,
-  ``opensbi`` and ``linux-riscv``,
+  ``zsbl``, ``opensbi`` and ``linux-riscv``,
   and build Cross toolchain by the following command:
 
 .. highlights::
@@ -62,6 +63,7 @@ To build uroot, you need to install **go 1.17**, refer to https://tecadmin.net/h
       # get the following folders:
       .
       ├── bootloader-riscv
+      ├── zsbl
       ├── opensbi
       ├── linux-riscv
       └── gcc-riscv
@@ -87,7 +89,6 @@ To build uroot, you need to install **go 1.17**, refer to https://tecadmin.net/h
       .
       ├── bsp-debs
       │      ├── linux-headers-6.1.22.deb
-      │      ├── linux-image-6.1.22-dbg.deb
       │      ├── linux-image-6.1.22.deb
       │      └── linux-libc-dev_6.1.22.deb
       ├── fw_jump.bin
@@ -95,6 +96,7 @@ To build uroot, you need to install **go 1.17**, refer to https://tecadmin.net/h
       ├── initrd.img
       ├── mango-milkv-pioneer.dtb
       ├── mango-sophgo-pisces.dtb
+      ├── mango-sophgo-x4evb.dtb
       ├── mango-sophgo-x8evb.dtb
       ├── riscv64_Image
       ├── tools
