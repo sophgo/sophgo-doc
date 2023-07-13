@@ -76,11 +76,20 @@ To build uroot, you need to install **go 1.17**, refer to https://tecadmin.net/h
 
    .. code:: sh
 
-      $ CHIP=mango
+      # build single CHIP:
+      $ CHIP_NUM=single
       $ source bootloader-riscv/scripts/envsetup.sh
       $ build_rv_all
 
-- The output files are in the ``install/soc_mango/riscv64`` directory.
+      # build multi chip:
+      $ CHIP_NUM=multi
+      $ source bootloader-riscv/scripts/envsetup.sh
+      $ build_rv_all
+
+- If you have chosen a single chip, the output files will be located in the install/soc_mango/single_chip directory.
+- If you have chosen multiple chips, the output files will be located in the install/soc_mango/multi_chip directory.
+
+
 
 .. highlights::
 
@@ -91,22 +100,24 @@ To build uroot, you need to install **go 1.17**, refer to https://tecadmin.net/h
       │      ├── linux-headers-6.1.22.deb
       │      ├── linux-image-6.1.22.deb
       │      └── linux-libc-dev_6.1.22.deb
-      ├── fw_jump.bin
-      ├── fw_jump.elf
-      ├── initrd.img
-      ├── mango-milkv-pioneer.dtb
-      ├── mango-sophgo-pisces.dtb
-      ├── mango-sophgo-x4evb.dtb
-      ├── mango-sophgo-x8evb.dtb
-      ├── riscv64_Image
+      ├── firmware
+      │      ├── fip.bin
+      │      ├── firmware.bin
+      │      ├── fw_jump.bin
+      │      ├── fw_jump.elf
+      │      ├── initrd.img
+      │      ├── mango-milkv-pioneer.dtb
+      │      ├── mango-sophgo-pisces.dtb
+      │      ├── mango-sophgo-x4evb.dtb
+      │      ├── mango-sophgo-x8evb.dtb
+      │      ├── riscv64_Image
+      │      ├── zsbl.bin
       ├── tools
       │      └── perf
       │            ├── build-perf.sh
       │            ├── perf-6.1.22
       │            └── perf-6.1.22.tar
-      ├── ubuntu-sophgo.img
-      ├── vmlinux
-      └── zsbl.bin
+      └── ubuntu-sophgo.img
 
 .. note:: If you need to compile a file separately,
    type the ``show_rv_functions`` command to
