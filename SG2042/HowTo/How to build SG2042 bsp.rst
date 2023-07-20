@@ -45,11 +45,23 @@ To build uroot, you need to install **go 1.17**, refer to https://tecadmin.net/h
       $ git clone https://github.com/sophgo/zsbl.git
       $ git clone https://github.com/sophgo/opensbi.git
       $ git clone https://github.com/sophgo/linux-riscv.git
+      
+      # clone u-boot
+      $ git clone https://github.com/sophgo/u-boot.git
+      # clone grub
+      $ git clone git://git.savannah.gnu.org/grub.git
+      $ pushd grub
+      $ git remote add github.com_tekkamanninja https://github.com/tekkamanninja/grub.git
+      $ git fetch github.com_tekkamanninja
+      $ git checkout github.com_tekkamanninja/riscv_devel_Nikita_V3
+      $ popd
+
+
 
 - Build Cross toolchain for bsp
 
   Enter the bsp directory which is the same level as ``bootloader-riscv``,
-  ``zsbl``, ``opensbi`` and ``linux-riscv``,
+  ``zsbl``, ``opensbi``, ``u-boot``, ``grub2`` and ``linux-riscv``,
   and build Cross toolchain by the following command:
 
 .. highlights::
@@ -66,6 +78,8 @@ To build uroot, you need to install **go 1.17**, refer to https://tecadmin.net/h
       ├── zsbl
       ├── opensbi
       ├── linux-riscv
+      ├── u-boot
+      ├── grub
       └── gcc-riscv
             ├── gcc-riscv64-unknown-elf
             └── gcc-riscv64-unknown-linux-gnu
@@ -97,9 +111,9 @@ To build uroot, you need to install **go 1.17**, refer to https://tecadmin.net/h
 
       .
       ├── bsp-debs
-      │      ├── linux-headers-6.1.22.deb
-      │      ├── linux-image-6.1.22.deb
-      │      └── linux-libc-dev_6.1.22.deb
+      │      ├── linux-headers-6.1.31.deb
+      │      ├── linux-image-6.1.31.deb
+      │      └── linux-libc-dev_6.1.31.deb
       ├── firmware
       │      ├── fip.bin
       │      ├── firmware.bin
@@ -112,11 +126,14 @@ To build uroot, you need to install **go 1.17**, refer to https://tecadmin.net/h
       │      ├── mango-sophgo-x8evb.dtb
       │      ├── riscv64_Image
       │      ├── zsbl.bin
+      │      ├── u-boot.bin
+      │      ├── grubriscv64.efi
+      │      ├── grub.cfg
       ├── tools
       │      └── perf
       │            ├── build-perf.sh
-      │            ├── perf-6.1.22
-      │            └── perf-6.1.22.tar
+      │            ├── perf-6.1.31
+      │            └── perf-6.1.31.tar
       └── ubuntu-sophgo.img
 
 .. note:: If you need to compile a file separately,
@@ -171,4 +188,3 @@ To build uroot, you need to install **go 1.17**, refer to https://tecadmin.net/h
       $ perf list
       $ perf stat
       $ perf bench
-
