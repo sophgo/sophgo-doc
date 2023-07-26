@@ -20,7 +20,7 @@ https://www.server-world.info/en/note?os=Fedora_37&p=desktop&f=1
     .. code:: sh
 
         # check your desktop environment
-        dnf grouplist -v 或者  dnf group list
+        dnf grouplist -v (or: dnf group list)
         # install GNOME
         dnf -y group install "Basic Desktop" GNOME
         # or install Xfce
