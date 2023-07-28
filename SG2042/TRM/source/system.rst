@@ -77,7 +77,7 @@ cores. These platform initializations including:
 - Setup RISC-V CPU reset address to where zsbl.bin is loaded.
 - Release all RISC-V CPUs, now all CPUs run from zero stage bootloader.
 
-So, RISC-V CPUs donot have a so called bootrom. Zero stage bootloader(zsbl.bin)
+So, RISC-V CPUs do not have a so called bootrom. Zero stage bootloader(zsbl.bin)
 is the first boot stage of RISC-V CPUs.
 
 Boot
@@ -103,7 +103,7 @@ SG2042 provides 8-bit boot strap pins BOOT_SEL[7:0], the usage is shown as table
    ==============       =========       =============== ===========
    BOOT_SEL0            Software        Recommend to 1  0: Disable SD card boot. 1: Try SD card boot first, then try SPI flash boot
    BOOT_SEL1            Hardware        Recommend to 0  0: Boot from on-chip bootrom. 1: Bootrom from external SPI flash
-   BOOT_SEL2            Software        Recommend to 0  Eanble SCP console
+   BOOT_SEL2            Software        Recommend to 0  Enable SCP console
    BOOT_SEL3            Software        Must be 0       Enter system level test mode
    BOOT_SEL4-7          Reserved        Must be 0       Reserved, but must be pulled down
    ==============       =========       =============== ===========
@@ -133,11 +133,11 @@ When booting from SPI flash, bootrom loads SCP firmware from a given offset in
 flash. When booting from SD card, some restrictions are listed below:
 
 - SD card MUST contain a partition table MBR format.
-- The first partition MUST be formated with FAT32 file system.
+- The first partition MUST be formatted with FAT32 file system.
 - SCP firmware MUST be named fip.bin.
 - fip.bin MUST be put into the first partition.
 
-Suggest partitioning and formating SD card on linux based PC for compatible
+Suggest partitioning and formatting SD card on linux based PC for compatible
 considerations. You can do it by following commands
 (assume your SD card's device file is /dev/sda):
 
