@@ -9,7 +9,7 @@ All operations perform on a Linux based PC.
 2. Download prebuilt images from sophgo daily build
 ===================================================
 
-We compile hole SG2042 software stack daily. You can get these binaries from our
+We compile whole SG2042 software stack daily. You can get these binaries from our
 NAS server.
 
 http://219.142.246.77:65000//sharing/f73TDqXdN
@@ -54,6 +54,7 @@ NOTICE, DONOT flush the image to a partition of that disk, like /dev/sdb1, /dev/
 .. highlights::
 
     .. code:: sh
+
         sudo e2fsck -f /dev/sdb3
 
 7. Resize file system to fit the new partition size
