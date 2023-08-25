@@ -1,19 +1,7 @@
-Reset
-=====
-
-TODO
-
 Interrupt
 =========
 
 TODO
-
-Power domain
-============
-
-TODO
-
-.. _platform_control:
 
 Platform control
 ================
