@@ -14,6 +14,9 @@ Welcome to SG2042 Technical Reference Manual's documentation!
    system.rst
    pinmux.rst
    clock.rst
+   Reset.rst
+   Power-domain.rst
+   LP.rst
    todo.rst
 ..
      trm.rst
