@@ -90,12 +90,14 @@ To build uroot, you need to install **go 1.17**, refer to https://tecadmin.net/h
 
    .. code:: sh
 
-      # build single CHIP:
+      # build single chip:
+      $ CHIP=mango
       $ CHIP_NUM=single
       $ source bootloader-riscv/scripts/envsetup.sh
       $ build_rv_all
 
-      # build multi chip:
+      # build multi chips:   
+      $ CHIP=mango
       $ CHIP_NUM=multi
       $ source bootloader-riscv/scripts/envsetup.sh
       $ build_rv_all
