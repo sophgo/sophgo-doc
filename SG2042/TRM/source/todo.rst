@@ -33,11 +33,6 @@ SPI
 
 TODO
 
-PWM
-===
-
-TODO
-
 Fan
 ===
 

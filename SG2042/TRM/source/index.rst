@@ -17,6 +17,7 @@ Welcome to SG2042 Technical Reference Manual's documentation!
    Reset.rst
    Power-domain.rst
    LP.rst
+   PWM.rst
    todo.rst
 ..
      trm.rst
