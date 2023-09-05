@@ -25,3 +25,6 @@ exclude_patterns = []
 
 html_theme = 'alabaster'
 html_static_path = ['_static']
+
+# By default, Sphinx expects the master doc to be contents. Set master doc to index instead.
+master_doc = 'index'
