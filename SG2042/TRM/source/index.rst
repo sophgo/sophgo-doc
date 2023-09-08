@@ -18,6 +18,8 @@ Welcome to SG2042 Technical Reference Manual's documentation!
    Power-domain.rst
    LP.rst
    PWM.rst
+   interrupt.rst
+   platform-control.rst
    todo.rst
 ..
      trm.rst

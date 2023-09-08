@@ -1,13 +1,3 @@
-Interrupt
-=========
-
-TODO
-
-Platform control
-================
-
-TODO
-
 LPC
 ===
 
