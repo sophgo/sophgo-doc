@@ -8,15 +8,6 @@ UART
 
 TODO
 
-I2C
-===
-
-TODO
-
-SPI flash
-=========
-
-TODO
 
 SPI
 ===
@@ -28,7 +19,3 @@ Fan
 
 TODO
 
-GPIO
-====
-
-TODO
