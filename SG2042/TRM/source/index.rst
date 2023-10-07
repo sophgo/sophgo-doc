@@ -20,6 +20,9 @@ Welcome to SG2042 Technical Reference Manual's documentation!
    PWM.rst
    interrupt.rst
    platform-control.rst
+   I2C.rst  
+   SPI-flash.rst
+   GPIO.rst
    todo.rst
 ..
      trm.rst
