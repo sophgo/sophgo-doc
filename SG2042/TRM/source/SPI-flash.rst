@@ -133,7 +133,7 @@ FmIntvl: Frame Interval
   FmIntvl controls the frame spacing of two adjacent frames of data: T = TSCK * FmIntvl (no SCK pulsewithin the frame spacing). When FmIntvl is 0, there is no frame spacing.
   
 DMMR, Direct Memory Mapping Read (0x0C)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 default value: 0x01
 
@@ -327,11 +327,17 @@ For receiving frames:
    |                        |                         |                         | write the higher frame |
    +------------------------+-------------------------+-------------------------+------------------------+
   
-The data storage format is shown in Figure 3 and Figure 4, taking the frame length of 6 and 10 as examples respectively.
+The data storage format is shown in :ref:`fmlen6` and :ref:`fmlen10`, taking the frame length of 6 and 10 as examples respectively.
 
-.. pic:: FmLen = 6, 1 byte per frame
+.. _fmlen6:
+.. figure:: pic/spi-flash-fmlen6.png
 
-.. pic:: FmLen = 10, 2 bytes per frame
+        FmLen = 6, 1 byte per frame
+
+.. _fmlen10:
+.. figure:: pic/spi-flash-fmlen10.png
+
+        FmLen = 10, 2 bytes per frame
 
 Issues with FF_PORT's data receiving and sending of low-order frames first:
 

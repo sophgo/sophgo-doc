@@ -30,8 +30,3 @@ Pinmux module controls attributes of pins. These attributes including function,
 pull up, pull down or no pull, if schmitt trigger is enabled and driving strength.
 
 .. include:: pinmux-reg.rst
-
-Analog pins
------------
-
-TODO
