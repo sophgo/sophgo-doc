@@ -95,12 +95,10 @@ Control Registers.
 
 Take DPLL0 configuration as an example:
 
-.. TODO: should change register address and its' names
-
-1. Gate PLL output by clearing PLL Clock Enable Control Reg (0x300100C4) bit[4]
-2. Modify DPLL0 Control Register (0x300100F8)
-3. Polling PLL Status Register (0x300100C0) until: (1). PLL is locked again (bit[12] == 1) and (2). Updating sequence is finished (bit[4] == 0)
-4. Un-gate PLL output clock by SettingPLL Clock Enable Control Reg (0x300100C4) bit[4]
+1. Gate PLL output by clearing PLL Clock Enable Control Reg (0x70_300100C4) bit[4]
+2. Modify DPLL0 Control Register (0x70_300100F8)
+3. Polling PLL Status Register (0x70_300100C0) until: (1). PLL is locked again (bit[12] == 1) and (2). Updating sequence is finished (bit[4] == 0)
+4. Un-gate PLL output clock by Setting PLL Clock Enable Control Reg (0x70_300100C4) bit[4]
 
 When user programs the PLL Control Registers, internal hardware sequence is as
 figure :ref:`pll_seq`
@@ -135,7 +133,7 @@ The generation of clock enable signal is shown as figure :ref:`clock_gate`
 
         Clock gate
 
-User is able to control the above logic (Enable/MUX) by programming PLL Clock Enable Control Register (0x3001_00C4).
+User is able to control the above logic (Enable/MUX) by programming PLL Clock Enable Control Register (0x70_3001_00C4).
 
 Both original PLL Clock Enable register and its synced version can be selected as Clock Enable PLL. This is because when PLL's frequency overshoots, the synchonizer may fail to work. There has to be a backup path.
 
@@ -173,7 +171,7 @@ The status of mode select pins is show in table :ref:`mode_select`
     | x         | 1         | 1         | Bypass |
     +-----------+-----------+-----------+--------+
 
-MODE_SEL2 pin is no used.
+MODE_SEL2 pin is not used.
 
 The default clock frequency is show as table :ref:`default_clock_frequency`
 

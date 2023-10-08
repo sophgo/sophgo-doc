@@ -14,8 +14,3 @@ SPI
 
 TODO
 
-Fan
-===
-
-TODO
-

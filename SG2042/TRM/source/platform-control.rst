@@ -1,3 +1,5 @@
+.. _platform_control:
+
 Platform control
 ================
 
