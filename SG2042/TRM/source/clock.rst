@@ -44,16 +44,10 @@ Different parts inside the chip works on different frequencies.
 As there is no "one-size-fits-all" PLL, SG2042 instantiates 4 PLLs to satisfy
 logic's clock requirements.
 
-- MPLL: the name is short for Main PLL.
-        The output clocks of this PLL are mainly used in
-        RP subsystem and AP subsystem.
+* MPLL: the name is short for Main PLL. The output clocks of this PLL are mainly used in RP subsystem and AP subsystem.
+* FPLL: the name is shoft for Fixed PLL. This PLL generates fixed frequency clock, with output clock at 1.0 GHz. The output clocks of this PLL are mainly used in data and configuraiton bus.
+* DPLL0/1: the name is short for DDR PLL. The output clocks of thes PLLs are mainly used in DDR subsystem.
 
-- FPLL: the name is shoft for Fixed PLL.
-        This PLL generates fixed frequency clock, with output clock at 1.0 GHz.
-        The output clocks of this PLL are mainly used in data and configuraiton bus.
-
-- DPLL0/1: the name is short for DDR PLL.
-        The output clocks of thes PLLs are mainly used in DDR subsystem.
 
 And in order to reconfigure PLL clock frequency on the fly,
 MPLL and DPLL0/1 use FPLL as a backup.
@@ -68,12 +62,12 @@ The micro architecture of a pll cell looks like figure :ref:`pll_micro_arch`
 
 The output clock frequency is influenced by:
 
-- FREF: Reference Clock Input (10MHz to 800MHz). SG2042 uses 25MHz reference clock.
-- FOUTPOSTDIV: Output Clock (16MHz to 3200MHz)
-- REFDIV: Reference divide value (1 to 63)
-- FBDIV: Feedback divide value (16 to 320)
-- POSTDIV1: Post Divide 1 setting (1 to 7)
-- POSTDIV2: Post Divide 2 setting (1 to 7)
+* FREF: Reference Clock Input (10MHz to 800MHz). SG2042 uses 25MHz reference clock.
+* FOUTPOSTDIV: Output Clock (16MHz to 3200MHz)
+* REFDIV: Reference divide value (1 to 63)
+* FBDIV: Feedback divide value (16 to 320)
+* POSTDIV1: Post Divide 1 setting (1 to 7)
+* POSTDIV2: Post Divide 2 setting (1 to 7)
 
 The output clock frequency is calculated as:
 
@@ -95,10 +89,10 @@ Control Registers.
 
 Take DPLL0 configuration as an example:
 
-1. Gate PLL output by clearing PLL Clock Enable Control Reg (0x70_300100C4) bit[4]
-2. Modify DPLL0 Control Register (0x70_300100F8)
-3. Polling PLL Status Register (0x70_300100C0) until: (1). PLL is locked again (bit[12] == 1) and (2). Updating sequence is finished (bit[4] == 0)
-4. Un-gate PLL output clock by Setting PLL Clock Enable Control Reg (0x70_300100C4) bit[4]
+#. Gate PLL output by clearing PLL Clock Enable Control Reg (0x70_300100C4) bit[4]
+#. Modify DPLL0 Control Register (0x70_300100F8)
+#. Polling PLL Status Register (0x70_300100C0) until: (1). PLL is locked again (bit[12] == 1) and (2). Updating sequence is finished (bit[4] == 0)
+#. Un-gate PLL output clock by Setting PLL Clock Enable Control Reg (0x70_300100C4) bit[4]
 
 When user programs the PLL Control Registers, internal hardware sequence is as
 figure :ref:`pll_seq`
@@ -108,15 +102,10 @@ figure :ref:`pll_seq`
 
         PLL hardware sequence
 
-- The updating_pll_val bit is asserted immediately after user writes to PLL Control Registers, and user can check the value of this bit in PLL status
-    register.
-
-- After hardware logic prepares  the new DIV value for PLL, PLL's PD (Global Power Down) signal will be toggled so that PLL will work on
-    the updated value.
-
-- PLL Lock goes high again when PLL's output is stable on new frequency.
-
-- Besides LOCK signal from PLL, internal logic will also wait for 240us then determine the modification sequence is finished and de-assert "updating_pll_val" bit.
+#. The updating_pll_val bit is asserted immediately after user writes to PLL Control Registers, and user can check the value of this bit in PLL status register.
+#. After hardware logic prepares  the new DIV value for PLL, PLL's PD (Global Power Down) signal will be toggled so that PLL will work on the updated value.
+#. PLL Lock goes high again when PLL's output is stable on new frequency.
+#. Besides LOCK signal from PLL, internal logic will also wait for 240us then determine the modification sequence is finished and de-assert "updating_pll_val" bit.
 
 User should keep polling PLL Status Register so as to ensure "updating_pll_val" bit field is de-asserted and whole sequece is finished. When the sequence is ongoing, internal logic will prevent initiating another modification.
 
