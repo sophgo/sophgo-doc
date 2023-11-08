@@ -401,7 +401,7 @@ CLKDIVREG11: offset 0x006c
     =====   =========   =======     ===========
     
 
-CLKDIVREG11: offset 0x0070
+CLKDIVREG12: offset 0x0070
 """"""""""""""""""""""""""
 
 .. table:: Clock divider control of TIMER7
@@ -426,7 +426,7 @@ CLKDIVREG11: offset 0x0070
     =====   =========   =======     ===========
 
     
-CLKDIVREG12: offset 0x0074
+CLKDIVREG13: offset 0x0074
 """"""""""""""""""""""""""
 
 .. table:: Clock divider control of TIMER8
@@ -451,7 +451,7 @@ CLKDIVREG12: offset 0x0074
     =====   =========   =======     ===========
 
     
-CLKDIVREG13: offset 0x0078
+CLKDIVREG14: offset 0x0078
 """"""""""""""""""""""""""
 
 .. table:: Clock divider control of eFuse
@@ -477,7 +477,7 @@ CLKDIVREG13: offset 0x0078
     =====   =========   =======     ===========
     
 
-CLKDIVREG14: offset 0x007c
+CLKDIVREG15: offset 0x007c
 """"""""""""""""""""""""""
 
 .. table:: Clock divider control of GPIO DB
@@ -502,7 +502,7 @@ CLKDIVREG14: offset 0x007c
     =====   =========   =======     ===========
     
 
-CLKDIVREG15: offset 0x0080
+CLKDIVREG16: offset 0x0080
 """"""""""""""""""""""""""
 
 .. table:: Clock divider control of ETH TX
@@ -528,7 +528,7 @@ CLKDIVREG15: offset 0x0080
     =====   =========   =======     ===========
     
     
-CLKDIVREG16: offset 0x0084
+CLKDIVREG17: offset 0x0084
 """"""""""""""""""""""""""
 
 .. table:: Clock divider control of ETH PTP
@@ -554,7 +554,7 @@ CLKDIVREG16: offset 0x0084
     =====   =========   =======     ===========
     
 
-CLKDIVREG17: offset 0x0088
+CLKDIVREG18: offset 0x0088
 """"""""""""""""""""""""""
 
 .. table:: Clock divider control of ETH
@@ -580,7 +580,7 @@ CLKDIVREG17: offset 0x0088
     =====   =========   =======     ===========
     
 
-CLKDIVREG18: offset 0x008c
+CLKDIVREG19: offset 0x008c
 """"""""""""""""""""""""""
 
 .. table:: Clock divider control of eMMC
@@ -606,7 +606,7 @@ CLKDIVREG18: offset 0x008c
     =====   =========   =======     ===========
     
 
-CLKDIVREG18: offset 0x0090
+CLKDIVREG20: offset 0x0090
 """"""""""""""""""""""""""
 
 .. table:: Clock divider control of eMMC 100k
@@ -631,7 +631,7 @@ CLKDIVREG18: offset 0x0090
     =====   =========   =======     ===========
     
 
-CLKDIVREG19: offset 0x0094
+CLKDIVREG21: offset 0x0094
 """"""""""""""""""""""""""
 
 .. table:: Clock divider control of SDIO
@@ -657,7 +657,7 @@ CLKDIVREG19: offset 0x0094
     =====   =========   =======     ===========
     
 
-CLKDIVREG20: offset 0x0098
+CLKDIVREG22: offset 0x0098
 """"""""""""""""""""""""""
 
 .. table:: Clock divider control of SDIO 100k
@@ -682,7 +682,7 @@ CLKDIVREG20: offset 0x0098
     =====   =========   =======     ===========
     
 
-CLKDIVREG21: offset 0x009c
+CLKDIVREG23: offset 0x009c
 """"""""""""""""""""""""""
 
 .. table:: Clock divider control of TOP AXI0
@@ -706,7 +706,7 @@ CLKDIVREG21: offset 0x009c
     =====   =========   =======     ===========
     
 
-CLKDIVREG22: offset 0x00a0
+CLKDIVREG24: offset 0x00a0
 """"""""""""""""""""""""""
 
 .. table:: Clock divider control of TOP AXI0
@@ -733,7 +733,7 @@ CLKDIVREG22: offset 0x00a0
     =====   =========   =======     ===========
 
     
-CLKDIVREG23: offset 0x00a4
+CLKDIVREG25: offset 0x00a4
 """"""""""""""""""""""""""
 
 .. table:: Clock divider 0 control of AXI DDR
@@ -761,7 +761,7 @@ CLKDIVREG23: offset 0x00a4
                                     1: De-assert Reset
     =====   =========   =======     ===========
     
-CLKDIVREG24: offset 0x00a8
+CLKDIVREG26: offset 0x00a8
 """"""""""""""""""""""""""
 
 .. table:: Clock divider 1 control of AXI DDR
@@ -790,7 +790,7 @@ CLKDIVREG24: offset 0x00a8
     =====   =========   =======     ===========
     
 
-CLKDIVREG25: offset 0x00ac
+CLKDIVREG27: offset 0x00ac
 """"""""""""""""""""""""""
 
 .. table:: Clock divider 0 control of DDR01
@@ -819,7 +819,7 @@ CLKDIVREG25: offset 0x00ac
     =====   =========   =======     ===========
     
 
-CLKDIVREG26: offset 0x00b0
+CLKDIVREG28: offset 0x00b0
 """"""""""""""""""""""""""
 
 .. table:: Clock divider 1 control of DDR01
@@ -848,7 +848,7 @@ CLKDIVREG26: offset 0x00b0
     =====   =========   =======     ===========
     
     
-CLKDIVREG27: offset 0x00b4
+CLKDIVREG29: offset 0x00b4
 """"""""""""""""""""""""""
 
 .. table:: Clock divider 0 control of DDR23
@@ -877,7 +877,7 @@ CLKDIVREG27: offset 0x00b4
     =====   =========   =======     ===========
 
 
-CLKDIVREG28: offset 0x00b8
+CLKDIVREG30: offset 0x00b8
 """"""""""""""""""""""""""
 
 .. table:: Clock divider 1 control of DDR23
