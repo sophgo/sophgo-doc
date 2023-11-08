@@ -29,4 +29,6 @@ Registers
 Pinmux module controls attributes of pins. These attributes including function,
 pull up, pull down or no pull, if schmitt trigger is enabled and driving strength.
 
+The base address is listed in table :ref:`mmap_table`, PINMUX device.
+
 .. include:: pinmux-reg.rst

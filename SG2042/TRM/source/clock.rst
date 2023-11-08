@@ -169,9 +169,10 @@ The default clock frequency is show as table :ref:`default_clock_frequency`
 
 Registers
 ---------
-There a set of controll register to controll SoC clocks, including clock gate,
-divider, mux and pll.
+There are a set of control registers to control SoC clocks. Clock gate,
+divider, mux registers are described in this chapter. PLL controll registers
+are described in chapter :ref:`system_control`.
 
-PLL controll registers are located in :ref:`system_control`.
+The base address is listed in table :ref:`mmap_table`, CLOCK device.
 
 .. include:: clock-reg.rst
