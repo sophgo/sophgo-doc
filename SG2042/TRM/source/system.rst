@@ -54,9 +54,9 @@ For example, CHIP0 PCIe0 Link0 slave address is located from 0x40_0000_0000 to
 0x40_3000_0000. CHIP1 PCIe0 Link0 slave address is located from 0xc0_0000_0000
 to 0xc0_3000_0000.
 
-Detailed memory layout is show in table :ref:`mmap`
+Detailed memory layout is show in table :ref:`mmap_table`
 
-.. _mmap:
+.. _mmap_table:
 .. include:: mmap.rst
 
 System coprocessor

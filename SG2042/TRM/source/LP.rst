@@ -95,13 +95,13 @@ All LPCS are divided into two different domains, and all interfaces in the domai
   +--------------------------+-----------------------------------------------+
   | Register                 | Address                                       |
   +==========================+===============================================+ 
-  | top_fab_gate_enable	     | address=0x30010000+0x20:[bit 0]               |
+  | top_fab_gate_enable	     | address=0x7030010000+0x20:[bit 0]             |
   +--------------------------+-----------------------------------------------+ 
-  | hsperi_fab_gate_enable   | address=0x30010000+0x20:[bit 1]               |
+  | hsperi_fab_gate_enable   | address=0x7030010000+0x20:[bit 1]             |
   +--------------------------+-----------------------------------------------+ 
-  | top_fab_gate_cnt_cycle   | address=0x30010000+0x24:[bit:(07:00)]         |
+  | top_fab_gate_cnt_cycle   | address=0x7030010000+0x24:[bit:(07:00)]       |
   +--------------------------+-----------------------------------------------+
-  | hsperi_fab_gate_cnt_cycle| address=0x30010000+0x24:[bit:(15:08)]         |
+  | hsperi_fab_gate_cnt_cycle| address=0x7030010000+0x24:[bit:(15:08)]       |
   +--------------------------+-----------------------------------------------+
   | Note: LPC control of AP is not supported                                 |
   +--------------------------+-----------------------------------------------+

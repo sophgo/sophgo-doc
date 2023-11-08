@@ -39,7 +39,9 @@ Soft Reset
 
 Every module in SG2042 owns a dedicated soft reset control bit for software usage.The relevant register information is as follows.
 
-.. table:: Software Reset Register 0 (0x30013000)
+The base address is listed in table :ref:`mmap_table`, RESET device.
+
+.. table:: Software Reset Register 0 (0x00000000)
 
     =====   =========   =======     ===========
     Bits    Attribute   Default     Description
@@ -78,7 +80,7 @@ Every module in SG2042 owns a dedicated soft reset control bit for software usag
     0       RW          0x1         Software Reset for ap_sys (Active Low) 
     =====   =========   =======     =========== 
 
-.. table:: Software Reset Register 1 (0x30013004)
+.. table:: Software Reset Register 1 (0x00000004)
 
     =====   =========   =======     =========== 
     Bits    Attribute   Default     Description
@@ -117,7 +119,7 @@ Every module in SG2042 owns a dedicated soft reset control bit for software usag
     0       RW          0x1         Software Reset for uart3 (Active Low)
     =====   =========   =======     ===========
  
-.. table:: Software Reset Register 2 (0x30013008) 
+.. table:: Software Reset Register 2 (0x00000008) 
    
     =====   =========   =======     ===========
     Bits    Attribute   Default     Description
