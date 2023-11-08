@@ -183,6 +183,6 @@ Registers
 There a set of controll register to controll SoC clocks, including clock gate,
 divider, mux and pll.
 
-PLL controll registers are located in :ref:`platform_control`.
+PLL controll registers are located in :ref:`system_control`.
 
 .. include:: clock-reg.rst

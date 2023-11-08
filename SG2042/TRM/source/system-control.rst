@@ -1,7 +1,11 @@
-.. _platform_control:
+.. _system_control:
 
-Platform control
+System control
 ================
+
+These registers control system behaviours or hold informations of this chip.
+This block is more like a gather of misc functions of a SoC. Its base address is
+listed in table :ref:`mmap_table`, SYS_CTRL device.
 
 Registers
 ---------
