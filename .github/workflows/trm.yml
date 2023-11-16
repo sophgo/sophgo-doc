@@ -1,0 +1,33 @@
+name: build-trm
+
+on:
+  push:
+  schedule:
+    - cron: "0 2 * * *"
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build-trm:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Update APT sources && Install Deps"
+        run: |
+          sudo apt update
+          sudo apt install -y python3-sphinx texlive-latex-recommended texlive-latex-extra latexmk
+
+      - uses: actions/checkout@v3
+
+      - name: "Compile TRM"
+        run: |
+          build_tiemstamp=$(date "+%Y%m%d%H%M")
+          cd SG2042/TRM && make latexpdf
+          cp -av build/latex/sg2042technicalreferencemanual.pdf \
+            ${GITHUB_WORKSPACE}/SG2042TechnicalReferenceManual_${build_tiemstamp}.pdf
+
+      - name: "Upload TRM Artifact"
+        uses: actions/upload-artifact@v3
+        with:
+          name: SG2042TechnicalReferenceManual
+          path: SG2042TechnicalReferenceManual_*.pdf
+          retention-days: 60
