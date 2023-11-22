@@ -3,12 +3,6 @@ LPC
 
 TODO
 
-UART
-====
-
-TODO
-
-
 SPI
 ===
 
