@@ -25,7 +25,7 @@ Welcome to SG2042 Technical Reference Manual's documentation!
    GPIO.rst
    uart.rst
    SPI.rst
-   todo.rst
+   LPC.rst
 ..
      trm.rst
 
