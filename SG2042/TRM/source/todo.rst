@@ -2,9 +2,3 @@ LPC
 ===
 
 TODO
-
-SPI
-===
-
-TODO
-
