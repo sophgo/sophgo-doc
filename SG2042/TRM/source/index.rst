@@ -24,6 +24,7 @@ Welcome to SG2042 Technical Reference Manual's documentation!
    SPI-flash.rst
    GPIO.rst
    uart.rst
+   SPI.rst
    todo.rst
 ..
      trm.rst
