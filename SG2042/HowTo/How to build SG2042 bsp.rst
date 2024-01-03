@@ -45,23 +45,16 @@ To build uroot, you need to install **go 1.17**, refer to https://tecadmin.net/h
       $ git clone https://github.com/sophgo/zsbl.git
       $ git clone https://github.com/sophgo/opensbi.git
       $ git clone https://github.com/sophgo/linux-riscv.git
-      
-      # clone u-boot
+      $ git clone https://github.com/sophgo/sophgo-edk2.git
+      $ git clone https://github.com/sophgo/grub.git
       $ git clone https://github.com/sophgo/u-boot.git
-      # clone grub
-      $ git clone git://git.savannah.gnu.org/grub.git
-      $ pushd grub
-      $ git remote add github.com_tekkamanninja https://github.com/tekkamanninja/grub.git
-      $ git fetch github.com_tekkamanninja
-      $ git checkout github.com_tekkamanninja/riscv_devel_Nikita_V3
-      $ popd
 
 
 
 - Build Cross toolchain for bsp
 
   Enter the bsp directory which is the same level as ``bootloader-riscv``,
-  ``zsbl``, ``opensbi``, ``u-boot``, ``grub2`` and ``linux-riscv``,
+  ``zsbl``, ``opensbi``, ``u-boot``, ``EDKII``, ``grub2`` and ``linux-riscv``,
   and build Cross toolchain by the following command:
 
 .. highlights::
@@ -79,6 +72,7 @@ To build uroot, you need to install **go 1.17**, refer to https://tecadmin.net/h
       ├── opensbi
       ├── linux-riscv
       ├── u-boot
+      ├── sophgo-edk2
       ├── grub
       └── gcc-riscv
             ├── gcc-riscv64-unknown-elf
@@ -96,7 +90,7 @@ To build uroot, you need to install **go 1.17**, refer to https://tecadmin.net/h
       $ source bootloader-riscv/scripts/envsetup.sh
       $ build_rv_all
 
-      # build multi chips:   
+      # build multi chips:
       $ CHIP=mango
       $ CHIP_NUM=multi
       $ source bootloader-riscv/scripts/envsetup.sh
@@ -129,8 +123,8 @@ To build uroot, you need to install **go 1.17**, refer to https://tecadmin.net/h
       │      ├── riscv64_Image
       │      ├── zsbl.bin
       │      ├── u-boot.bin
-      │      ├── grubriscv64.efi
-      │      ├── grub.cfg
+      │      ├── grubriscv64
+      │      ├── SG2042.fd
       ├── tools
       │      └── perf
       │            ├── build-perf.sh
@@ -166,8 +160,8 @@ To build uroot, you need to install **go 1.17**, refer to https://tecadmin.net/h
       └── tools
              └── perf
                    ├── build-perf.sh
-                   ├── perf-6.1.22
-                   └── perf-6.1.22.tar
+                   ├── perf-6.1.31
+                   └── perf-6.1.31.tar
 
 - Copy the ``tools`` directory to the SG2042 EVB, and
   execute the ``build-perf.sh`` to make and install perf tool.
