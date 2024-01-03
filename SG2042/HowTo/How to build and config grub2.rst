@@ -22,7 +22,7 @@ Build
 
     .. code:: sh
 
-      git clone https://git.savannah.gnu.org/git/grub.git
+      git clone https://github.com/sophgo/grub.git
 
 3. Compile
 ----------
@@ -35,7 +35,8 @@ Option 1. Move the ``grub`` at the same directory as the ``bootloader-riscv`` re
 
         CHIP=mango
         source bootloader-riscv/scripts/envsetup.sh
-        build_rv_grub
+        build_rv_ubuntu_grub
+        build_rv_fedora_grub
 
 Option 2. If you have no ``bootloader-riscv`` repository, compile the GRUB2 with the following steps.
 
