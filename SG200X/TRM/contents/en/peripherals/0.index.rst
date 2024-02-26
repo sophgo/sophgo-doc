@@ -1,0 +1,19 @@
+Peripherals
+===========
+
+.. toctree::
+	:maxdepth: 2
+
+	./i2c.rst
+	./uart.rst
+	./spi.rst
+	./sdmmc.rst
+	./gpio.rst
+	./usb.rst
+	./saradc.rst
+	./temperature.rst
+	./pwm.rst
+	./keyscan.rst
+	./wiegand.rst
+	./irrx.rst
+

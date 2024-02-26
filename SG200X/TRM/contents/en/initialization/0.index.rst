@@ -1,0 +1,38 @@
+Boot and Upgrade
+================
+
+Overview
+--------
+
+The chip is booted from the built-in ROM (BOOTROM). When the chip is reset, it will detect whether there is a weak pull-up or weak pull-down on the two pins (EMMC_DAT3, EMMC_DAT0) to confirm the type of memory device currently selected.
+
+Secure boot chips will check during boot and chip upgrade to ensure that the software being executed or upgraded is safe.
+
+Correspondence between startup mode and corresponding signal latch value
+------------------------------------------------------------------------
+
+- Support booting from SPI Nor Flash (EMMC_DAT3 pull down, EMMC_DAT0 pull up)
+
+- Support booting from SPI Nand Flash (EMMC_DAT3 pull down, EMMC_DAT0 pull down)
+
+- Support booting from eMMC (EMMC_DAT3 pull up, EMMC_DAT0 pull up)
+
+Note: SD0 and eMMC domain share IO power, because the SD card run with 3.0V by default, and eMMC is mostly 1.8V, basically eMMC is not supported unless SD0 does not connect with the SD card.
+
+Image burning mode
+------------------
+
+- Supports image burning via SD card.
+
+- Supports image burning through USB device.
+
+- If there is an image in flash, support software upgrade through the network.
+
+Secure boot
+-----------
+
+- Support secure boot and upgrade.
+
+- AES/DES/SM4 hardware encryption and decryption.
+
+- SHA/TRNG/Secure Efuse security hardware.

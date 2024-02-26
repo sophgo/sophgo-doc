@@ -1,0 +1,10 @@
+系统控制器
+==========
+
+.. toctree::
+	:maxdepth: 2
+
+	./overview.rst
+	./function_description.rst
+	./registers.rst
+

@@ -1,0 +1,12 @@
+.. _section_power:
+
+Power Management
+================
+
+.. toctree::
+	:maxdepth: 2
+
+	./overview.rst
+	./clock_control.rst
+	./ddr_powerctrl.rst
+	./voltage_adjustment.rst

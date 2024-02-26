@@ -1,0 +1,8 @@
+PinMux and PinCtrl
+==================
+
+.. toctree::
+	:maxdepth: 2
+
+	./pinmux.rst
+	./pinctrl.rst
