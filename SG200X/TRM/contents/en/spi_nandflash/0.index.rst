@@ -1,0 +1,13 @@
+SPI NAND Flash Controller
+=========================
+
+.. toctree::
+	:maxdepth: 2
+
+	./overview.rst
+	./features.rst
+	./functionalities.rst
+	./working_method.rst
+	./data_structure.rst
+	./registers_overview.rst
+	./registers_descriptions.rst

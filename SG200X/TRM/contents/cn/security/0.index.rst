@@ -1,0 +1,28 @@
+安全子系统
+==========
+
+芯片提供独立安全子系统模块，负责提供特定安全功能。
+
+安全子系统模块包括了下列安全功能模块
+
+- 密码运算单元 (Crypto DMA)
+
+- 真随机产生单元 (True Random Number Generator)
+
+- 安全除错保护单元 (Secure Debug Protection)
+
+密码运算单元 (CryptoDMA) 提供对称密钥加解密及哈希 (Hash) 的硬件加速，安全 eFuse 单元负责提供系统安全设置及安全密钥给安全子系统使用，真乱数产生单元提供具合格乱度的随机数供安全系统使用。
+
+.. _diagram_security_module:
+.. figure:: ../../../../media/image143.png
+	:align: center
+
+	安全子系统模块
+
+.. toctree::
+	:maxdepth: 2
+
+	./cryptodma.rst
+	./firewall.rst
+	./efuse.rst
+

@@ -1,0 +1,12 @@
+SPI NOR Flash 控制器
+====================
+
+.. toctree::
+	:maxdepth: 2
+
+	./overview.rst
+	./features.rst
+	./functionalities.rst
+	./working_method.rst
+	./registers_overview.rst
+	./registers_descriptions.rst

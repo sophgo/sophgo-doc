@@ -1,0 +1,28 @@
+Security Subsystem
+==================
+
+The chip provides an independent security subsystem module responsible for providing specific security functions.
+
+The safety subsystem module includes the following safety function modules
+
+- Crypto DMA unit (CryptoDMA)
+
+- True Random Number Generator
+
+- Secure Debug Protection
+
+The cryptographic operation unit (CryptoDMA) provides hardware acceleration of symmetric key encryption, decryption and hashing (Hash). The security eFuse unit is responsible for providing system security settings and security keys for use by the security subsystem. The true random number generation unit provides qualified random numbers. Random numbers are used by security systems.
+
+.. _diagram_security_module:
+.. figure:: ../../../../media/image143.png
+	:align: center
+
+	Security subsystem module
+
+.. toctree::
+	:maxdepth: 2
+
+	./cryptodma.rst
+	./firewall.rst
+	./efuse.rst
+
