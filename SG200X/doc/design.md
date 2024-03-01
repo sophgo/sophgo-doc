@@ -27,6 +27,25 @@
 
 参考 ["Installing Sphinx"][4]。推荐采用 [PyPI 的方式][5] 安装，这种方式安装的 Sphinx 的版本比较新，而且跨平台。
 
+下面以 ubuntu 20.04 上安装为例介绍安装过程。
+
+```shell
+$ sudo apt update
+$ sudo apt install python3
+$ sudo apt install python3-pip
+$ pip3 install -U sphinx -i https://pypi.tuna.tsinghua.edu.cn/simple
+```
+
+注意，执行 pip3 下载 python 包时默认使用国外源，这里使用 `-i` 指定采用国内的清华大学的 pip 源可以加速下载过程。
+
+安装过程中会提示如下 (假设这里的 user id 为 "u", 具体替换为实际的本地用户名)：
+```shell
+  WARNING: The script pybabel is installed in '/home/u/.local/bin' which is not on PATH.
+  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+```
+
+所以将 `/home/u/.local/bin` 加入 PATH 环境变量。修改 `~/.bashrc`，加上 `export PATH=$PATH:/home/u/.local/bin` 即可。
+
 安装完成后，查看 Sphinx 的版本。在命令提示符下键入 `sphinx-build --version`。 如果一切正常，您将看到刚安装的 Sphinx 软件包的版本号。以我本地安装的情况为例：
 
 ```shell
@@ -36,12 +55,17 @@ sphinx-build 7.1.2
 
 如果要做 pdf，则要继续安装 texlive，texlive 是制作 pdf 的前提，因为 sphinx 首先是生成 tex 再转 pdf。
 
-Ubuntu 上可以采用 apt 方式安装 `sudo apt-get install texlive-full`。这样安装的是完整版本，会安装所有的国家的字体。
+Ubuntu 上可以采用 apt 方式安装。
 
-Windows 上可以参考："Windows下TeXLive 环境的安装与配置": <https://www.cnblogs.com/mqingqing123/p/16057591.html>，这里利用的是 iso 方式，注意在安装过程中可以选择支持的字体，我们不用支持所有的，这样会小一些。
+```shell
+$ sudo apt-get install texlive-full
+```
 
-Ubuntu 上也可以用 iso 方式安装 texlive。参考 <https://cloud.tencent.com/developer/article/1831654>。
+这样安装的是完整版本，会安装所有的国家的字体。只是时间会比较长。
 
+以上安装完后基本上 Sphinx 的构建环境就绪。
+
+附录：Windows 上可以参考："Windows下TeXLive 环境的安装与配置": <https://www.cnblogs.com/mqingqing123/p/16057591.html>，这里利用的是 iso 方式，注意在安装过程中可以选择支持的字体，我们不用支持所有的，这样会小一些。Ubuntu 上也可以用 iso 方式安装 texlive。参考 <https://cloud.tencent.com/developer/article/1831654>。
 
 ## 编辑器设置
 
