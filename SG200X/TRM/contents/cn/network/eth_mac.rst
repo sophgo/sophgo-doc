@@ -6,7 +6,13 @@ Ethernet MAC
 
 芯片支持 1个 Ethernet MAC, 实现网路数据的接收与发送。
 
-这个 Ethernet MAC 搭配内建 10/100Mbps Fast Ethernet Transceiver, 可工作在 10/100Mbps 全双工或半工双模式。
+.. only:: sg2002
+
+	这个 Ethernet MAC 搭配内建 10/100Mbps Fast Ethernet Transceiver, 可工作在 10/100Mbps 全双工或半工双模式。
+
+.. only:: sg2000
+
+	这个 Ethernet MAC 搭配内建 10/100Mbps Fast Ethernet Transceiver, 可工作在 10/100Mbps 全双工或半工双模式，支持通过 RMII 外挂 PHY。
 
 功能描述
 ~~~~~~~~
@@ -14,6 +20,10 @@ Ethernet MAC
 以太网模块有如下功能特点 :
 
 - Ethernet MAC0 搭配内建 10 / 100 Mbps Fast Ethernet Transceiver 搭配内建 Ethernet PHY 支持 10 / 100 Mbit/s 速率。
+
+.. only:: sg2000
+
+	- 支持通过 RMII 外挂PHY。
 
 - 支持全双工或半双工工作模式。
 
