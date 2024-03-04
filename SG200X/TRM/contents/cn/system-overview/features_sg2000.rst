@@ -25,7 +25,7 @@
 TPU
 ~~~
 
-- 内建 TPU , 算力达到 ~1.0TOPS INT8。
+- 内建 TPU , 算力达到 ~0.5TOPS INT8。
 
 - 支持主流的神经网络架构: Caffe，Pytorch，TensorFlow(Lite)，ONNX 和 MXNet。
 
@@ -69,13 +69,13 @@ TPU
 
 - 输入
 
-  - 支持同时两路视频输入 (mipi 2L + 1L)
+  - 支持同时三路视频输入 (mipi 2L + 2L + DVP or MIPI 4L)
 
   - 支持 MIPI, Sub-LVDS, HiSPI 等串行接口
 
   - 支持 8/10/12 bit RGB Bayer 视频输入
 
-  - 支持 BT.656
+  - 支持 BT.601,BT.656,BT.1120 视频输入
 
   - 支持 AHD 多路混合 BT 格式
 
@@ -89,9 +89,9 @@ TPU
 
   - 支持多种串行与并行屏显规格
 
-  - 支持 MIPI 等串行接口
+  - 支持 MIPI，LVDS 等串行接口
 
-  - 支持 BT656, BT601 (8bit), BT1120, 8080 等并行接口
+  - 支持 BT.601, BT.656, BT.1120, RGB565/666/888, 8080 输出接口
 
   - 支持 SPI 输出接口
 
@@ -142,11 +142,11 @@ ISP 与图像处理
 
 - 集成 Audio CODEC, 支持 16 bit 音源/语音 输入和输出
 
-- 集成单声道麦克风输入
+- 集成双声道麦克风输入
 
-- 集成单声道输出. (需要外挂功放才能推动喇叭)
+- 集成双声道输出. (需要外挂功放才能推动喇叭)
 
-- 内部集成另一路的麦克风直连輸出声道, 方便实现 AEC
+- 同时支持以I2S/PCM/TDM 接口连接外部 audio CODEC. 内建 audio PLL 支援 MCLK 输出
 
 - 软件音频编解码协议 (G.711, G.726, ADPCM)
 
@@ -158,7 +158,7 @@ ISP 与图像处理
 - 以太网模块提供 1 个 Ethernet MAC , 实现网路数据的接收与发送。
 
 - Ethernet MAC 搭配内建 10/100Mbps Fast Ethernet Transceiver
-  可工作在 10/100Mbps 全双工或半双工模式。
+  可工作在 10/100Mbps 全双工或半双工模式，也可通过 RMII 外挂 PHY。
 
 安全系统模块
 ~~~~~~~~~~~~
@@ -191,15 +191,15 @@ ISP 与图像处理
 
 - 集成 POR, Power sequence。
 
-- 4 个单端 ADC (3 in No-die domain)。
+- 6 个单端 ADC (3 in No-die domain)。
 
 - 6 个 I2C (1 in No-die domain)。
 
-- 3 个 SPI。
+- 4 个 SPI。
 
-- 5 组 UART (1 in No-die domain)。
+- 5 组 UART (No-die domain)。
 
-- 4 组 (15 通道) PWM。
+- 4 组 (16 通道) PWM。
 
 - 2 个 SDIO 接口：
 
@@ -207,13 +207,15 @@ ISP 与图像处理
 
   - 一个支持 1.8V / 3.0V 连接其他 SDIO 3.0 设备 (支持速度为 UHS-I)。
 
-- 66 GPIO 接口 (14 in No-die domain)。
+- 110 GPIO 接口 (25 in No-die domain)。
 
 - 集成 keyscan 及 Wiegand。
 
-- 集成 MAC PHY 支援 10/100Mbps 全双工或半双工模式。
+- 集成 MAC PHY 支援 10/100Mbps 全双工或半双工模式，也可通过 RMII 外挂 PHY。
 
 - 一个 USB Host / device 接口。
+
+- 两组 I2S。
 
 **注**: 有关 No-die domain 的概念，参考 :ref:`section_power` 章节。
 
@@ -222,7 +224,7 @@ ISP 与图像处理
 
 - 内建 DRAM。
 
-  - DDR3 16bitx1, 最高速率达 1866Mbps, 容量 2Gbit (256MB)。
+  - DDR3 16bitx1, 最高速率达 1866Mbps, 容量 4Gbit (256MB)。
 
 - SPI NOR flash 接口 (1.8V / 3.0V)。
 
@@ -257,10 +259,10 @@ ISP 与图像处理
 
   - IO 电压为 1.8V 及 3.0V
 
-  - DDR 电压如下表
+  - DDR 电压
 
-    -  1.35V
+    - 1.35V
 
 - 封装
 
-  - 使用 QFN 封装, 封装尺寸为 9mmx9mmx0.9mm. 管脚间距为 0.35mm. 管脚总数为 88 个。
+  - 使用 IFBGA 封装, 封装尺寸为 10mmx10mmx1.3mm. 管脚间距为 0.65mm. 管脚总数为 205 个。
