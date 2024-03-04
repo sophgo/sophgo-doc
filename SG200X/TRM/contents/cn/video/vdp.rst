@@ -17,7 +17,7 @@ VDP 的整体架构如图
 
 	VDP 功能框图
 
-SG2002 仅支持一路 BT.656/BT.601/BT.1120/MCU-I80/MCU-M68/LVDS/MIPI DSI/serial TTL 输出
+芯片仅支持一路 BT.656/BT.601/BT.1120/MCU-I80/MCU-M68/LVDS/MIPI DSI/serial TTL 输出。
 
 - 总线数据读取，数据处理，包含视频层 V, 图形层G。
 
@@ -207,7 +207,13 @@ VDP 输出接口可依不同对接芯片接口，支持配置各种典型及非�
 高清输出接口 MIPI Tx
 ^^^^^^^^^^^^^^^^^^^^
 
-- 支持 RGB666,RGB565,RGB10-10-10 输出。
+.. only:: sg2002
+
+	- 支持 RGB666, RGB565, RGB10-10-10 输出。
+
+.. only:: sg2000
+
+	- 支持 RGB888, RGB666, RGB565, RGB10-10-10 输出。
 
 - 支持 1080P@60fps 4-channel 显示。
 
