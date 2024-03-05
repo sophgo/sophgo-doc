@@ -4,7 +4,7 @@ I2C
 概述
 ~~~~
 
-本芯片配置 5 个 I2C 控制器, 可个别配置为 Master/Slave。IO 配置需参考 Function pin mux 做配置。
+本芯片配置 6 个 I2C 控制器 (5 个 Active Domain，1 个 No-die Domain), 可个别配置为 Master/Slave。IO 配置需参考 Function pin mux 做配置。
 
 功能描述
 ~~~~~~~~

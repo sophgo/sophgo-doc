@@ -4,7 +4,7 @@ I2C
 Overview
 ~~~~~~~~
 
-This chip is equipped with 5 I2C controllers, which can be individually configured as Master/Slave. For IO configuration, please refer to Function pin mux for configuration.
+This chip is equipped with 6 I2C controllers (5 in Active Domain, 1 in No-die Domain), which can be individually configured as Master/Slave. For IO configuration, please refer to Function pin mux for configuration.
 
 Function Description
 ~~~~~~~~~~~~~~~~~~~~
