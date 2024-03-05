@@ -6,7 +6,13 @@ Overview
 
 The chip supports 1 Ethernet MAC to receive and send network data.
 
-This Ethernet MAC is equipped with a built-in 10/100Mbps Fast Ethernet Transceiver, which can operate in 10/100Mbps, full-duplex or half-duplex mode.
+.. only:: sg2002
+
+	This Ethernet MAC is equipped with a built-in 10/100Mbps Fast Ethernet Transceiver, which can operate in 10/100Mbps, full-duplex or half-duplex mode.
+
+.. only:: sg2000
+
+	This Ethernet MAC is equipped with a built-in 10/100Mbps Fast Ethernet Transceiver, which can operate in 10/100Mbps, full-duplex or half-duplex mode and can support external PHY via RMII.
 
 Function Description
 ~~~~~~~~~~~~~~~~~~~~
@@ -14,6 +20,10 @@ Function Description
 The Ethernet module has the following features:
 
 - Ethernet MAC0 with built-in 10 / 100 Mbps Fast Ethernet Transceiver with built-in Ethernet PHY supports 10/100 Mbit/s rate.
+
+.. only:: sg2000
+
+	- Support external PHY via RMII.
 
 - Support full-duplex or half-duplex working mode.
 
