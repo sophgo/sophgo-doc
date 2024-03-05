@@ -5,15 +5,47 @@ SG2000 和 SG2002 不同的地方可以采用 Sphinx 支持的条件编译方式
 
 - 条件编译文字
 
-  ![](./conditional_text.png)
+  ```rst
+  .. only:: sg2002
+
+          SG2002 ......
+
+  .. only:: sg2000
+
+          SG2000 ......
+  ```
 
 - 条件编译图片
 
-  ![](./conditional_picture.png)
+  ```rst
+  .. only:: sg2002
+
+          .. _diagram_package_pins_sg2002:
+          .. figure:: ../../../../media/image4.png
+
+                  管脚分布图
+
+  .. only:: sg2000
+
+          .. _diagram_package_pins_sg2000:
+          .. figure:: ../../../../media/image3.png
+
+                  管脚分布图
+  ```
+
+  **注意：采用 only 语法时，不同条件下的 "锚点" id 必须不同，否则编译时会报错说有重复。**
 
 - 条件编译 include 文件
 
-  ![](./conditional_file.png)
+  ```rst
+  .. only:: sg2002
+
+          .. include:: ./interrupts-sg2002.table.rst
+
+  .. only:: sg2000
+
+          .. include:: ./interrupts-sg2000.table.rst
+  ```
 
 
 项目中需要将 `"sg2002"` / `"sg2000"` 作为 tag 添加在 Makefile 中，具体可以参考 `SG200X/TRM/sg2000_cn/Makefile` 或者 `SG200X/TRM/sg2002_cn/Makefile`。
