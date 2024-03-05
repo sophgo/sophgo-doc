@@ -1,9 +1,20 @@
 System Overview
 ===============
 
-.. toctree::
-	:maxdepth: 2
+.. only:: sg2002
 
-	./introduction.rst
-	./system-block-diagram.rst
-	./features.rst
+	.. toctree::
+		:maxdepth: 2
+
+		./introduction.rst
+		./system-block-diagram.rst
+		./features.rst
+
+.. only:: sg2000
+
+	.. toctree::
+		:maxdepth: 2
+
+		./introduction_sg2000.rst
+		./system-block-diagram_sg2000.rst
+		./features_sg2000.rst

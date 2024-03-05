@@ -8,7 +8,7 @@ Processor Cores
 
   - 32KB I-cache, 64KB D-Cache
 
-  - Integrated Vector and Floating Point Unit (FPU)
+  - Integrated vector (Vector) and floating point operation unit (FPU)
 
 - Main processor ARM Cortex-A53 @ 1.0Ghz
 
@@ -16,18 +16,18 @@ Processor Cores
 
   - 128KB L2 cache
 
-  - Support Neon and Floating Point Unit (FPU)
+  - Support Neon and floating point operation FPU
 
 - Coprocessor RISCV C906 @ 700Mhz
 
-  - Integrated Floating Point Unit (FPU)
+  - Integrated floating point unit (FPU)
 
 TPU
 ~~~
 
-- Built-in TPU, computing power reaches ~1.0TOPS INT8.
+- Built-in TPU, computing power reaches ~0.5TOPS INT8.
 
-- Supports mainstream neural network architectures: Caffe, Pytorch, TensorFlow(Lite), ONNX and MXNet.
+- Supports mainstream neural network architectures: Caffe, Pytorch, TensorFlow (Lite), ONNX and MXNet.
 
 - Support Pedestrian Detection, Face Detection, Face recognition, Face anti-spoofing and other video structured applications.
 
@@ -69,13 +69,13 @@ Video Interface
 
 - Input
 
-  - Supports two simultaneous video inputs (mipi 2L + 1L)
+  - Supports three video inputs simultaneously (mipi 2L + 2L + DVP or MIPI 4L)
 
   - Supports MIPI, Sub-LVDS, HiSPI and other serial interfaces
 
   - Support 8/10/12 bit RGB Bayer video input
 
-  - Support BT.656
+  - Support BT.601, BT.656, BT.1120 video input
 
   - Support AHD multi-channel mixed BT format
 
@@ -89,9 +89,9 @@ Video Interface
 
   - Supports multiple serial and parallel screen display specifications
 
-  - Support serial interfaces such as MIPI
+  - Support MIPI, LVDS and other serial interfaces
 
-  - Supports BT656, BT601 (8bit), BT1120, 8080 and other parallel interfaces
+  - Support BT.601, BT.656, BT.1120, RGB565/666/888, 8080 output interface
 
   - Support SPI output interface
 
@@ -133,20 +133,20 @@ ISP and Image processing
 Hardware acceleration engine
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- Mixed hardware and software mode supports part of OpenCV libraries
+- Mixed hardware and software mode supports some OpenCV libraries
 
-- Mixed hardware and software mode supports part of IVE libraries
+- Mixed hardware and software mode supports some IVE libraries
 
 Audio Codec
 ~~~~~~~~~~~
 
-- Integrated Audio CODEC, supports 16-bit audio source/voice input and output
+- Integrated Audio CODEC, supports 16 bit audio source/voice input and output
 
-- Integrated mono microphone input
+- Integrated two-channel microphone input
 
-- Integrated mono output. (An external amplifier is required to drive the speaker)
+- Integrated two-channel output. (An external amplifier is required to drive the speakers)
 
-- Internally integrated another microphone is directly connected to the output channel to facilitate AEC implementation
+- Also supports connecting to external audio CODEC via I2S/PCM/TDM interface. Built-in audio PLL supports MCLK output
 
 - Software audio codec protocols (G.711, G.726, ADPCM)
 
@@ -155,9 +155,10 @@ Audio Codec
 Network Interface
 ~~~~~~~~~~~~~~~~~
 
-- The Ethernet module provides one Ethernet MAC to receive and send network data.
+- The Ethernet module provides an Ethernet MAC to receive and send network data.
 
-- Ethernet MAC with built-in 10/100Mbps Fast Ethernet Transceiver, can work in 10/100Mbps full-duplex or half-duplex mode.
+- Ethernet MAC with built-in 10/100Mbps Fast Ethernet Transceiver
+   It can work in 10/100Mbps full-duplex or half-duplex mode, and can also plug-in PHY through RMII.
 
 Security System Module
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -190,42 +191,46 @@ Peripheral interface
 
 - Integrated POR, Power sequence.
 
-- 4 single-ended ADCs (3 No-die domain).
+- 6 single-ended ADCs (3 in No-die domain).
 
-- 6 I2C (1 No-die domain).
+- 6 I2C (1 in No-die domain).
 
-- 3 SPIs.
+- 4 SPIs.
 
-- 5 sets of UART (1 No-die domain).
+- 5 sets of UART (No-die domain).
 
-- 4 sets (15 channels) PWM.
+- 4 sets (16 channels) PWM.
 
 - 2 SDIO interfaces:
 
-  - One supports connected with SD 3.0 Card under 3V (supports maximum capacity SDXC 2TB, supported speed is UHS-I).
+  - One SD 3.0 Card that supports 3V connection (supports maximum capacity SDXC 2TB, supported speed is UHS-I).
 
-  - One supports connected with other SDIO 3.0 devices under 1.8V/3.0V (supported speed is UHS-I).
+  - One supports 1.8V/3.0V to connect other SDIO 3.0 devices (supported speed is UHS-I).
 
-- 66 GPIO interfaces (14 no die domain).
+- 110 GPIO interfaces (25 in No-die domain).
 
 - Integrate keyscan and Wiegand.
 
-- Integrated MAC PHY supports 10/100Mbps full-duplex or half-duplex mode.
+- Integrated MAC PHY supports 10/100Mbps full-duplex or half-duplex mode, and can also be plugged in via RMII.
 
 - One USB Host/device interface.
+
+- Two sets of I2S.
+
+**Note**: For the concept of No-die domain, please refer to the :ref:`section_power` chapter.
 
 External memory interface
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - Built-in DRAM.
 
-  - DDR3 16bit x 1, maximum speed up to 1866Mbps, capacity 2Gbit (256MB).
+  - DDR3 16bitx1, maximum speed up to 1866Mbps, capacity 4Gbit (256MB).
 
 - SPI NOR flash interface (1.8V / 3.0V).
 
   - Supports 1, 2, 4 wire modes.
 
-  - Maximum support is 256MByte.
+  - Maximum supported is 256MByte.
 
 - SPI Nand flash interface (1.8V / 3.0V).
 
@@ -254,10 +259,10 @@ Chip physical specifications
 
   - IO voltage is 1.8V and 3.0V
 
-  - DDR voltage is as shown in the table below
+  - DDR voltage
 
     - 1.35V
 
 - Encapsulation
 
-  - Using QFN package, the package size is 9mmx9mmx0.9mm. The pin pitch is 0.35mm. The total number of pins is 88.
+  - Using IFBGA package, the package size is 10mmx10mmx1.3mm. The pin pitch is 0.65mm. The total number of pins is 205.
