@@ -17,7 +17,7 @@ The overall architecture of VDP is as shown in the figure:
 
 	VDP functional block diagram
 
-SG2002 only supports one BT.656/BT.601/BT.1120/MCU-I80/MCU-M68/LVDS/MIPI DSI/serial TTL output
+The chipset only supports one BT.656/BT.601/BT.1120/MCU-I80/MCU-M68/LVDS/MIPI DSI/serial TTL output
 
 - Bus data reading and data processing, including video layer V and graphics layer G.
 
@@ -207,7 +207,13 @@ All timing parameters must be configured before the interface is turned on.
 HD Output Interface MIPI Tx
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- Support RGB666, RGB565, RGB10-10-10 output.
+.. only:: sg2002
+
+	- Support RGB666, RGB565, RGB10-10-10 output.
+
+.. only:: sg2000
+
+	- Support RGB888, RGB666, RGB565, RGB10-10-10 output.
 
 - Support 1080P@60fps 4-channel display.
 
