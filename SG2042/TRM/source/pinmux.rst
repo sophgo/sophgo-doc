@@ -19,6 +19,7 @@ Pin function
 
 Most digital pins have multiple functions. Each digital pin can have at most four
 functions. Pins and functions are listed in table :ref:`digital_pin_function`
+The letter in parentheses means, I: input, O: output, IO: input and output.
 
 .. _digital_pin_function:
 .. include:: digital-pin-function.rst
