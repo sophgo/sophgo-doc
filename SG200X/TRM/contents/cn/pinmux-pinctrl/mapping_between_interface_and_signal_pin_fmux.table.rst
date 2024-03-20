@@ -2,7 +2,8 @@ ADC
 ^^^
 
 .. only:: sg2002
-	.. _table_inf_signal_pin_fmux_adc:
+
+	.. _table_inf_signal_pin_fmux_adc_sg2002:
 	.. table:: ADC
 		:widths: 2 1 1 1 3
 
@@ -16,7 +17,8 @@ ADC
 		+---------+---------+---------+--------+-----------------------+
 
 .. only:: sg2000
-	.. _table_inf_signal_pin_fmux_adc:
+
+	.. _table_inf_signal_pin_fmux_adc_sg2000:
 	.. table:: ADC
 		:widths: 2 1 1 1 3
 
@@ -69,7 +71,8 @@ Audio
 ^^^^^
 
 .. only:: sg2002
-	.. _table_inf_signal_pin_fmux_audio:
+
+	.. _table_inf_signal_pin_fmux_audio_sg2002:
 	.. table:: Audio
 		:widths: 2 1 1 1 3
 
@@ -87,7 +90,8 @@ Audio
 		+---------+---------+---------+--------+-----------------------+
 
 .. only:: sg2000
-	.. _table_inf_signal_pin_fmux_audio:
+
+	.. _table_inf_signal_pin_fmux_audio_sg2000:
 	.. table:: Audio
 		:widths: 2 1 1 1 3
 
