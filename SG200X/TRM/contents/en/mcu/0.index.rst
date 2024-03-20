@@ -1,0 +1,13 @@
+.. _section_8051:
+
+8051 Subsystem
+==============
+
+.. toctree::
+	:maxdepth: 2
+
+	./overview.rst
+	./features.rst
+	./working_method.rst
+	./registers_overview.rst
+	./registers_description.rst

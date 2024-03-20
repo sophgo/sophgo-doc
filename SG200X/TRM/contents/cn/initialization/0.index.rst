@@ -1,0 +1,38 @@
+启动和升级
+==========
+
+概述
+----
+
+芯片由内置 ROM (BOOTROM) 启动。芯片在复位时会通过侦测两个管脚(EMMC_DAT3, EMMC_DAT0) 上是否有弱上拉或弱下拉以确认目前选用使用的存储器件类型。
+
+安全启动的芯片, 则会在开机及芯片升级时都会验签以确保执行或升级的软件是安全的。
+
+启动模式和对应的信号锁存值对应关系
+----------------------------------
+
+-  支持由 SPI Nor Flash 启动 (EMMC_DAT3 pull down, EMMC_DAT0 pull up)
+
+-  支持由 SPI Nand Flash 启动 (EMMC_DAT3 pull down, EMMC_DAT0 pull down)
+
+-  支持由 eMMC 启动. (EMMC_DAT3 pull up, EMMC_DAT0 pull up)
+
+Note：因为 SD0 与 eMMC domain 共用 IO power，因为SD 卡default 3.0V，而 eMMC 多为 1.8V，所以基本上不支援 eMMC，除非 SD0 不接SD卡。
+
+镜像烧写模式. 
+--------------
+
+-  支持通过 SD 卡烧写镜像。
+
+-  支持通过 USB device mode 烧写镜像。
+
+-  若 flash 中己有镜像, 软件支援由网路升级软件。
+
+安全启动
+--------
+
+-  支持安全启动及升级。
+
+-  AES/DES/SM4 硬件加解密。
+
+-  SHA/TRNG/Secure Efuse 安全硬件。

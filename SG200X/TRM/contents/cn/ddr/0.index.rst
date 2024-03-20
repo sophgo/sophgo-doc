@@ -1,0 +1,14 @@
+.. _section_ddr:
+
+DDR 控制器
+==========
+
+.. toctree::
+	:maxdepth: 2
+
+	./overview.rst
+	./features.rst
+	./functionalities.rst
+	./working_method.rst
+	./axi_registers.rst
+	./ddrc_registers.rst

@@ -1,0 +1,11 @@
+DMA 控制器
+==========
+
+.. toctree::
+	:maxdepth: 2
+
+	./overview.rst
+	./features.rst
+	./functionalities.rst
+	./working_method.rst
+	./registers.rst

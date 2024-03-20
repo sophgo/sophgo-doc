@@ -1,0 +1,14 @@
+.. _section_rtc:
+
+Real Time Clock
+===============
+
+.. toctree::
+	:maxdepth: 2
+
+	./overview.rst
+	./features.rst
+	./functionalities.rst
+	./working_method.rst
+	./registers_overview.rst
+	./registers_description.rst
