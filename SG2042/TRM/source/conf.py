@@ -7,8 +7,8 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'SG2042 Technical Reference Manual'
-copyright = '2023, Chao Wei'
-author = 'Chao Wei'
+copyright = '2023, SOPHGO'
+author = ''
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
