@@ -1,17 +1,43 @@
 ADC
 ^^^
-.. _table_inf_signal_pin_fmux_adc:
-.. table:: ADC
-	:widths: 2 1 1 1 3
 
-	+---------+---------+---------+--------+-----------------------+
-	| Signal  |Direction| PinName |Function| Function select       |
-	| Name    |         |         |Number  | register              |
-	+=========+=========+=========+========+=======================+
-	| (ADC1)  | I       | ADC1    | 0      | FMUX\                 |
-	|         |         |         |        | _GPIO_REG_IOCTRL_ADC1 |
-	|         |         |         |        | 0x0300_10F8           |
-	+---------+---------+---------+--------+-----------------------+
+.. only:: sg2002
+
+	.. _table_inf_signal_pin_fmux_adc_sg2002:
+	.. table:: ADC
+		:widths: 2 1 1 1 3
+
+		+---------+---------+---------+--------+-----------------------+
+		| Signal  |Direction| PinName |Function| Function select       |
+		| Name    |         |         |Number  | register              |
+		+=========+=========+=========+========+=======================+
+		| (ADC1)  | I       | ADC1    | 0      | FMUX\                 |
+		|         |         |         |        | _GPIO_REG_IOCTRL_ADC1 |
+		|         |         |         |        | 0x0300_10F8           |
+		+---------+---------+---------+--------+-----------------------+
+
+.. only:: sg2000
+
+	.. _table_inf_signal_pin_fmux_adc_sg2000:
+	.. table:: ADC
+		:widths: 2 1 1 1 3
+
+		+---------+---------+---------+--------+-----------------------+
+		| Signal  |Direction| PinName |Function| Function select       |
+		| Name    |         |         |Number  | register              |
+		+=========+=========+=========+========+=======================+
+		| (ADC1)  | I       | ADC1    | 0      | FMUX\                 |
+		|         |         |         |        | _GPIO_REG_IOCTRL_ADC1 |
+		|         |         |         |        | 0x0300_10F8           |
+		+---------+---------+---------+--------+-----------------------+
+		| (ADC2)  | I       | ADC2    | 0      | FMUX\                 |
+		|         |         |         |        | _GPIO_REG_IOCTRL_ADC1 |
+		|         |         |         |        | 0x0300_10F8           |
+		+---------+---------+---------+--------+-----------------------+
+		| (ADC3)  | I       | ADC3    | 0      | FMUX\                 |
+		|         |         |         |        | _GPIO_REG_IOCTRL_ADC1 |
+		|         |         |         |        | 0x0300_10F8           |
+		+---------+---------+---------+--------+-----------------------+
 	
 No-die domain ADC
 ^^^^^^^^^^^^^^^^^
@@ -44,22 +70,51 @@ No-die domain ADC
 Audio
 ^^^^^
 
-.. _table_inf_signal_pin_fmux_audio:
-.. table:: Audio
-	:widths: 2 1 1 1 3
+.. only:: sg2002
 
-	+---------+---------+---------+--------+-----------------------+
-	| Signal  |Direction| PinName |Function| Function select       |
-	| Name    |         |         |Number  | register              |
-	+=========+=========+=========+========+=======================+
-	| (PAD\   | I       | PA      | 0      | FMUX_GPIO_REG_IO      |
-	| _AUD_AI |         | D_AUD_A |        | CTRL_PAD_AUD_AINL_MIC |
-	| NL_MIC) |         | INL_MIC |        | 0x0300_11BC           |
-	+---------+---------+---------+--------+-----------------------+
-	| (\      | O       | PAD_AU  | 0      | FMUX_GPIO_REG_IO      |
-	| PAD_AUD\|         | D_AOUTR |        | CTRL_PAD_AUD_AOUTR    |
-	| _AOUTR) |         |         |        | 0x0300_11C8           |
-	+---------+---------+---------+--------+-----------------------+
+	.. _table_inf_signal_pin_fmux_audio_sg2002:
+	.. table:: Audio
+		:widths: 2 1 1 1 3
+
+		+---------+---------+---------+--------+-----------------------+
+		| Signal  |Direction| PinName |Function| Function select       |
+		| Name    |         |         |Number  | register              |
+		+=========+=========+=========+========+=======================+
+		| (PAD\   | I       | PA      | 0      | FMUX_GPIO_REG_IO      |
+		| _AUD_AI |         | D_AUD_A |        | CTRL_PAD_AUD_AINL_MIC |
+		| NL_MIC) |         | INL_MIC |        | 0x0300_11BC           |
+		+---------+---------+---------+--------+-----------------------+
+		| (\      | O       | PAD_AU  | 0      | FMUX_GPIO_REG_IO      |
+		| PAD_AUD\|         | D_AOUTR |        | CTRL_PAD_AUD_AOUTR    |
+		| _AOUTR) |         |         |        | 0x0300_11C8           |
+		+---------+---------+---------+--------+-----------------------+
+
+.. only:: sg2000
+
+	.. _table_inf_signal_pin_fmux_audio_sg2000:
+	.. table:: Audio
+		:widths: 2 1 1 1 3
+
+		+---------+---------+---------+--------+-----------------------+
+		| Signal  |Direction| PinName |Function| Function select       |
+		| Name    |         |         |Number  | register              |
+		+=========+=========+=========+========+=======================+
+		| (PAD\   | I       | PA      | 0      | FMUX_GPIO_REG_IO      |
+		| _AUD_AI |         | D_AUD_A |        | CTRL_PAD_AUD_AINL_MIC |
+		| NL_MIC) |         | INL_MIC |        | 0x0300_11BC           |
+		+---------+---------+---------+--------+-----------------------+
+		| (PAD\   | I       | PA      | 0      | FMUX_GPIO_REG_IO      |
+		| _AUD_AI |         | D_AUD_A |        | CTRL_PAD_AUD_AINR_MIC |
+		| NR_MIC) |         | INR_MIC |        | 0x0300_11BC           |
+		+---------+---------+---------+--------+-----------------------+
+		| (\      | O       | PAD_AU  | 0      | FMUX_GPIO_REG_IO      |
+		| PAD_AUD\|         | D_AOUTL |        | CTRL_PAD_AUD_AOUTL    |
+		| _AOUTL) |         |         |        | 0x0300_11C8           |
+		+---------+---------+---------+--------+-----------------------+
+		| (\      | O       | PAD_AU  | 0      | FMUX_GPIO_REG_IO      |
+		| PAD_AUD\|         | D_AOUTR |        | CTRL_PAD_AUD_AOUTR    |
+		| _AOUTR) |         |         |        | 0x0300_11C8           |
+		+---------+---------+---------+--------+-----------------------+
 
 
 Ethernet
