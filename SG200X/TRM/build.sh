@@ -3,10 +3,10 @@
 ROOT=$(pwd)
 
 document_list=(
-    TRM/sg2000_cn
-    TRM/sg2000_en
-    TRM/sg2002_cn
-    TRM/sg2002_en
+    sg2000_cn
+    sg2000_en
+    sg2002_cn
+    sg2002_en
 )
 
 build_html() {

@@ -7,7 +7,7 @@
 	- [编辑器设置](#编辑器设置)
 - [项目设计](#项目设计)
 	- [本项目的基本需求:](#本项目的基本需求)
-	- [SG200X 顶层项目文件组织架构](#sg200x-顶层项目文件组织架构)
+	- [SG200X TRM 顶层项目文件组织架构](#sg200x-trm-顶层项目文件组织架构)
 	- [TRM 项目工程目录说明](#trm-项目工程目录说明)
 	- [工程中章节级别源码的设计](#工程中章节级别源码的设计)
 - [代码编写说明](#代码编写说明)
@@ -83,75 +83,75 @@ Latex 中存在中英文混排时特别要注意确保设置等宽字体显示�
 
 ## 本项目的基本需求:
 
-- SG200X 包含两个子项目 SG2002 和 SG2000。这两个项目采用的芯片有一些微小的差别，但绝大部分内容是一样的。
+- SG200X 的 TRM 包含两个子项目 SG2002 和 SG2000。这两个项目采用的芯片有一些微小的差别，但绝大部分内容是一样的。
 - 目前需要实现 TRM，也许以后会实现 datasheet。
 - TRM 需要提供中文和英文版本
 - TRM 的特点是表格特别多，而且表格主要是用于定义控制寄存器的使用。
 
-## SG200X 顶层项目文件组织架构
+## SG200X TRM 顶层项目文件组织架构
 
 ```bash
-$ tree -L 4 SG200X/
-.
+$ tree -L 3 SG200X/TRM
+SG200X/TRM
 ├── build.sh
+├── conf.py
+├── contents
+│   ├── cn
+│   │   ├── audio
+│   │   └── ......
+│   └── en
+│       ├── audio
+│       └── ......
 ├── doc
-└── TRM
-    ├── conf.py
-    ├── contents
-    │   ├── cn
-    │   │   ├── audio
-    │   │   └── ......
-    │   └── en
-    │       ├── audio
-    │       └── ......
-    ├── media
-    │   ├── image100.png
-    │   └── ......
-    ├── sg2000_cn
-    │   ├── make.bat
-    │   ├── Makefile
-    │   └── source
-    │       ├── conf.py -> ../../conf.py
-    │       ├── contents -> ../../contents/cn/
-    │       └── index.rst
-    ├── sg2000_en
-    │   ├── make.bat
-    │   ├── Makefile
-    │   └── source
-    │       ├── conf.py -> ../../conf.py
-    │       ├── contents -> ../../contents/en
-    │       ├── contents-share -> ../../contents/cn
-    │       └── index.rst
-    ├── sg2002_cn
-    │   ├── make.bat
-    │   ├── Makefile
-    │   └── source
-    │       ├── conf.py -> ../../conf.py
-    │       ├── contents -> ../../contents/cn/
-    │       └── index.rst
-    └── sg2002_en
-        ├── make.bat
-        ├── Makefile
-        └── source
-            ├── conf.py -> ../../conf.py
-            ├── contents -> ../../contents/en
-            ├── contents-share -> ../../contents/cn
-            └── index.rst
+│   ├── design_conditional_sg200x.md
+│   └── design.md
+├── media
+│   ├── image100.png
+│   └── ......
+├── sg2000_cn
+│   ├── make.bat
+│   ├── Makefile
+│   └── source
+│       ├── conf.py -> ../../conf.py
+│       ├── contents -> ../../contents/cn/
+│       └── index.rst
+├── sg2000_en
+│   ├── make.bat
+│   ├── Makefile
+│   └── source
+│       ├── conf.py -> ../../conf.py
+│       ├── contents -> ../../contents/en
+│       ├── contents-share -> ../../contents/cn
+│       └── index.rst
+├── sg2002_cn
+│   ├── make.bat
+│   ├── Makefile
+│   └── source
+│       ├── conf.py -> ../../conf.py
+│       ├── contents -> ../../contents/cn/
+│       └── index.rst
+└── sg2002_en
+    ├── make.bat
+    ├── Makefile
+    └── source
+        ├── conf.py -> ../../conf.py
+        ├── contents -> ../../contents/en
+        ├── contents-share -> ../../contents/cn
+        └── index.rst
 ```
 
 - `build.sh`: 用于构建的自动化 bash 脚本
 - `doc`: 设计文档目录
-- `TRM`: 该目录下存放 TRM 的工程项目源码，安排如下：
-  - `conf.py`: 每个 sphinx 项目共享的配置文件，每个项目中会采用符号链接 `conf.py` 指向这个文件
-  - `contents`: 这是一个目录，下面存放每个 sphinx 项目共享的源码，分为 cn（中文）和 en（英文）两个版本对应的子目录。每个子目录中按照一个章节对应一个子目录的方式安排。具体章节子目录的设计见下文 [工程中章节级别源码的设计](#工程中章节级别源码的设计)。每个工程会采用符号链接分别指向该目录下的 cn 或者 en 子目录。
-  - `media`: 这是一个目录，下面存放每个 sphinx 项目共享的图片资源。图片文件格式统一为 png。为简化中英文双语处理，要求所有的图片中的文字都是英文，不出现中文。工程源码会引用该目录下的图片文件。
-  - 工程目录。目前一共有四个工程，分别是：
-    - `sg2000_cn`: SG2000 的中文版本
-    - `sg2000_en`: SG2000 的英文版本
-    - `sg2002_cn`: SG2002 的中文版本
-    - `sg2002_en`: SG2002 的英文版本
-    这些目录安排符合 Sphinx 工程的基本要求，但也根据我们自身项目的需求做了定制。具体参考下文 [TRM 项目工程目录说明](#trm-项目工程目录说明)。
-    更多有关 SG2002 和 SG2000 条件编译的设计笔记参考 [《SG2000 和 SG2002 的条件编译编码设计笔记》](./design_conditional_sg200x.md)。
+- `conf.py`: 每个 sphinx 项目共享的配置文件，每个项目中会采用符号链接 `conf.py` 指向这个文件
+- `contents`: 这是一个目录，下面存放每个 sphinx 项目共享的源码，分为 cn（中文）和 en（英文）两个版本对应的子目录。每个子目录中按照一个章节对应一个子目录的方式安排。具体章节子目录的设计见下文 [工程中章节级别源码的设计](#工程中章节级别源码的设计)。每个工程会采用符号链接分别指向该目录下的 cn 或者 en 子目录。
+- `media`: 这是一个目录，下面存放每个 sphinx 项目共享的图片资源。图片文件格式统一为 png。为简化中英文双语处理，要求所有的图片中的文字都是英文，不出现中文。工程源码会引用该目录下的图片文件。
+- 工程目录。目前一共有四个工程，分别是：
+  - `sg2000_cn`: SG2000 的中文版本
+  - `sg2000_en`: SG2000 的英文版本
+  - `sg2002_cn`: SG2002 的中文版本
+  - `sg2002_en`: SG2002 的英文版本
+  这些目录安排符合 Sphinx 工程的基本要求，但也根据我们自身项目的需求做了定制。具体参考下文 [TRM 项目工程目录说明](#trm-项目工程目录说明)。
+  更多有关 SG2002 和 SG2000 条件编译的设计笔记参考 [《SG2000 和 SG2002 的条件编译编码设计笔记》](./design_conditional_sg200x.md)。
 
 ## TRM 项目工程目录说明
 
@@ -272,11 +272,11 @@ SG200X/TRM/sg2002_cn/source/contents/system-overview
 ## 自动化脚本 `build.sh` 方式
 
 ```bash
-$ cd SG200X
+$ cd SG200X/TRM
 $ ./build.sh
 ```
 
-执行该命令将自动构建所有工程，并且在 SG200X 下输出对应的 pdf 文件如下：
+执行该命令将自动构建所有工程，并且在 SG200X/TRM 下输出对应的 pdf 文件如下：
 
 ```bash
 ......
@@ -298,8 +298,8 @@ $ ./build.sh
 如果只想构建某一个工程，譬如 `sg2000_en`，可以输入命令如下：
 
 ```bash
-$ cd SG200X
-$ ./build.sh TRM/sg2000_en
+$ cd SG200X/TRM
+$ ./build.sh sg2000_en
 ```
 
 
