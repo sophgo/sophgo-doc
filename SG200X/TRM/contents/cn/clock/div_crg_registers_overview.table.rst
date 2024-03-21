@@ -1,5 +1,5 @@
 .. _table_div_crg_overview:
-.. table:: Clock Gen base address : 0x0300200
+.. table:: Clock Gen base address : 0x03002000
 	:widths: 2 1 2
 
 	+-----------------------+---------+------------------------------------+
