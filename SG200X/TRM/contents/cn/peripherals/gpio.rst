@@ -1,7 +1,9 @@
 GPIO
 ----
 
-系统配置 4 组 GPIO (General Purpose Input/Output), GPIO0 ~ GPIO3。每组 GPIO 提供 32 个可编程的输入输出管脚。
+系统包括 4 组 Active Domain 下的 GPIO (General Purpose Input/Output) , GPIO0 ~ GPIO3 和 1 组 No-die Domain 下的 GPIO, RTCSYS_GPIO。每组 GPIO 提供 32 个可编程的输入输出管脚。
+
+注：本手册中也经常使用 GPIOA 代替 GPIO0, GPIOB 代替 GPIO1, GPIOC 代替 GPIO2, GPIOD 代替 GPIO3。
 
 每一个管脚的方向可以任意设置为输入或者输出, 用于生成特定应用的输出信号或收集特定应用的输入信号。设置为输入管脚时，GPIO 可用作中断源；设置为输出管脚时，每一个 GPIO 都可以独立地输出 0 或 1。
 
