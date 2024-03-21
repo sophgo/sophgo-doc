@@ -104,9 +104,9 @@ RTC_ALARM_ENABLE
 	+======+======================+=======+========================+======+
 	| 0    | RTC_ALARM_ENABLE     | R/W   | Alarm enable           | 0x0  |
 	|      |                      |       |                        |      |
-	|      |                      |       | 0 = enable the alarm   |      |
+	|      |                      |       | 1 = enable the alarm   |      |
 	|      |                      |       |                        |      |
-	|      |                      |       | 1 = disable the alarm  |      |
+	|      |                      |       | 0 = disable the alarm  |      |
 	|      |                      |       | or clear the alarm     |      |
 	|      |                      |       | interrupt status       |      |
 	+------+----------------------+-------+------------------------+------+
