@@ -2,13 +2,46 @@
 FAQ
 ===
 
-1. Where can I find prebuilt binaries?
+1. Where can I find OS images?
 ===================================
 
-We compile hole SG2042 software stack daily. You can get these binaries from our
-NAS server.
+There are two kinds of images, one is single way image, the other is dual way image.
 
-http://219.142.246.77:65000//sharing/f73TDqXdN
+Single way image is for Milk-V pioneer box, EVB boards.
+
+Dual way image is for SR02208Ax dual way servers.
+
+Dual way images
+
+`Fedora-38-riscv64-sophgo-multi-20240125.img.tar.gz <https://sophon-file.sophon.cn/sophon-prod-s3/drive/24/03/20/21/multi_chip/Fedora-38-riscv64-sophgo-multi-20240125.img.tar.gz>`_
+
+`ubuntu-22.04-riscv64-sophgo-multi-20240125.img.tar.gz <https://sophon-file.sophon.cn/sophon-prod-s3/drive/24/03/20/21/multi_chip/ubuntu-22.04-riscv64-sophgo-multi-20240125.img.tar.gz>`_
+
+`openEuler-23.03-riscv64-sophgo-multi-20240125-build.img.zst <https://sophon-file.sophon.cn/sophon-prod-s3/drive/24/03/20/21/multi_chip/openEuler-23.03-riscv64-sophgo-multi-20240125-build.img.zst>`_
+
+`Deepin-23-riscv64-sophgo-multi-20240125-build.img.zst <https://sophon-file.sophon.cn/sophon-prod-s3/drive/24/03/20/21/multi_chip/Deepin-23-riscv64-sophgo-multi-20240125-build.img.zst>`_
+
+`openKylin-1.0-riscv64-sophgo-multi-20240125-build.img.zst <https://sophon-file.sophon.cn/sophon-prod-s3/drive/24/03/20/21/multi_chip/openKylin-1.0-riscv64-sophgo-multi-20240125-build.img.zst>`_
+
+`openSUSE-20230618-riscv64-sophgo-multi-20240125-build.img.zst <https://sophon-file.sophon.cn/sophon-prod-s3/drive/24/03/20/21/multi_chip/openSUSE-20230618-riscv64-sophgo-multi-20240125-build.img.zst>`_
+
+`Debian-12-riscv64-sophgo-multi-20240125-build.img.zst <https://sophon-file.sophon.cn/sophon-prod-s3/drive/24/03/20/21/multi_chip/Debian-12-riscv64-sophgo-multi-20240125-build.img.zst>`_
+
+Single way images
+
+`Fedora-38-riscv64-sophgo-single-20240125.img.tar.gz <https://sophon-file.sophon.cn/sophon-prod-s3/drive/24/03/20/21/single_chip/Fedora-38-riscv64-sophgo-single-20240125.img.tar.gz>`_
+
+`ubuntu-22.04-riscv64-sophgo-single-20240125.img.tar.gz <https://sophon-file.sophon.cn/sophon-prod-s3/drive/24/03/20/21/single_chip/ubuntu-22.04-riscv64-sophgo-single-20240125.img.tar.gz>`_
+
+`openEuler-23.03-riscv64-sophgo-single-20240125-build.img.zst <https://sophon-file.sophon.cn/sophon-prod-s3/drive/24/03/20/21/single_chip/openEuler-23.03-riscv64-sophgo-single-20240125-build.img.zst>`_
+
+`Deepin-23-riscv64-sophgo-single-20240125-build.img.zst <https://sophon-file.sophon.cn/sophon-prod-s3/drive/24/03/20/21/single_chip/Deepin-23-riscv64-sophgo-single-20240125-build.img.zst>`_
+
+`openKylin-1.0-riscv64-sophgo-single-20240125-build.img.zst <https://sophon-file.sophon.cn/sophon-prod-s3/drive/24/03/20/21/single_chip/openKylin-1.0-riscv64-sophgo-single-20240125-build.img.zst>`_
+
+`openSUSE-20230618-riscv64-sophgo-single-20240125-build.img.zst <https://sophon-file.sophon.cn/sophon-prod-s3/drive/24/03/20/21/single_chip/openSUSE-20230618-riscv64-sophgo-single-20240125-build.img.zst>`_
+
+`Debian-12-riscv64-sophgo-single-20240125-build.img.zst <https://sophon-file.sophon.cn/sophon-prod-s3/drive/24/03/20/21/single_chip/Debian-12-riscv64-sophgo-single-20240125-build.img.zst>`_
 
 2. Install GUI
 ==============

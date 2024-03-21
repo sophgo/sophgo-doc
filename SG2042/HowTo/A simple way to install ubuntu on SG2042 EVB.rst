@@ -13,7 +13,9 @@ A Simple Method to Install Ubuntu Image on SG2042 EVB
 
 2. Get an Ubuntu Image
 ======================
--   Dowload the `Ubuntu image <http://219.142.246.77:65000/sharing/agK6z51jP>`_ directly.
+-   Dowload Ubuntu image.
+
+    About how to download images, see `FAQ <https://github.com/sophgo/sophgo-doc/blob/main/SG2042/HowTo/FAQ.rst>`_ 'Where can I find OS images'
 
     The image is created based on Ubuntu offical preinstall server image.
 

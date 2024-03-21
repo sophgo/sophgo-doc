@@ -6,13 +6,10 @@ Create bootable disk using prebuilt image
 ===============
 All operations perform on a Linux based PC.
 
-2. Download prebuilt images from sophgo daily build
-===================================================
+2. Download prebuilt images
+===========================
 
-We compile whole SG2042 software stack daily. You can get these binaries from our
-NAS server.
-
-http://219.142.246.77:65000//sharing/f73TDqXdN
+About how to download images, see `FAQ <https://github.com/sophgo/sophgo-doc/blob/main/SG2042/HowTo/FAQ.rst>`_ 'Where can I find OS images'
 
 3. Get the device file of you disk
 ==================================
