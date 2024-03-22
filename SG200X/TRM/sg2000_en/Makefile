@@ -12,7 +12,7 @@ PROJECT      = sg2000
 DOC_TYPE     = trm
 DOC_LANG     = en
 RELEASE      = 1.0-beta
-RELEASE_DATE = 2024-01-08
+RELEASE_DATE = 2024-03-22
 COPYRIGHT    = "2024 SOPHGO Co., Ltd"
 AUTHOR       = Sophgo
 

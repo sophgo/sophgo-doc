@@ -11,7 +11,7 @@ SG2000 Technical Reference Manual
 	Revision          Date             Description
 	===============   ============     =====================================
 	1.0-alpha         2023/11/23       Initial Version
-	1.0-beta          2023/12/xx       Converted to reStructuredText
+	1.0-beta          2024/03/22       Converted to reStructuredText
 	===============   ============     =====================================
 
 
