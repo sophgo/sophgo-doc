@@ -1,7 +1,9 @@
 PLL configuration
 -----------------
 
-See :ref:`table_pll_configure`, the chip has 9 built-in PLLs (not counting Analog IP built-in PLL), which are divided into two types of PLL: integer frequency multiplication and fractional frequency multiplication.
+See :ref:`table_pll_configure`, the chip has 8 built-in PLLs (not counting Analog IP built-in PLL), which are divided into two types of PLL: integer frequency multiplication and fractional frequency multiplication.
+
+For more information on PLL Configuration/Control Registers, refer to :ref:`section_clock_pll_reg_overview` and :ref:`section_clock_pll_reg_description`.
 
 .. include:: ../../contents-share/clock/pll_configure_params.table.rst
 

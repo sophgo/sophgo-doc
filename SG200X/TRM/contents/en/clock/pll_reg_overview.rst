@@ -1,3 +1,5 @@
+.. _section_clock_pll_reg_overview:
+
 PLL CRG Register Overview
 -------------------------
 
