@@ -1,3 +1,5 @@
+.. _section_clock_pll_reg_description:
+
 PLL CRG 寄存器描述
 ------------------
 
