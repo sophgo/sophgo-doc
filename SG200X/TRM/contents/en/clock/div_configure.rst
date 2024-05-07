@@ -1,7 +1,17 @@
-CLK_DIV clock division configuration
-------------------------------------
+IP/Subsystem clock configuration
+--------------------------------
 
-Main clock frequency division resource table. The following table indicates the configurable clock source and default clock frequency and frequency division for each clock. The software can switch the clock source from XTAL to PLL after booting and adjust the clock frequency division configuration.
+:ref:`table_clk_div_default_params` lists all IP/Subsystem clocks and related information in the system. The following is an introduction to IP/Subsystem clock related information based on this table.
+
+- "CLK_NAME" is the clock name of the IP/Subsystem clock.
+
+- Each IP/Subsystem clock can be switched on and off via registers (Gate function). The specific settings are controlled by the registers clk_en_0, clk_en_1, clk_en_2, clk_en_3 and clk_en_4. Each bit controls a clock. See :ref:`table_clk_en_0`, :ref:`table_clk_en_1`, :ref:`table_clk_en_2`, :ref:`table_clk_en_3` and :ref:`table_clk_en_4`.
+
+- The "DIV" column identifies whether the clock supports frequency division (Divide function), "Y" indicates support, and empty indicates not support. Each clock that supports frequency division has a corresponding DIV register for setting the division factor (Divider Factor). For example, clk_tpu corresponds to the [20:16] bit field of div_clk_tpu.
+
+- If a clock supports frequency division, there may be multiple parent clocks (PLL clock or xtal) as clock sources for frequency division. These parent clocks are divided into two groups, DIV_IN0 and DIV_IN1, which correspond to "DIV_IN0" column and the "DIV_IN1" column on the table respectively. Each group contains one or more Sources. We can select the Source through the clk_src bit field of the DIV register corresponding to the clock. Most clocks that support frequency division only need one set of Source, namely DIV_IN0. A small number of clocks have two sets of Sources, including clk_a53, clk_c906_0 and clk_c906_1. If a clock has two sets of Sources, then the clock has two corresponding DIV registers. For example, clk_a53 corresponds to div_clk_a53_0 and div_clk_a53_1. We can select groups DIV_IN0 and DIV_IN1 through register clk_sel_0, the default is DIV_IN1 (Reset). The "PLL SRC/DIV/FREQ" column gives the "Parent Clock"/"Division Factor"/"Frequency Value" selected by default for this clock. The software can switch the clock source from XTAL to PLL after Boot, and adjust the clock frequency division configuration.
+
+- The "XTAL" column identifies whether the clock supports bypassing its parent clock to xtal. "Y" indicates support, and empty indicates not support. The specific settings are controlled by the registers clk_byp_0 and clk_byp_1, see :ref:`table_clk_byp_0` and :ref:`table_clk_byp_1`.
 
 .. include:: ../../contents-share/clock/clksource_preset_freq_div_param.table.rst
 
