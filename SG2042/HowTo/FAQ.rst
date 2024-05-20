@@ -179,3 +179,49 @@ Refer to `Grub2/Setup <https://help.ubuntu.com/community/Grub2/Setup>`_ .
 * **Error 2** ``error: file `/boot/grub/locale/C.gmo' not found.``
 
   Add ``LANG=en_US.UTF-8`` into ``/etc/default/grub``, and then type ``update-grub`` to update ``/boot/grub/grub.cfg``.
+
+
+4. How to set static ip in Fedora38?
+=====================================
+
+For example, We would like to set the network port ``eth0`` to:
+
+    Static IPv4 address: ``192.168.20.42``
+
+    Subnet Mask: ``255.255.255.0``
+
+    Gateway: ``192.168.20.1``
+
+    DNS: ``8.8.8.8``
+
+* Add a new connection:
+
+.. highlights::
+
+    .. code:: sh
+
+        sudo nmcli connection add type ethernet con-name 'static-ip' ifname eth0
+
+* Set the IPv4 configuration method to manual, rather than DHCP:
+
+.. highlights::
+
+    .. code:: sh
+
+        sudo nmcli connection modify 'static-ip' ipv4.method manual
+
+* Set static ipv4 address, mask, gateway and dns:
+
+.. highlights::
+
+    .. code:: sh
+
+        sudo nmcli connection modify 'static-ip' ipv4.addresses 192.168.20.24/24 gw4 192.168.20.1 ipv4.dns 8.8.8.8
+
+* Bring up the ``static-ip`` connection:
+
+.. highlights::
+
+    .. code:: sh
+
+        sudo nmcli connection up 'static-ip'
