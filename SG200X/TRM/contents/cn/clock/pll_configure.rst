@@ -1,7 +1,9 @@
 PLL 配置
 --------
 
-如 :ref:`table_pll_configure` , 芯片内置 9 PLLs (不计入 Analog IP 内建 PLL), 分为整数倍频跟分数倍频两类 PLL。
+如 :ref:`table_pll_configure` , 芯片内置 8 个 PLL (不计入 Analog IP 内建 PLL), 分为整数倍频跟分数倍频两类 PLL。
+
+有关更多 PLL Configuration/Control Register 的内容，参考 :ref:`section_clock_pll_reg_overview` 和 :ref:`section_clock_pll_reg_description`。
 
 .. include:: ./pll_configure_params.table.rst
 

@@ -1,5 +1,7 @@
-PLL CRG Register Description
-----------------------------
+.. _section_clock_pll_reg_description:
+
+PLL Control Register Description
+--------------------------------
 
 PLL_G2 Register Description
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
