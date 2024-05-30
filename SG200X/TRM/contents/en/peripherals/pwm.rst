@@ -4,12 +4,22 @@ PWM
 Overview
 ~~~~~~~~
 
-The chip provides 1 set of 4 independent PWM signal outputs.
+The chip provides 4 PWM controllers PWM0, PWM1, PWM2 and PWM3.
+
+Each controller provides 4 independent PWM signal outputs. They are:
+
+- PWM0 includes PWM[0], PWM[1], PWM[2], PWM[3].
+
+- PWM1 includes PWM[4], PWM[5], PWM[6], PWM[7].
+
+- PWM2 includes PWM[8], PWM[9], PWM[10], PWM[11].
+
+- PWM3 includes PWM[12], PWM[13], PWM[14], PWM[15].
 
 Features
 ~~~~~~~~
 
-The PWM clock source can be selected from 100MHz or 148.5MHz, and the default is 100MHz. All 4 PWM channels can be operated independently:
+The PWM clock source can be selected from 100MHz or 148.5MHz, and the default is 100MHz.
 
 - There is an internal 30-bit counter, the output period and the number of high/low level beats are configurable.
 
@@ -22,15 +32,15 @@ The PWM clock source can be selected from 100MHz or 148.5MHz, and the default is
 Way of Working
 ~~~~~~~~~~~~~~
 
-The basic configuration process of PWM is as follows (taking PWM0 as an example):
+The basic configuration process of PWM is as follows (taking PWM[0] as an example):
 
 1. Based on the selected clock source, calculate the square wave period and low-level beat number to be output.
 
 2. Write the corresponding values to registers HLPERIOD0 and PERIOD0.
 
-3. To operate in continuous output mode, configure PWMMODE to 0, set PWMSTART[0] to 1, and PWM0 starts to output until PWMSTART[0] is set to 0 to end the output.
+3. To operate in continuous output mode, configure PWMMODE to 0, set PWMSTART[0] to 1, and PWM[0] starts to output until PWMSTART[0] is set to 0 to end the output.
 
-4. If you want to operate in the fixed pulse number output mode, configure PWMMODE as 1, and write the number of square waves to be output into the register PCOUNT0. After setting PWMSTART[0] to 1, PWM0 starts to output and ends automatically after reaching the set square wave number, and the status register PWMDONE changes from 0 to 1.
+4. If you want to operate in the fixed pulse number output mode, configure PWMMODE as 1, and write the number of square waves to be output into the register PCOUNT0. After setting PWMSTART[0] to 1, PWM[0] starts to output and ends automatically after reaching the set square wave number, and the status register PWMDONE changes from 0 to 1.
 
 .. _diagram_pwm_continuous_mode:
 .. figure:: ../../../../media/image133.png
@@ -48,7 +58,7 @@ For example: To output a waveform with a frequency of 1MHz, a low level ratio of
 
 1. Using the default 100MHz clock source, the period number (PERIOD0) is configured as 100MHz / 1MHz = 100, and the low level number (HLPERIOD0) is configured as 100 x 75% = 75. The number of pulses (PCOUNT0) is configured as 16.
 
-2. Write 1 to PWMSTART [0] to start outputting the waveform.
+2. Write 1 to PWMSTART[0] to start outputting the waveform.
 
 3. Read the register PWMDONE[0] until the value is 1, indicating that the output is completed.
 
@@ -83,11 +93,13 @@ Set SHIFTSTART to 0 to end the output, and read the register PWMDONE[3:0] until 
 PWM Register Overview
 ~~~~~~~~~~~~~~~~~~~~~
 
-An overview of the PWM registers is shown in table :ref:`table_pwm_register_overview`.
+An overview of the PWM registers is shown in table :ref:`table_pwm_register_overview`. Here take PWM0 controller as an example, the other 3 controllers are similar.
 
 .. include:: ../../contents-share/peripherals/pwm_registers_overview.table.rst
 
 PWM Register Description
 ~~~~~~~~~~~~~~~~~~~~~~~~
+
+Here take PWM0 controller as an example, the other 3 controllers are similar.
 
 .. include:: ../../contents-share/peripherals/pwn_registers_description.table.rst

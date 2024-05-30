@@ -8,7 +8,7 @@ HLPERIOD0
 	+------+----------------------+-------+------------------------+------+
 	| Bits | Name                 | Access| Description            | Reset|
 	+======+======================+=======+========================+======+
-	| 29:0 | HLPERIOD0            | R/W   | PWM0 Number of low     | 0x1  |
+	| 29:0 | HLPERIOD0            | R/W   | PWM[0] Number of low   | 0x1  |
 	|      |                      |       | level taps (in clk_pwm)|      |
 	|      |                      |       |                        |      |
 	|      |                      |       | When POLARITY[0] is 0, |      |
@@ -30,8 +30,9 @@ PERIOD0
 	+------+----------------------+-------+------------------------+------+
 	| Bits | Name                 | Access| Description            | Reset|
 	+======+======================+=======+========================+======+
-	| 29:0 | PERIOD0              | R/W   | PWM0 Square wave period| 0x2  |
-	|      |                      |       | beats (in clk_pwm)     |      |
+	| 29:0 | PERIOD0              | R/W   | PWM[0] Square wave     | 0x2  |
+	|      |                      |       | period beats           |      |
+	|      |                      |       | (in clk_pwm)           |      |
 	|      |                      |       |                        |      |
 	|      |                      |       | Note The PERIOD value  |      |
 	|      |                      |       | must be greater than   |      |
@@ -48,7 +49,7 @@ HLPERIOD1
 	+------+----------------------+-------+------------------------+------+
 	| Bits | Name                 | Access| Description            | Reset|
 	+======+======================+=======+========================+======+
-	| 29:0 | HLPERIOD1            | R/W   | PWM1 Number of low     | 0x1  |
+	| 29:0 | HLPERIOD1            | R/W   | PWM[1] Number of low   | 0x1  |
 	|      |                      |       | level taps (in clk_pwm)|      |
 	|      |                      |       |                        |      |
 	|      |                      |       | When POLARITY[1] is 0, |      |
@@ -70,8 +71,9 @@ PERIOD1
 	+------+----------------------+-------+------------------------+------+
 	| Bits | Name                 | Access| Description            | Reset|
 	+======+======================+=======+========================+======+
-	| 29:0 | PERIOD1              | R/W   | PWM1 Square wave period| 0x2  |
-	|      |                      |       | beats (in clk_pwm)     |      |
+	| 29:0 | PERIOD1              | R/W   | PWM[1] Square wave     | 0x2  |
+	|      |                      |       | period beats           |      |
+	|      |                      |       | (in clk_pwm)           |      |
 	|      |                      |       |                        |      |
 	|      |                      |       | Note The PERIOD value  |      |
 	|      |                      |       | must be greater than   |      |
@@ -88,7 +90,7 @@ HLPERIOD2
 	+------+----------------------+-------+------------------------+------+
 	| Bits | Name                 | Access| Description            | Reset|
 	+======+======================+=======+========================+======+
-	| 29:0 | HLPERIOD2            | R/W   | PWM2 Number of low     | 0x1  |
+	| 29:0 | HLPERIOD2            | R/W   | PWM[2] Number of low   | 0x1  |
 	|      |                      |       | level taps (in clk_pwm)|      |
 	|      |                      |       |                        |      |
 	|      |                      |       | When POLARITY[2] is 0, |      |
@@ -110,8 +112,9 @@ PERIOD2
 	+------+----------------------+-------+------------------------+------+
 	| Bits | Name                 | Access| Description            | Reset|
 	+======+======================+=======+========================+======+
-	| 29:0 | PERIOD2              | R/W   | PWM2 Square wave period| 0x2  |
-	|      |                      |       | beats (in clk_pwm)     |      |
+	| 29:0 | PERIOD2              | R/W   | PWM[2] Square wave     | 0x2  |
+	|      |                      |       | period beats           |      |
+	|      |                      |       | (in clk_pwm)           |      |
 	|      |                      |       |                        |      |
 	|      |                      |       | Note The PERIOD value  |      |
 	|      |                      |       | must be greater than   |      |
@@ -128,7 +131,7 @@ HLPERIOD3
 	+------+----------------------+-------+------------------------+------+
 	| Bits | Name                 | Access| Description            | Reset|
 	+======+======================+=======+========================+======+
-	| 29:0 | HLPERIOD3            | R/W   | PWM3 Number of low     | 0x1  |
+	| 29:0 | HLPERIOD3            | R/W   | PWM[3] Number of low   | 0x1  |
 	|      |                      |       | level taps (in clk_pwm)|      |
 	|      |                      |       |                        |      |
 	|      |                      |       | When POLARITY[3] is 0, |      |
@@ -150,8 +153,9 @@ PERIOD3
 	+------+----------------------+-------+------------------------+------+
 	| Bits | Name                 | Access| Description            | Reset|
 	+======+======================+=======+========================+======+
-	| 29:0 | PERIOD3              | R/W   | PWM3 Square wave period| 0x2  |
-	|      |                      |       | beats (in clk_pwm)     |      |
+	| 29:0 | PERIOD3              | R/W   | PWM[3] Square wave     | 0x2  |
+	|      |                      |       | period beats           |      |
+	|      |                      |       | (in clk_pwm)           |      |
 	|      |                      |       |                        |      |
 	|      |                      |       | Note The PERIOD value  |      |
 	|      |                      |       | must be greater than   |      |
@@ -168,25 +172,27 @@ POLARITY
 	+------+----------------------+-------+------------------------+------+
 	| Bits | Name                 | Access| Description            | Reset|
 	+======+======================+=======+========================+======+
-	| 3:0  | POLARITY             | R/W   | PWM0~3 signal polarity | 0x0  |
+	| 3:0  | POLARITY             | R/W   | PWM[0]~[3] signal      | 0x0  |
+	|      |                      |       | polarity               |      |
 	|      |                      |       |                        |      |
-	|      |                      |       | [n] = 0: PWMn          |      |
+	|      |                      |       | [n] = 0: PWM[n]        |      |
 	|      |                      |       | Default is low         |      |
 	|      |                      |       | level output           |      |
 	|      |                      |       |                        |      |
-	|      |                      |       | [n] = 1: PWMn          |      |
+	|      |                      |       | [n] = 1: PWM[n]        |      |
 	|      |                      |       | Default is high        |      |
 	|      |                      |       | level output           |      |
 	+------+----------------------+-------+------------------------+------+
 	| 7:4  | Reserved             |       |                        |      |
 	+------+----------------------+-------+------------------------+------+
-	| 11:8 | PWMMODE              | R/W   | PWM0~3 operating mode  | 0x0  |
+	| 11:8 | PWMMODE              | R/W   | PWM[0]~[3] operating   | 0x0  |
+	|      |                      |       | mode                   |      |
 	|      |                      |       |                        |      |
-	|      |                      |       | [n+8] = 0: PWMn        |      |
+	|      |                      |       | [n+8] = 0: PWM[n]      |      |
 	|      |                      |       | Operation in Continuous|      |
 	|      |                      |       | Out Mode               |      |
 	|      |                      |       |                        |      |
-	|      |                      |       | [n+8] = 1: PWMn        |      |
+	|      |                      |       | [n+8] = 1: PWM[n]      |      |
 	|      |                      |       | Operation in fixed     |      |
 	|      |                      |       | output mode            |      |
 	+------+----------------------+-------+------------------------+------+
@@ -195,11 +201,11 @@ POLARITY
 	| 16   | SHIFTMODE            | R/W   | Enable PWM synchronous | 0x0  |
 	|      |                      |       | phase output mode      |      |
 	|      |                      |       |                        |      |
-	|      |                      |       | 0 = PWM0~3             |      |
+	|      |                      |       | 0 = PWM[0]~[3]         |      |
 	|      |                      |       | operate in general mode|      |
 	|      |                      |       |                        |      |
-	|      |                      |       | 1 = PWM0~3 operate in  |      |
-	|      |                      |       | 4-way synchronised     |      |
+	|      |                      |       | 1 = PWM[0]~[3] operate |      |
+	|      |                      |       | in 4-way synchronised  |      |
 	|      |                      |       | output mode            |      |
 	+------+----------------------+-------+------------------------+------+
 	| 19:17| Reserved             |       |                        |      |
@@ -228,33 +234,35 @@ PWMSTART
 	+------+----------------------+-------+------------------------+------+
 	| Bits | Name                 | Access| Description            | Reset|
 	+======+======================+=======+========================+======+
-	| 3:0  | PWMSTART             | R/W   | EnablePWM0~3           | 0x0  |
+	| 3:0  | PWMSTART             | R/W   | Enable PWM[0]~[3]      | 0x0  |
 	|      |                      |       |                        |      |
-	|      |                      |       | [n] = 0: Stop PWMn     |      |
+	|      |                      |       | [n] = 0: Stop PWM[n]   |      |
 	|      |                      |       |                        |      |
-	|      |                      |       | [n] = 1: Output PWMn   |      |
+	|      |                      |       | [n] = 1: Output PWM[n] |      |
 	|      |                      |       |                        |      |
-	|      |                      |       | When PWMMODE is set to |      |
-	|      |                      |       | 0, write bit n to 0 and|      |
+	|      |                      |       | When PWMMODE is 0,     |      |
+	|      |                      |       | write bit n to 0 and   |      |
 	|      |                      |       | then write 1 to start  |      |
-	|      |                      |       | PWMn output, until bit |      |
-	|      |                      |       | n is written to 0 to   |      |
-	|      |                      |       | stop output. When      |      |
-	|      |                      |       | PWMMODE is set to 1,   |      |
+	|      |                      |       | PWM[n] output, until   |      |
+	|      |                      |       | bit n is written to 0  |      |
+	|      |                      |       | to stop output.        |      |
+	|      |                      |       |                        |      |
+	|      |                      |       | When PWMMODE is 1,     |      |
 	|      |                      |       | write bit n to 1 to    |      |
-	|      |                      |       | start PWMn output, and |      |
-	|      |                      |       | stop output            |      |
+	|      |                      |       | start PWM[n] output,   |      |
+	|      |                      |       | and stop output        |      |
 	|      |                      |       | automatically when the |      |
 	|      |                      |       | number of pulses output|      |
 	|      |                      |       | output equals to the   |      |
 	|      |                      |       | value of PCOUNTn.      |      |
+	|      |                      |       |                        |      |
 	|      |                      |       | When SHIFTMODE is set  |      |
 	|      |                      |       | to 1, PWMSTART[3:0]    |      |
-	|      |                      |       | will be PWM0           |      |
-	|      |                      |       | ~PWMSTART[3:0] will be |      |
-	|      |                      |       | PWM0~ and will be      |      |
+	|      |                      |       | will be output enable  |      |
+	|      |                      |       | for PWM[0]~[3]. Start  |      |
+	|      |                      |       | of PWM will be         |      |
 	|      |                      |       | controlled by          |      |
-	|      |                      |       | SHIFTSTART             |      |
+	|      |                      |       | SHIFTSTART.            |      |
 	+------+----------------------+-------+------------------------+------+
 	| 31:4 | Reserved             |       |                        |      |
 	+------+----------------------+-------+------------------------+------+
@@ -269,7 +277,8 @@ PWMDONE
 	+------+----------------------+-------+------------------------+------+
 	| Bits | Name                 | Access| Description            | Reset|
 	+======+======================+=======+========================+======+
-	| 3:0  | PWMDONE              | RO    | PWM0~3 End output state|      |
+	| 3:0  | PWMDONE              | RO    | PWM[0]~[3] End output  |      |
+	|      |                      |       | state                  |      |
 	|      |                      |       |                        |      |
 	|      |                      |       | [n] = 1: PWMn          |      |
 	|      |                      |       | Closed Output          |      |
@@ -323,7 +332,7 @@ PCOUNT0
 	+------+----------------------+-------+------------------------+------+
 	| Bits | Name                 | Access| Description            | Reset|
 	+======+======================+=======+========================+======+
-	| 23:0 | PCOUNT0              | R/W   | Number of PWM0 pulses  | 0x1  |
+	| 23:0 | PCOUNT0              | R/W   | Number of PWM[0] pulses| 0x1  |
 	|      |                      |       | (set value must be     |      |
 	|      |                      |       | greater than 0)        |      |
 	|      |                      |       |                        |      |
@@ -344,7 +353,7 @@ PCOUNT1
 	+------+----------------------+-------+------------------------+------+
 	| Bits | Name                 | Access| Description            | Reset|
 	+======+======================+=======+========================+======+
-	| 23:0 | PCOUNT1              | R/W   | Number of PWM1 pulses  | 0x1  |
+	| 23:0 | PCOUNT1              | R/W   | Number of PWM[1] pulses| 0x1  |
 	|      |                      |       | (set value must be     |      |
 	|      |                      |       | greater than 0)        |      |
 	|      |                      |       |                        |      |
@@ -364,7 +373,7 @@ PCOUNT2
 	+------+----------------------+-------+------------------------+------+
 	| Bits | Name                 | Access| Description            | Reset|
 	+======+======================+=======+========================+======+
-	| 23:0 | PCOUNT2              | R/W   | Number of PWM2 pulses  | 0x1  |
+	| 23:0 | PCOUNT2              | R/W   | Number of PWM[2] pulses| 0x1  |
 	|      |                      |       | (set value must be     |      |
 	|      |                      |       | greater than 0)        |      |
 	|      |                      |       |                        |      |
@@ -384,7 +393,7 @@ PCOUNT3
 	+------+----------------------+-------+------------------------+------+
 	| Bits | Name                 | Access| Description            | Reset|
 	+======+======================+=======+========================+======+
-	| 23:0 | PCOUNT3              | R/W   | Number of PWM3 pulses  | 0x1  |
+	| 23:0 | PCOUNT3              | R/W   | Number of PWM[3] pulses| 0x1  |
 	|      |                      |       | (set value must be     |      |
 	|      |                      |       | greater than 0)        |      |
 	|      |                      |       |                        |      |
@@ -404,7 +413,7 @@ PULSECOUNT0
 	+------+----------------------+-------+------------------------+------+
 	| Bits | Name                 | Access| Description            | Reset|
 	+======+======================+=======+========================+======+
-	| 23:0 | PULSECOUNT0          | RO    | PWM0                   |      |
+	| 23:0 | PULSECOUNT0          | RO    | PWM[0]                 |      |
 	|      |                      |       | Number of Output       |      |
 	|      |                      |       | Pulses Status          |      |
 	+------+----------------------+-------+------------------------+------+
@@ -421,7 +430,7 @@ PULSECOUNT1
 	+------+----------------------+-------+------------------------+------+
 	| Bits | Name                 | Access| Description            | Reset|
 	+======+======================+=======+========================+======+
-	| 23:0 | PULSECOUNT1          | RO    | PWM1                   |      |
+	| 23:0 | PULSECOUNT1          | RO    | PWM[1]                 |      |
 	|      |                      |       | Number of Output       |      |
 	|      |                      |       | Pulses Status          |      |
 	+------+----------------------+-------+------------------------+------+
@@ -438,7 +447,7 @@ PULSECOUNT2
 	+------+----------------------+-------+------------------------+------+
 	| Bits | Name                 | Access| Description            | Reset|
 	+======+======================+=======+========================+======+
-	| 23:0 | PULSECOUNT2          | RO    | PWM2                   |      |
+	| 23:0 | PULSECOUNT2          | RO    | PWM[2]                 |      |
 	|      |                      |       | Number of Output       |      |
 	|      |                      |       | Pulses Status          |      |
 	+------+----------------------+-------+------------------------+------+
@@ -455,7 +464,7 @@ PULSECOUNT3
 	+------+----------------------+-------+------------------------+------+
 	| Bits | Name                 | Access| Description            | Reset|
 	+======+======================+=======+========================+======+
-	| 23:0 | PULSECOUNT3          | RO    | PWM3                   |      |
+	| 23:0 | PULSECOUNT3          | RO    | PWM[3]                 |      |
 	|      |                      |       | Number of Output       |      |
 	|      |                      |       | Pulses Status          |      |
 	+------+----------------------+-------+------------------------+------+
@@ -472,7 +481,7 @@ SHIFTCOUNT0
 	+------+----------------------+-------+------------------------+------+
 	| Bits | Name                 | Access| Description            | Reset|
 	+======+======================+=======+========================+======+
-	| 23:0 | SHIFTCOUNT0          | R/W   | PWM0                   | 0x0  |
+	| 23:0 | SHIFTCOUNT0          | R/W   | PWM[0]                 | 0x0  |
 	|      |                      |       | Phase difference of    |      |
 	|      |                      |       | the first pulse output |      |
 	|      |                      |       | (in clk_pwm)           |      |
@@ -493,7 +502,7 @@ SHIFTCOUNT1
 	+------+----------------------+-------+------------------------+------+
 	| Bits | Name                 | Access| Description            | Reset|
 	+======+======================+=======+========================+======+
-	| 23:0 | SHIFTCOUNT1          | R/W   | PWM1                   | 0x0  |
+	| 23:0 | SHIFTCOUNT1          | R/W   | PWM[1]                 | 0x0  |
 	|      |                      |       | Phase difference of    |      |
 	|      |                      |       | the first pulse output |      |
 	|      |                      |       | (in clk_pwm)           |      |
@@ -514,7 +523,7 @@ SHIFTCOUNT2
 	+------+----------------------+-------+------------------------+------+
 	| Bits | Name                 | Access| Description            | Reset|
 	+======+======================+=======+========================+======+
-	| 23:0 | SHIFTCOUNT2          | R/W   | PWM2                   | 0x0  |
+	| 23:0 | SHIFTCOUNT2          | R/W   | PWM[2]                 | 0x0  |
 	|      |                      |       | Phase difference of    |      |
 	|      |                      |       | the first pulse output |      |
 	|      |                      |       | (in clk_pwm)           |      |
@@ -535,7 +544,7 @@ SHIFTCOUNT3
 	+------+----------------------+-------+------------------------+------+
 	| Bits | Name                 | Access| Description            | Reset|
 	+======+======================+=======+========================+======+
-	| 23:0 | SHIFTCOUNT3          | R/W   | PWM3                   | 0x0  |
+	| 23:0 | SHIFTCOUNT3          | R/W   | PWM[3]                 | 0x0  |
 	|      |                      |       | Phase difference of    |      |
 	|      |                      |       | the first pulse output |      |
 	|      |                      |       | (in clk_pwm)           |      |
@@ -561,8 +570,9 @@ SHIFTSTART
 	|      |                      |       |                        |      |
 	|      |                      |       | When SHIFTMODE is set  |      |
 	|      |                      |       | to 1, this register    |      |
-	|      |                      |       | starts to output PWM0~3|      |
-	|      |                      |       | after writing 1.       |      |
+	|      |                      |       | starts to output       |      |
+	|      |                      |       | PWM[0]~[3] after       |      |
+	|      |                      |       | writing 1.             |      |
 	+------+----------------------+-------+------------------------+------+
 	| 31:1 | Reserved             |       |                        |      |
 	+------+----------------------+-------+------------------------+------+
@@ -577,7 +587,7 @@ PWM_OE
 	+------+----------------------+-------+------------------------+------+
 	| Bits | Name                 | Access| Description            | Reset|
 	+======+======================+=======+========================+======+
-	| 3:0  | PWM_OE               | R/W   | PWM0~3 IO output       | 0x0  |
+	| 3:0  | PWM_OE               | R/W   | PWM[0]~[3] IO output   | 0x0  |
 	|      |                      |       | enable                 |      |
 	|      |                      |       |                        |      |
 	|      |                      |       | 1 = IO is output,      |      |
