@@ -4,12 +4,22 @@ PWM
 概述
 ~~~~
 
-芯片提供 1 组 4 路独立的 PWM 信号输出。
+芯片提供 4 个 PWM 控制器 PWM0、PWM1、PWM2 和 PWM3。
+
+每个控制器提供 4 路独立的 PWM 信号输出。它们是：
+
+- PWM0 包括 PWM[0], PWM[1], PWM[2], PWM[3]。
+
+- PWM1 包括 PWM[4], PWM[5], PWM[6], PWM[7]。
+
+- PWM2 包括 PWM[8], PWM[9], PWM[10], PWM[11]。
+
+- PWM3 包括 PWM[12], PWM[13], PWM[14], PWM[15]。
 
 特点
 ~~~~
 
-PWM 的时钟来源为 100MHz 和 148.5MHz 二选一，默认为 100MHz。4 路 PWM 皆可独立操作：
+PWM 的时钟来源为 100MHz 和 148.5MHz 二选一，默认为 100MHz。
 
 - 内部有 30-bit 计数器, 输出周期和高/低电平拍数皆可配置。
 
@@ -22,15 +32,15 @@ PWM 的时钟来源为 100MHz 和 148.5MHz 二选一，默认为 100MHz。4 路 
 工作方式
 ~~~~~~~~
 
-PWM 基本配置流程如下 (以 PWM0 为例):
+PWM 基本配置流程如下 (以 PWM[0] 为例):
 
 1. 基于选定的时钟源，通过计算得到需输出的方波周期和低电平拍数。
 
 2. 将对应值写入寄存器 HLPERIOD0、PERIOD0。
 
-3. 若要操作在连续输出模式，配置 PWMMODE 为 0, 将 PWMSTART[0] 设 1 后, PWM0 开始输出，直到 PWMSTART[0] 设 0 后结束输出。
+3. 若要操作在连续输出模式，配置 PWMMODE 为 0, 将 PWMSTART[0] 设 1 后, PWM[0] 开始输出，直到 PWMSTART[0] 设 0 后结束输出。
 
-4. 若要操作在固定脉冲个数输出模式，配置 PWMMODE 为 1, 需输出的方波数目写入寄存器 PCOUNT0。将 PWMSTART[0] 设 1 后, PWM0 开始输出，达到设定的方波数后自动结束，状态寄存器 PWMDONE 由 0 转 1。
+4. 若要操作在固定脉冲个数输出模式，配置 PWMMODE 为 1, 需输出的方波数目写入寄存器 PCOUNT0。将 PWMSTART[0] 设 1 后, PWM[0] 开始输出，达到设定的方波数后自动结束，状态寄存器 PWMDONE 由 0 转 1。
 
 .. _diagram_pwm_continuous_mode:
 .. figure:: ../../../../media/image133.png
@@ -48,7 +58,7 @@ PWM 基本配置流程如下 (以 PWM0 为例):
 
 1. 使用默认 100MHz 时钟源，周期数 (PERIOD0) 配置为 100MHz / 1MHz = 100, 低电平数 (HLPERIOD0) 配置为 100 x 75% = 75。脉冲数 (PCOUNT0) 配置为 16。
 
-2. PWMSTART [0] 写 1 后开始输出波形。
+2. PWMSTART[0] 写 1 后开始输出波形。
 
 3. 读取寄存器 PWMDONE[0] 直到值为 1, 表示输出完成。
 
@@ -60,9 +70,9 @@ PWM 基本配置流程如下 (以 PWM0 为例):
 
 1. 配置 HLPERIOD0/PERIOD0, HLPERIOD1/PERIOD1, HLPERIOD2/PERIOD2, HLPERIOD3/PERIOD3为相同值。
 
-2. 依4路方波波形需要错开的 phase 差，配置适当值到寄存器 SHIFTCOUNT0, SHIFTCOUNT1, SHIFTCOUNT2, SHIFTCOUNT3。
+2. 依 4 路方波波形需要错开的 phase 差，配置适当值到寄存器 SHIFTCOUNT0, SHIFTCOUNT1, SHIFTCOUNT2, SHIFTCOUNT3。
 
-3. 配置 PWMSTART[3:0]为4'hF, 并将 SHIFTSTART 设 1, 4 路的计数器同时开始计数，并在计数器值等于 SHIFTCOUNTn 时输出第 n 路的 PWM 波形。
+3. 配置 PWMSTART[3:0] 为 4'hF, 并将 SHIFTSTART 设 1, 4 路的计数器同时开始计数，并在计数器值等于 SHIFTCOUNTn 时输出第 n 路的 PWM 波形。
 
 .. _diagram_pwm_continuous_shift_mode:
 .. figure:: ../../../../media/image135.png
@@ -83,11 +93,13 @@ PWM 基本配置流程如下 (以 PWM0 为例):
 PWM 寄存器概览
 ~~~~~~~~~~~~~~
 
-PWM 寄存器概览如表格 :ref:`table_pwm_register_overview` 所示。
+PWM 寄存器概览如表格 :ref:`table_pwm_register_overview` 所示，这里以 PWM0 控制器为例，其他 3 个控制器类似。
 
 .. include:: ./pwm_registers_overview.table.rst
 
 PWM 寄存器描述
 ~~~~~~~~~~~~~~
+
+以 PWM0 控制器为例，其他 3 个控制器类似。
 
 .. include:: ./pwn_registers_description.table.rst

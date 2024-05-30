@@ -6,21 +6,21 @@
 	| Name                 | Address | Description                        |
 	|                      | Offset  |                                    |
 	+======================+=========+====================================+
-	| HLPERIOD0            | 0x000   | PWM0 low -level shooting number    |
+	| HLPERIOD0            | 0x000   | PWM[0] low -level shooting number  |
 	+----------------------+---------+------------------------------------+
-	| PERIOD0              | 0x004   | PWM0 square wave cycle shooting    |
+	| PERIOD0              | 0x004   | PWM[0] square wave cycle shooting  |
 	+----------------------+---------+------------------------------------+
-	| HLPERIOD1            | 0x008   | PWM1 low -level shooting number    |
+	| HLPERIOD1            | 0x008   | PWM[1] low -level shooting number  |
 	+----------------------+---------+------------------------------------+
-	| PERIOD1              | 0x00c   | PWM1 Fang wave cycle shooting      |
+	| PERIOD1              | 0x00c   | PWM[1] square wave cycle shooting  |
 	+----------------------+---------+------------------------------------+
-	| HLPERIOD2            | 0x010   | PWM2 low -level shooting number    |
+	| HLPERIOD2            | 0x010   | PWM[2] low -level shooting number  |
 	+----------------------+---------+------------------------------------+
-	| PERIOD2              | 0x014   | PWM2 square wave cycle shooting    |
+	| PERIOD2              | 0x014   | PWM[2] square wave cycle shooting  |
 	+----------------------+---------+------------------------------------+
-	| HLPERIOD3            | 0x018   | PWM3 low -level shooting number    |
+	| HLPERIOD3            | 0x018   | PWM[3] low -level shooting number  |
 	+----------------------+---------+------------------------------------+
-	| PERIOD3              | 0x01c   | PWM3 square wave cycle shooting    |
+	| PERIOD3              | 0x01c   | PWM[3] square wave cycle shooting  |
 	+----------------------+---------+------------------------------------+
 	| POLARITY             | 0x040   | PWM mode settings                  |
 	+----------------------+---------+------------------------------------+
@@ -30,32 +30,32 @@
 	+----------------------+---------+------------------------------------+
 	| PWMUPDATE            | 0x04c   | Dynamic loading PWM cycle parameter|
 	+----------------------+---------+------------------------------------+
-	| PCOUNT0              | 0x050   | Set pwm0 pulse number              |
+	| PCOUNT0              | 0x050   | Set PWM[0] pulse number            |
 	+----------------------+---------+------------------------------------+
-	| PCOUNT1              | 0x054   | Set PWM1 pulse number              |
+	| PCOUNT1              | 0x054   | Set PWM[1] pulse number            |
 	+----------------------+---------+------------------------------------+
-	| PCOUNT2              | 0x058   | Set PWM2 pulse number              |
+	| PCOUNT2              | 0x058   | Set PWM[2] pulse number            |
 	+----------------------+---------+------------------------------------+
-	| PCOUNT3              | 0x05c   | Set PWM3 pulse number              |
+	| PCOUNT3              | 0x05c   | Set PWM[3] pulse number            |
 	+----------------------+---------+------------------------------------+
-	| PULSECOUNT0          | 0x060   | PWM0 output pulse meter status     |
+	| PULSECOUNT0          | 0x060   | PWM[0] output pulse meter status   |
 	+----------------------+---------+------------------------------------+
-	| PULSECOUNT1          | 0x064   | PWM1 has output pulse meter status |
+	| PULSECOUNT1          | 0x064   | PWM[1] output pulse meter status   |
 	+----------------------+---------+------------------------------------+
-	| PULSECOUNT2          | 0x068   | PWM2 has output pulse meter status |
+	| PULSECOUNT2          | 0x068   | PWM[2] output pulse meter status   |
 	+----------------------+---------+------------------------------------+
-	| PULSECOUNT3          | 0x06c   | PWM3 has output pulse meter status |
+	| PULSECOUNT3          | 0x06c   | PWM[3] output pulse meter status   |
 	+----------------------+---------+------------------------------------+
-	| SHIFTCOUNT0          | 0x080   | Synchronous mode PWM0              |
+	| SHIFTCOUNT0          | 0x080   | Synchronous mode PWM[0]            |
 	|                      |         | initial difference                 |
 	+----------------------+---------+------------------------------------+
-	| SHIFTCOUNT1          | 0x084   | Synchronous mode PWM1              |
+	| SHIFTCOUNT1          | 0x084   | Synchronous mode PWM[1]            |
 	|                      |         | initial difference                 |
 	+----------------------+---------+------------------------------------+
-	| SHIFTCOUNT2          | 0x088   | Synchronous mode PWM2              |
+	| SHIFTCOUNT2          | 0x088   | Synchronous mode PWM[2]            |
 	|                      |         | initial difference                 |
 	+----------------------+---------+------------------------------------+
-	| SHIFTCOUNT3          | 0x08c   | Synchronous mode PWM3              |
+	| SHIFTCOUNT3          | 0x08c   | Synchronous mode PWM[3]            |
 	|                      |         | initial difference                 |
 	+----------------------+---------+------------------------------------+
 	| SHIFTSTART           | 0x090   | PWM synchronization mode enable    |
