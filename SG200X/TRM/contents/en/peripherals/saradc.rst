@@ -4,13 +4,11 @@ SARADC
 Overview
 ~~~~~~~~
 
+SARADC is an analog signal to digital conversion controller. This chip has up to 2 SARADC controllers, one in the Active Domain and another one in the No-die Domain, each providing 3 independent channels.
+
 .. only:: sg2002
 
-	SARADC is an analog signal to digital conversion controller. This chip has up to 2 SARADC controllers, each providing 3 independent channels.
-
-.. only:: sg2000
-
-	SARADC is an analog signal to digital conversion controller. This chip has up to 2 SARADC controllers, each providing 6 independent channels.
+	**Note:** The chip does not bring out all ADC channels on the pins for the controller under Active Domain. For details, please refer to :ref:`table_inf_signal_pin_fmux_adc_sg2002`.
 
 Features
 ~~~~~~~~
@@ -19,13 +17,9 @@ Features
 
 - The scanning frequency cannot be higher than 320K/s;
 
-.. only:: sg2002
+- Each controller provides 3 independent channels;
 
-	- 12bit sampling accuracy, 3 independent channels;
-
-.. only:: sg2000
-
-	- 12bit sampling accuracy, 6 independent channels;
+- 12bit sampling accuracy;
 
 - Can trigger sequential scanning of three channels at one time;
 
@@ -34,13 +28,7 @@ Features
 Way of Working
 ~~~~~~~~~~~~~~
 
-.. only:: sg2002
-
-	The CPU configures the scanning channel. Each SARADC controller can configure 3 channels at the same time and start SARADC for channel scanning. After the channel scan completes all enabled channels, the system is notified of the completion of the scan through an interrupt, and the CPU can obtain the conversion results.
-
-.. only:: sg2000
-
-	The CPU configures the scanning channel. Each SARADC controller can configure 6 channels at the same time and start SARADC for channel scanning. After the channel scan completes all enabled channels, the system is notified of the completion of the scan through an interrupt, and the CPU can obtain the conversion results.
+The CPU configures the scanning channel. Each SARADC controller can configure 3 channels at the same time and start SARADC for channel scanning. After the channel scan completes all enabled channels, the system is notified of the completion of the scan through an interrupt, and the CPU can obtain the conversion results.
 
 .. _section_saradc_register_overview:
 
