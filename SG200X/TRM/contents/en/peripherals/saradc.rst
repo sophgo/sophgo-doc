@@ -30,6 +30,8 @@ Way of Working
 
 The CPU configures the scanning channel. Each SARADC controller can configure 3 channels at the same time and start SARADC for channel scanning. After the channel scan completes all enabled channels, the system is notified of the completion of the scan through an interrupt, and the CPU can obtain the conversion results.
 
+After the system is powered on, in order to ensure the SARADC measurement accuracy, it is recommended to calibrate the SARADC module of the chip. The calibration is performed offline. The specific method is to first set saradc_test.reg_saradc_vrefsel to external mode, and then manually adjust saradc_trim.reg_saradc_trim repeatedly until the actual read sampling value is close to the external reference voltage value after conversion to meet the accuracy requirements. After the calibration is completed, record the value of saradc_trim.reg_saradc_trim. Then each time the power is turned on, through software programming, set saradc_test.reg_saradc_vrefsel to external mode and then set the recorded value to saradc_trim.reg_saradc_trim.
+
 .. _section_saradc_register_overview:
 
 SARADC Register Overview
@@ -53,7 +55,7 @@ Each set of registers has the same definition, taking RTCSYS_SARADC as an exampl
 	+======================+=========+====================================+
 	| saradc_ctrl          | 0x004   | control register                   |
 	+----------------------+---------+------------------------------------+
-	| saradc_status        | 0x008   | staus register                     |
+	| saradc_status        | 0x008   | status register                    |
 	+----------------------+---------+------------------------------------+
 	| saradc_cyc_set       | 0x00c   | saradc waveform setting register   |
 	+----------------------+---------+------------------------------------+
@@ -71,6 +73,11 @@ Each set of registers has the same definition, taking RTCSYS_SARADC as an exampl
 	+----------------------+---------+------------------------------------+
 	| saradc_intr_raw      | 0x02c   | interrupt raw status register      |
 	+----------------------+---------+------------------------------------+
+	| saradc_test          | 0x030   | test register                      |
+	+----------------------+---------+------------------------------------+
+	| saradc_trim          | 0x034   | trim register                      |
+	+----------------------+---------+------------------------------------+
+
 
 SARADC Register Description
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
