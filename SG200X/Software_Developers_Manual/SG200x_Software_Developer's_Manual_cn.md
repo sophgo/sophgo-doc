@@ -19,6 +19,12 @@ SG200x SDK支持Linux、FreeRTOs两个系统，适用于SG200x系列芯片及搭
 - oss: 第三方库
 - ramdisk: 存放最小文件系统的预编译目录
 - u-boot-2021.10: 开源 uboot 代码
+- cvimath: 数学运算库
+- cvibuilder: 定义tpu cvimodel文件
+- cviruntime: 作为 SDK 发布的库，用于开发 TPU 应用程序
+- cvikernel: 用于生成TPU指令
+- flatbuffers: 第三方开源库
+- cnpy: 提供可读写npy、npz数据格式的c++接口
 - install: 执行一次完整编译后，镜像的存放路径
 
 # 2. SDK开发环境搭建
@@ -149,6 +155,8 @@ cd sophpi
 
 在修改脚本后，请对照SDK工程目录章节，确保是否成功克隆了所有的子仓库。如果您的GitHub账户启用了2FA，可能需要额外使用Personal Access Token来代替密码进行认。在这种情况下，Git 会提示你输入用户名和密码，你的用户名就是你的 GitHub 用户名，密码则是你的 PAT。
 
+> 注意：我们更推荐您使用SSH的方式拉取代码，SSH协议在发送数据时会对数据进行加密操作，数据传输更安全，有效减少拉取失败的风险。
+
 ### 3.2.2 分别拉取子仓库
 如果您无法使用自动化脚本的方式拉取代码，也可以使用如下命令分别拉取各个子仓库：
 
@@ -170,6 +178,12 @@ git clone https://github.com/sophgo/oss
 git clone https://github.com/sophgo/ramdisk -b sg200x-dev
 git clone https://github.com/sophgo/u-boot-2021.10 -b sg200x-dev
 git clone https://github.com/sophgo/buildroot-2021.05.git
+git clone https://github.com/sophgo/cvimath.git
+git clone https://github.com/sophgo/cvibuilder.git
+git clone https://github.com/sophgo/cviruntime.git
+git clone https://github.com/sophgo/cvikernel.git
+git clone https://github.com/sophgo/cnpy.git
+git clone https://github.com/sophgo/flatbuffers.git
 ```
 之后按照即可按照正常程序获取 SDK 并编译。
 
@@ -312,7 +326,7 @@ cv1812cp - cv1812cp_sophpi_duo_sd [C906B + EMMC 8192MB + BGA SIP 256MB]
 
 - 选择芯片：进入Chip selection，对应选择芯片型号
 - 切换架构：进入Arch define, 输入对应架构riscv或者arm即可切换
-- RNDIS设置：进入Rtoofs packages， 勾选rndis script库，则可以通过RNDIS驱动连接电脑
+- ROOTFS设置：进入ROOTFS Options， 请注意勾选`Enable buildroot generate rootfs`来确保镜像的成功构建
 
 
 ## 4.3 编译完整SDK文档
@@ -322,6 +336,7 @@ cv1812cp - cv1812cp_sophpi_duo_sd [C906B + EMMC 8192MB + BGA SIP 256MB]
 clean_all && build_all
 pack_burn_image
 ```
+> 注意：无论用以上哪种方式进行组态设定，都请使用`menuconfig`来确认您已经勾选`Enable buildroot generate rootfs`，否则系统可能会启动失败。
 
 ## 4.4 编译部分SDK文档
 ### 4.4.1 U-boot单独编译
@@ -584,69 +599,17 @@ CVITEK SDK 包提供 SD，USB 裸片烧写功能，建议在实际产品中将�
 ## 6.6 Alios 开发使用注意事项
 参考 Alios 开源文档 https://github.com/alibaba/AliOS-Things/tree/master/documentation
 
-# 7. 设置工作环境
-## 7.1 驱动安装
-本章节主要介绍当搭载SG200X处理器的设备和计算机连接的时候，为了使用USB网络，该如何设置工作环境。
 
-### 7.1.1 USBnet设置
-我们在系统上默认启用了RNDIS和DHCP。
-#### Windows
-1. 通过Type-C线将搭载有SG200x芯片的设备与电脑连接。
-2. "RNDIS" 设备出现在设备管理器中。
-   ![Alt text](https://milkv.io/zh/assets/images/rndis-step1-ec7c0a6fee7c25d633ed5b132fa08397.png)
-3. 选择 "RNDIS "并右键单击以更新驱动程序。
-   ![Alt text](https://milkv.io/zh/assets/images/rndis-step2-0aa16a878e347fa2470184ee54a5db16.png)
-4. 选择 "Browse my computer for drivers"
-   ![Alt text](https://milkv.io/zh/assets/images/rndis-step3-374dc22300bdb04c3af90017ad1fb264.png)
-5. 选择 "Let me pick from a list of available drivers on my computer"
-   ![Alt text](https://milkv.io/zh/assets/images/rndis-step4-a58f3e0adbdd28435c3ae68e22e448c6.png)
-6. 选择 "Network adapters"
-   ![Alt text](https://milkv.io/zh/assets/images/rndis-step5-a84dd3455c606b658ac4f1d8710d4fb1.png)
-7. 选择 "Microsoft -> USB RNDIS Adapter"
-   ![Alt text](https://milkv.io/zh/assets/images/rndis-step6-82994804d908d8b976a04034af874289.png)
-8. 忽略警告信息
-   ![Alt text](https://milkv.io/zh/assets/images/rndis-step7-edc1e41baa18f2cdf9995b26cbfe8d1b.png)
-9.  驱动程序更新成功
-    ![Alt text](https://milkv.io/zh/assets/images/rndis-step8-3b4d4fb7571082248b48ef54ea8e5246.png)
-10. 检查 "USB RNDIS Adapter"
-    ![Alt text](https://milkv.io/zh/assets/images/rndis-step9-2e3cbfc5060e072436d3526ac98b5fd1.png)
-11. 打开终端，并使用ping来测试网络
-    `ping 169.254.250.73`
-
-#### Linux
-一般来说，Linux可以使用RNDIS而无需配置。 您可以使用命令ip来检查usb0网络。
-#### macOS
-没有RNDIS的官方驱动程序。我们需要安装HoRNDIS.
-
-1. 下载HoRNDIS驱动程序
-- Intel https://github.com/jwise/HoRNDIS/releases
-- Apple silicon https://github.com/jwise/HoRNDIS/files/7323710/HoRNDIS-M1.zip
-2. 禁用系统完整性保护
-   - 进入macOS恢复系统
-      请参考 [macOS 用户指南 -> 恢复](https://support.apple.com/en-hk/guide/mac-help/mchl338cf9a8/mac) 进入恢复模式.
-   - 打开终端，输入以下命令
-      ```
-      csrutil disable
-      csrutil enable --without kext
-      ```
-
-   - 重新启动Mac
-****
-1. 安装压缩包中的Kext扩展
-
-2. 检查网络设置
-
-
-# 8. 附录--文档资料
+# 7. 附录--文档资料
 本章节提供芯片平台文档如Datasheet和TRM等，同时提供各类可能相关的学习资源。
 
-## 8.1 芯片平台文档
-### 8.1.1 Datasheet
+## 7.1 芯片平台文档
+### 7.1.1 Datasheet
 - SG2000 [Datasheet](https://github.com/sophgo/sophgo-doc/releases/tag/sg2000-datasheet-v1.0-alpha)
 
 - SG2002 [Datasheet](https://github.com/sophgo/sophgo-doc/releases/tag/sg2002-datasheet-v1.0-alpha)
 
-### 8.1.2 Technical Reference Manual
+### 7.1.2 Technical Reference Manual
 - SG2000 [TRM](https://github.com/sophgo/sophgo-doc/releases/tag/sg2000-trm-v1.0-alpha)
 
 - SG2002 [TRM](https://github.com/sophgo/sophgo-doc/releases/tag/sg2002-trm-v1.0-alpha)
@@ -656,7 +619,7 @@ CVITEK SDK 包提供 SD，USB 裸片烧写功能，建议在实际产品中将�
 
 - SG2002 [v1.0-beta双语版本](https://github.com/sophgo/sophgo-doc/releases/tag/sg2002-trm-v1.0-beta)
 
-### 8.1.3硬件开发指南
+### 7.1.3硬件开发指南
 通用硬件开发文档目录下主要介绍芯片硬件板基本功能特点、硬件接口和使用方法等，旨在帮助相关开发人员更准确地使用该EVB。具体资料请详见[sophgo-github](https://github.com/sophgo/sophgo-hardware/tree/master/SG200X) /sophgo-hardware/SG200X/芯片名称/目录下的相关文档。
 <table>
    <tr>
@@ -810,108 +773,108 @@ CVITEK SDK 包提供 SD，USB 裸片烧写功能，建议在实际产品中将�
     </tr>
 </table>
 
-## 8.2 Linux开发文档
+## 7.2 Linux开发文档
 此文档主要介绍 Linux 开发环境。Linux 开发环境的搭建 U-boot、Linux 内核、根文件系统 (rootfs)以及内核和根文件系统的烧写，以及创建网络开发环境和启动 Linux 开发。
 - [LINUX 开发环境用户指南](https://doc.sophgo.com/cvitek-develop-docs/master/docs_latest_release/CV180x_CV181x/zh/01.software/BSP/Linux_Development_Environment_User_Guide/build/LinuxDevelopmentEnvironmentUserGuide_zh.pdf)
 
-## 8.3 U-boot移植应用开发
+## 7.3 U-boot移植应用开发
 SG200x列处理器在主板上 Bootloader 采用 U-boot-2021.10。当配置的不同外围处理器的(亦即开发版和公版上相异)，需要修改 U-boot 相关程序代码，主要包括缓存器 (registers), 系统配置档 (configuration) 和驱动程序 (drivers)。
 - 其他操作细节请参考文档：[U-BOOT 移植应用开发指南](https://doc.sophgo.com/cvitek-develop-docs/master/docs_latest_release/CV180x_CV181x/zh/01.software/BSP/U-boot_Porting_Development_Guide/build/U-bootPortingDevelopmentGuide_zh.pdf)
 
-## 8.4 IVE 软件开发
+## 7.4 IVE 软件开发
 IVE(Intelligent Video Engine)是一种使用应减去加速电脑视觉算法的模块，用户利用IVE 开发智能分析方案可以加速智能分析的运算，降低 RISC-V 占用。当前 IVE 所提供的算子可以支撑开发影像或视频的智能分析方案。
 - 具体操作细节请参考文档[IVE 软件开发指南](https://doc.sophgo.com/cvitek-develop-docs/master/docs_latest_release/CV180x_CV181x/zh/01.software/MPI/IVEAPI_Reference/build/IVEAPIReference_zh.pdf)
 
-## 8.5 LDC 调试
+## 7.5 LDC 调试
 LDC（镜头畸变校正系统）为实现校正和展宽功能，针对桶状畸变 (Barrel Distortion) 及枕型畸变(Pincushion Distortion) 的一帧图像做校正，能将此两类别变形的影像画面修正。
 - 各应用场景的参数调试说明请参考文档[LDC 调试指南](https://doc.sophgo.com/cvitek-develop-docs/master/docs_latest_release/CV180x_CV181x/zh/01.software/MPI/LDC_Debugging_Guide/build/LDCDebuggingGuide_zh.pdf)
 
-## 8.6 MIPI使用
+## 7.6 MIPI使用
 MIPI Rx 可接收差分与 DC(TTL) 接口数据, 并将数据转换成 pixel 数据后传给下一级的 ISP
 模块。差分讯号支持 SubLVDS(Sub Low-Voltage Differential Signal), MIPI-CSI 与 HiSPi(High Speed Serial Pixel Interface) 等视频输入。DC 讯号支持 Sensor RAW12, BT1120, BT656 与BT601。
 - 更多功能描述和使用说明请参考文档[MIPI使用指南](https://doc.sophgo.com/cvitek-develop-docs/master/docs_latest_release/CV180x_CV181x/zh/01.software/MPI/MIPI_User_Guide/build/MIPIUserGuide_zh.pdf)
 
-## 8.7 AliOS Sensor调试
+## 7.7 AliOS Sensor调试
 此文档将介绍关于Sensor驱动、处理器规格、图像输出调试等资讯。
 - [AliOS Sensor调试指南](https://doc.sophgo.com/cvitek-develop-docs/master/docs_latest_release/CV180x_CV181x/zh/01.software/MPI/Sensor_Debugging_Guide/build/AliOS_Sensor_Debugging_Guide_zh.pdf)
 
-## 8.8 开机画面
+## 7.8 开机画面
 此文档将说明如何在uboot及AliOS下，显示出开机画面。
 - [开机画面使用指南](https://doc.sophgo.com/cvitek-develop-docs/master/docs_latest_release/CV180x_CV181x/zh/01.software/MPI/Startup_Screen_User_Guide/build/StartupScreenUserGuide_zh.pdf)
 
-## 8.9 MMF媒体软件开发
+## 7.9 MMF媒体软件开发
 MMF是多媒体软件架构（Multimedia Framework）的简称，用以缩短应用程序开发所需的时间，包含了以下功能：ISP影像前处理（包含HDR、去噪、边缘锐化等）、输入影像截取及输出、图像几何校正、H.265/H.264/JPEG 编解码、音频撷取及输出、音频编解码等。各功能的具体使用说明，请参考文档。
 - [MMF媒体软件开发指南](https://doc.sophgo.com/cvitek-develop-docs/master/docs_latest_release/CV180x_CV181x/zh/01.software/MPI/Media_Processing_Software_Development_Reference/build/MediaProcessingSoftwareDevelopmentReference_zh.pdf)
 
-## 8.10 屏幕对接
+## 7.10 屏幕对接
 此文档将详细说明MIPI DSI和LVDS两种屏幕在处理器上的配置和调试。
 - [屏幕对接使用指南](https://doc.sophgo.com/cvitek-develop-docs/master/docs_latest_release/CV180x_CV181x/zh/01.software/MPI/Screen_Docking_Guide/build/ScreenDockingGuide_zh.pdf)。
 
-## 8.11 处理器码率控制
+## 7.11 处理器码率控制
 此文档将介绍码率控制参数、GOP结构参数意义和使用方法，同时将对码率控制的各项专题进行说明。
 - [处理器码率控制使用说明](https://doc.sophgo.com/cvitek-develop-docs/master/docs_latest_release/CV180x_CV181x/zh/01.software/MPI/Bit_Rate_Control_Application_Notes/build/BitRateControlApplicationNotes_zh.pdf)
 
-## 8.12 智能编码
+## 7.12 智能编码
 此文档将对GOP的结构和使用场景，编码器输入、输出讯息进行说明。
 - [智能编码使用指南](https://doc.sophgo.com/cvitek-develop-docs/master/docs_latest_release/CV180x_CV181x/zh/01.software/MPI/Smart_Coding_User_Guide/build/SmartCodingUserGuide_zh.pdf)
 
 
-## 8.13 音频质量调试
+## 7.13 音频质量调试
 此文档将对VQE（语音音质增强模块）算法及模块内各功能做详细介绍，并重点说明线性回声消除（AEC）的调试步骤。
 - [音频质量调试指南](https://doc.sophgo.com/cvitek-develop-docs/master/docs_latest_release/CV180x_CV181x/zh/01.software/MPI/Audio_Quality_Tuning_Guide/build/AudioQualityTuningGuide_zh.pdf)
 
 
-## 8.14 eFuse
+## 7.14 eFuse
 处理器内部集成eFuse空间，可供安全启动和和 448 bits 的用户自定义区域。此文档内介绍具体的eFuse分区、安全启动eFuse的设置流程等。
 - [eFuse 使用指南](https://doc.sophgo.com/cvitek-develop-docs/master/docs_latest_release/CV180x_CV181x/zh/01.software/BSP/eFuse_User_Guide/build/eFuseUserGuide_zh.pdf)
 
-## 8.15 Flash分区工具
+## 7.15 Flash分区工具
 此文档主要介绍不同版本SDK（SPINOR / SPINAND / EMMC）应该如何对Flash进行分区规划。
 - [Flash 分区工具使用指南](https://doc.sophgo.com/cvitek-develop-docs/master/docs_latest_release/CV180x_CV181x/zh/01.software/BSP/Cvitek_Flash_Partition_Tool_User_Guide/build/CvitekFlashPartitionToolUserGuide_zh.pdf)
 
-## 8.16 SPI NAND烧录器
+## 7.16 SPI NAND烧录器
 此文档对使用SPI NAND文件的烧写进行了说明。
 - [SPI NAND 烧录器预烧手册](https://doc.sophgo.com/cvitek-develop-docs/master/docs_latest_release/CV180x_CV181x/zh/01.software/BSP/SPI_NAND_Programmer_Burn-in_User_Guide/build/SPINANDProgrammerBurn-inUserGuide_zh.pdf)
 
-## 8.17 Wi-Fi使用
+## 7.17 Wi-Fi使用
 Linux平台上对于不同WiFi处理器的驱动与操作方式有通用性，此文档将分别介绍在不同接口上（如USB或是SDIO）如何使用Realtek解决方案进行驱动移植与调试，及相关的操作。
 - [Wi-Fi使用指南](https://doc.sophgo.com/cvitek-develop-docs/master/docs_latest_release/CV180x_CV181x/zh/01.software/BSP/Wi-Fi_User_Guide/build/Wi-FiUserGuide_zh.pdf)
 
-## 8.18 安全启动
+## 7.18 安全启动
 此文档对如何生成安全惊醒以及安全启动处理器进行了说明。
 - [安全启动使用指南](https://doc.sophgo.com/cvitek-develop-docs/master/docs_latest_release/CV180x_CV181x/zh/01.software/BSP/Secure_Boot_User_Guide/build/SecureBootUserGuide_zh.pdf)
 
-## 8.19 外围设备驱动
+## 7.19 外围设备驱动
 此文档对Ethernet、USB、SD/MMC卡、GPIO、UART、Watchdog、PWM、ADC等外设分别进行了操作说明。
 - 具体请参考文档[外围设备驱动操作指南](https://doc.sophgo.com/cvitek-develop-docs/master/docs_latest_release/CV180x_CV181x/zh/01.software/BSP/Peripheral_Driver/build/PeripheralDriver_zh.pdf)
 
-## 8.20 RTC
+## 7.20 RTC
 RTC(Real time clock)是硬件时钟，用于给系列提供并记录时间。Linux 内核将 RTC 作为时间与日期维护器，当 Linux 系统启动时，内核读取 RTC 时间以初始化系统（软件）时钟达成时间同步。
 - 具体的操作及命令请参考文档[RTC 操作指南](https://doc.sophgo.com/cvitek-develop-docs/master/docs_latest_release/CV180x_CV181x/zh/01.software/BSP/RTC_Application_Guide/build/RTCApplicationGuide_zh.pdf)
 
-## 8.21 ISP开发
+## 7.21 ISP开发
 此文档主要介绍ISP的用户接口，将从系统控制、3A、ISP模块三个部分进行说明。
 - 请参考文档[ISP 开发参考](https://doc.sophgo.com/cvitek-develop-docs/master/docs_latest_release/CV180x_CV181x/zh/01.software/ISP/ISP_Development_Reference/build/ISPDevelopmentReference_zh.pdf)
 
-## 8.22 ISP图像调优
+## 7.22 ISP图像调优
 此文档是为引导用户进行图像调优进行的说明，内容包含基本概念和步骤，可结合下方【图像质量调试工具使用指南】配合参考。
 - [图像调优指南](https://doc.sophgo.com/cvitek-develop-docs/master/docs_latest_release/CV180x_CV181x/zh/01.software/ISP/ISP_Tuning_Guide/build/ISPTuningGuide_zh.pdf)
 
-## 8.23 图像质量调试
+## 7.23 图像质量调试
 CviPQ Tool是专业的图像质量调试工具，提供用户可在线调试ISP各模块的参数调节，并能实时观看参数设置效果；同时提供ISP标定功能，对需要标定的模块产生各类数据，提供给客户调节参数，以获得更佳图像质量。此文档是对CviPQ Tool进行的详细使用说明。
 - [图像质量调试工具使用指南](https://doc.sophgo.com/cvitek-develop-docs/master/docs_latest_release/CV180x_CV181x/zh/01.software/ISP/PQ_Tools_User_Guide/build/PQToolsUserGuide_zh.pdf)
 
-## 8.24 量产烧写
+## 7.24 量产烧写
 此文档介绍如何使用 cviDownloadTool 工具烧录整个单板系统文件，该方案通过 USB 通信来完成烧录，具有成本低，烧录速度快等特点。
 - [量产烧写使用指南](https://doc.sophgo.com/cvitek-develop-docs/master/docs_latest_release/CV180x_CV181x/zh/01.software/BSP/Production_Burning_User_Guide/build/ProductionBurningUserGuide_zh.pdf)
 
 
-# 9. 附录--工具下载
-## 9.1 MIPI 屏幕时钟时序计算器
+# 8. 附录--工具下载
+## 8.1 MIPI 屏幕时钟时序计算器
 [请点击此链接下载–MIPI 屏幕时钟时序计算器](https://doc.sophgo.com/cvitek-develop-docs/master/docs_latest_release/CV180x_CV181x/zh/01.software/MPI/Clock_Timing_Calculator_for_MIPI_Panels/build/MIPI_Time_Calculator.csv)
 
-## 9.2 CviPQ Tool
+## 8.2 CviPQ Tool
 [请点击此链接下载 – CviPQ Tool](https://github.com/jzlynn/sg-accessories/blob/master/CAM-GC2083/Software/CviPQtool_20230306.zip)
 
-## 9.3 CviDownload Tool
+## 8.3 CviDownload Tool
 [请点击此链接下载 – CviDownload Tool](https://github.com/jzlynn/sg-accessories/blob/master/CAM-GC2083/Software/cviDownloadTool.zip)

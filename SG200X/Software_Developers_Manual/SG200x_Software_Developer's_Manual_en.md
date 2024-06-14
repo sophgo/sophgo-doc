@@ -23,6 +23,12 @@ The SG200x SDK is designed for the SG200x series of SoCs and any development boa
 - oss: 3rd-party libraries.
 - ramdisk: Pre-built files for the minimal system.
 - u-boot-2021.10: U-Boot sources.
+- cvimath: A library of mathematical operations.
+- cvibuilder: The library for tpu cvimodel file define.
+- cviruntime: A library released as SDK for use to develop TPU application.
+- cvikernel: A library for TPU instruction generation, serving as assembly.
+- flatbuffers: 3rd-party open source libraries.
+- cnpy: A tool that provides c++ interface to read and write npy, npz data format
 - install: Artifact directory for built system images.
 
 # 2. Deploying the SDK
@@ -203,6 +209,8 @@ With the following:
 
 After editing the script, please refer to the project directories to make sure that you have fetched all necessary repositories. If your GitHub account has two-factor authentication (2FA) enabled, you may need to authenticate using your Personal Access Token. In this situation, please authenticate using your GitHub user name and your Personal Access Token as its password.
 
+> Notice: We recommend you to use SSH to clone the code. SSH protocol will encrypt the data when sending data, making the data transmission more secure, and effectively reduce the risk of clone failure.
+
 ### 3.2.2 Fetching Repositories Manually
 
 If using the automated script is not an option, please fetch the repositories manually:
@@ -225,6 +233,12 @@ git clone https://github.com/sophgo/oss
 git clone https://github.com/sophgo/ramdisk -b sg200x-dev
 git clone https://github.com/sophgo/u-boot-2021.10 -b sg200x-dev
 git clone https://github.com/sophgo/buildroot-2021.05.git
+git clone https://github.com/sophgo/cvimath.git
+git clone https://github.com/sophgo/cvibuilder.git
+git clone https://github.com/sophgo/cviruntime.git
+git clone https://github.com/sophgo/cvikernel.git
+git clone https://github.com/sophgo/cnpy.git
+git clone https://github.com/sophgo/flatbuffers.git
 ```
 
 After which, you may use the normal procedures to fetch and build the SDK.
@@ -391,7 +405,7 @@ Following the instructions at the bottom of the screen, you may navigate the con
 
 - To choose the SoC: Enter the "Chip selection" menu to select the appropriate model.
 - To switch the architecture: Enter the "Arch define" menu to, input "riscv" or "arm" to select your target architecture.
-- RNDIS configuration: Enter the "Rootfs packages" menu, selecting the "rndis script" library to enable the RNDIS drivers.
+- ROOTFS configuration: Enter the "ROOTFS Options" menu, and make sure you select the `Enable buildroot generate rootfs` to enable the buildroot construction.
 
 ## 4.3 Building A Complete SDK
 
@@ -403,6 +417,7 @@ By running in addition the `pack_burn_image` command, the build system will gene
 clean_all && build_all
 pack_burn_image
 ```
+> Notice: However you choose to configure the SDK, please always use `menuconfig` command to check if `Enable buildroot generate rootfs` option is selected. If not, the system may fail to boot.
 
 ## 4.4 Building SDK Components
 
@@ -756,80 +771,18 @@ We recommend removing the JTAG port on the production boards to prevent maliciou
 
 Please refer to the [AliOS's developer documentation](https://github.com/alibaba/AliOS-Things/tree/master/documentation).
 
-# 7. Configuring Host Networking
-
-## 7.1 Installing Networking Drivers
-
-This section outlines the procedures to configure USB networking between SG200x-based devices and the host computer.
-
-### 7.1.1 Configuring USB Networking
-
-We have enabled RNDIS and DHCP by default on our system images.
-
-#### Windows
-
-1. Using a USB Type-C cable, connect the SG200x device with the host computer.
-2. An "RNDIS" device should appear in Device Manager.
-   ![Alt text](https://milkv.io/zh/assets/images/rndis-step1-ec7c0a6fee7c25d633ed5b132fa08397.png)
-3. Right click on the "RNDIS" device and select "Update Drivers."
-   ![Alt text](https://milkv.io/zh/assets/images/rndis-step2-0aa16a878e347fa2470184ee54a5db16.png)
-4. Select "Browse my computer for drivers."
-   ![Alt text](https://milkv.io/zh/assets/images/rndis-step3-374dc22300bdb04c3af90017ad1fb264.png)
-5. Select "Let me pick from a list of available drivers on my computer."
-   ![Alt text](https://milkv.io/zh/assets/images/rndis-step4-a58f3e0adbdd28435c3ae68e22e448c6.png)
-6. Select "Network adapters."
-   ![Alt text](https://milkv.io/zh/assets/images/rndis-step5-a84dd3455c606b658ac4f1d8710d4fb1.png)
-7. Select "Microsoft -> USB RNDIS Adapter."
-   ![Alt text](https://milkv.io/zh/assets/images/rndis-step6-82994804d908d8b976a04034af874289.png)
-8. Ignore all warnings.
-   ![Alt text](https://milkv.io/zh/assets/images/rndis-step7-edc1e41baa18f2cdf9995b26cbfe8d1b.png)
-9. Device driver for "RNDIS" should now be installed correctly.
-   ![Alt text](https://milkv.io/zh/assets/images/rndis-step8-3b4d4fb7571082248b48ef54ea8e5246.png)
-10. Double check the status of "USB RNDIS Adapter."
-      ![Alt text](https://milkv.io/zh/assets/images/rndis-step9-2e3cbfc5060e072436d3526ac98b5fd1.png)
-11. Open a Command Prompt and use `ping` to verify connectivity (changing the IP address as needed).
-    `ping 169.254.250.73`
-
-#### Linux
-
-Linux should normally come with RNDIS and no additional configuration should be needed. You may use the `ip` command to verify the status of the `usb0` network interface.
-
-#### macOS
-
-macOS does not come with official support for RNDIS. Therefore, we need to install HoRNDIS.
-
-__Prerequisites__
-
-1. Download HoRNDIS.
-    - Intel: https://github.com/jwise/HoRNDIS/releases
-    - Apple Silicon: https://github.com/jwise/HoRNDIS/files/7323710/HoRNDIS-M1.zip
-2. Disable system integrity protection (SIP).
-    - Enter the recovery environment, referencing [Apple's official documentation](https://support.apple.com/en-hk/guide/mac-help/mchl338cf9a8/mac).
-    - Open a Terminal window and run the following commands:
-
-```
-csrutil disable
-csrutil enable --without kext
-```
-
-    - Reboot your Mac.
-
-3. Install the kext (kernel extension) in the downloaded archive.
-
-4. Verify network connectivity.
-
-# 8. Appendix: References
+# 7. Appendix: References
 
 This section indexes chip-specific platform documentation, such as datasheets and technical reference manuals (TRMs). It also lists extra references for further studies.
 
-## 8.1 Platform Documentation
+## 7.1 Platform Documentation
 
-### 8.1.1 Datasheets
+### 7.1.1 Datasheets
 
 - [SG2000 Datasheet](https://github.com/sophgo/sophgo-doc/releases/tag/sg2000-datasheet-v1.0-alpha)
 - [SG2002 Datasheet](https://github.com/sophgo/sophgo-doc/releases/tag/sg2002-datasheet-v1.0-alpha)
 
-### 8.1.2 Technical Reference Manual
+### 7.1.2 Technical Reference Manual
 
 - [SG2000 Technical Reference Manual](https://github.com/sophgo/sophgo-doc/releases/tag/sg2000-trm-v1.0-alpha)
 - [SG2002 Technical Reference Manual](https://github.com/sophgo/sophgo-doc/releases/tag/sg2002-trm-v1.0-alpha)
@@ -839,7 +792,7 @@ We also supplies a bilingual beta edition, open sourcing the manual's source RST
 - [SG2000 TRM: Bilingual v1.0-beta](https://github.com/sophgo/sophgo-doc/releases/tag/sg2000-trm-v1.0-beta)
 - [SG2002 TRM: Bilingual v1.0-beta](https://github.com/sophgo/sophgo-doc/releases/tag/sg2002-trm-v1.0-beta)
 
-### 8.1.3 Hardware Development Guides
+### 7.1.3 Hardware Development Guides
 
 The generic hardware development documentation outlines basic board-specific features and functionalities, hardware interfaces, and usage with an aim to help developers make the best use of the evaluation boards (EVBs). Please see under `/sophgo-hardware/SG200X/$CHIP_NAME` in the [sophgo-hardware](https://github.com/sophgo/sophgo-hardware/tree/master/SG200X) repository for detail.
 
@@ -997,49 +950,49 @@ The generic hardware development documentation outlines basic board-specific fea
 
 
 
-## 8.2 Linux Development Environment User Guide
+## 7.2 Linux Development Environment User Guide
 
 This documentation introduces frequently used procedures for deploying a Linux development environment, including deployment of development tools, descriptions on building and installing U-Boot, Linux Kernel, and the rootfs. It also includes instructions on network configuration and SDK deployment.
 
 - [Linux Development Environment User Guide](https://doc.sophgo.com/cvitek-develop-docs/master/docs_latest_release/CV180x_CV181x/zh/01.software/BSP/Linux_Development_Environment_User_Guide/build/LinuxDevelopmentEnvironmentUserGuide_zh.pdf)
 
-## 8.3 U-Boot Porting Development Guide
+## 7.3 U-Boot Porting Development Guide
 
 The SG200x series of SoCs uses U-Boot 2021.10. If your hardware configuration comes with peripherals that deviates from reference designs, you would need to make changes to the U-Boot sources. This includes registers, system configurations, and drivers.
 
 Please refer to the [U-Boot Porting Development Guide](https://doc.sophgo.com/cvitek-develop-docs/master/docs_latest_release/CV180x_CV181x/zh/01.software/BSP/U-boot_Porting_Development_Guide/build/U-bootPortingDevelopmentGuide_zh.pdf) for more details.
 
-## 8.4 IVE API References
+## 7.4 IVE API References
 
 IVE (Intelligent Video Engine) is a hardware-accelerated computer vision implementation. Its intelligent analyzing solution to lower the burden on RISC-V processors. The operators currently available to IVE can sufficiently support development of image- or video-based intelligent analysis.
 
 Please refer to the [IVE API References](https://doc.sophgo.com/cvitek-develop-docs/master/docs_latest_release/CV180x_CV181x/zh/01.software/MPI/IVEAPI_Reference/build/IVEAPIReference_zh.pdf) for more details.
 
-## 8.5 LDC Debugging Guide
+## 7.5 LDC Debugging Guide
 
 LDC (Lens Distortion Correction) provides correction and broadening for Barrel Distortion and Pincushion Distortion for single frames of images.
 
 Please refer to the [LDC Debugging Guide](https://doc.sophgo.com/cvitek-develop-docs/master/docs_latest_release/CV180x_CV181x/zh/01.software/MPI/LDC_Debugging_Guide/build/LDCDebuggingGuide_zh.pdf) for detailed debugging paramters for specific applications.
 
-## 8.6 MIPI User Guide
+## 7.6 MIPI User Guide
 
 MIPI Rx can receive data from differential signals and the DC(TTL) port, converting received data into pixel data and passing them onto next level(s) of ISP module(s). The differential signal supports inputs ranging from  SubLVDS (Sub Low-Voltage Differential Signal), MIPI-CSI, and HiSPi (High-Speed Serial Pixel Interface). The DC signal supports Sensor RAW12, BT1120, BT656, and BT601.
 
 Please refer to the [MIPI User Guide](https://doc.sophgo.com/cvitek-develop-docs/master/docs_latest_release/CV180x_CV181x/zh/01.software/MPI/MIPI_User_Guide/build/MIPIUserGuide_zh.pdf) for feature descriptions and user instructions.
 
-## 8.7 AliOS Sensor Debugging Guide
+## 7.7 AliOS Sensor Debugging Guide
 
 This documentation describes the sensor driver, processor specifications, and image output debugging.
 
 - [AliOS Sensor Debugging Guide](https://doc.sophgo.com/cvitek-develop-docs/master/docs_latest_release/CV180x_CV181x/zh/01.software/MPI/Sensor_Debugging_Guide/build/AliOS_Sensor_Debugging_Guide_zh.pdf)
 
-## 8.8 Startup Screen User Guide
+## 7.8 Startup Screen User Guide
 
 This documentation describes how to display a startup screen under U-Boot and AliOS.
 
 - [Startup Screen User Guide](https://doc.sophgo.com/cvitek-develop-docs/master/docs_latest_release/CV180x_CV181x/zh/01.software/MPI/Startup_Screen_User_Guide/build/StartupScreenUserGuide_zh.pdf)
 
-## 8.9 MMF Media Procssing Software Development Reference
+## 7.9 MMF Media Procssing Software Development Reference
 
 MMF is an acronym for Multimedia Framework, a set of software components to ease development of application development. The MMF includes the following features:
 
@@ -1053,106 +1006,106 @@ MMF is an acronym for Multimedia Framework, a set of software components to ease
 
 Please refer to the [Media Processing Software Development Reference](https://doc.sophgo.com/cvitek-develop-docs/master/docs_latest_release/CV180x_CV181x/zh/01.software/MPI/Media_Processing_Software_Development_Reference/build/MediaProcessingSoftwareDevelopmentReference_zh.pdf) for details on available features and usage.
 
-## 8.10 Screen Docking Guide
+## 7.10 Screen Docking Guide
 
 This documentation outlines in detail configuration of MIPI DSI and LVDS screens on SG200x development boards.
 
 - [Scren Docking Guide](https://doc.sophgo.com/cvitek-develop-docs/master/docs_latest_release/CV180x_CV181x/zh/01.software/MPI/Screen_Docking_Guide/build/ScreenDockingGuide_zh.pdf)。
 
-## 8.11 Bit Rate Control Application Notes
+## 7.11 Bit Rate Control Application Notes
 
 This documentation introduces bit rate control parameters, GOP structure parameters and usage, and topics on bit rate control.
 
 - [Bit Rate Control Application Notes](https://doc.sophgo.com/cvitek-develop-docs/master/docs_latest_release/CV180x_CV181x/zh/01.software/MPI/Bit_Rate_Control_Application_Notes/build/BitRateControlApplicationNotes_zh.pdf)
 
-## 8.12 Smart Coding User Guide
+## 7.12 Smart Coding User Guide
 
 This documentation outlines GOP structure and applications, encoding input/output, etc.
 
 - [Smart Coding User Guide](https://doc.sophgo.com/cvitek-develop-docs/master/docs_latest_release/CV180x_CV181x/zh/01.software/MPI/Smart_Coding_User_Guide/build/SmartCodingUserGuide_zh.pdf)
 
-## 8.13 Audio Quality Tuning Guide
+## 7.13 Audio Quality Tuning Guide
 
 This documentation describes in detail the algorithms and features in the VQE (Voice Quality Enhancement) module, with particular emphasis on outlining the debugging procedures for AEC (Acoustic Echo Cancellation).
 
 - [Audio Quality Tuning Guide](https://doc.sophgo.com/cvitek-develop-docs/master/docs_latest_release/CV180x_CV181x/zh/01.software/MPI/Audio_Quality_Tuning_Guide/build/AudioQualityTuningGuide_zh.pdf)
 
-## 8.14 eFuse User Guide
+## 7.14 eFuse User Guide
 
 The processor comes internally with an eFuse partition to provide secure boot and 448 bits of custom sector. This documentation describes in detail the eFuse partition, secure boot, eFuse configuration procedures, etc.
 
 - [eFuse User Guide](https://doc.sophgo.com/cvitek-develop-docs/master/docs_latest_release/CV180x_CV181x/zh/01.software/BSP/eFuse_User_Guide/build/eFuseUserGuide_zh.pdf)
 
-## 8.15 Flash Partition Tool User Guide
+## 7.15 Flash Partition Tool User Guide
 
 This documentation outlines partition procedures and suggestions for various SDK versions (SPINOR/SPINAND/EMMC).
 
 - [Flash Partition Tool User Guide](https://doc.sophgo.com/cvitek-develop-docs/master/docs_latest_release/CV180x_CV181x/zh/01.software/BSP/Cvitek_Flash_Partition_Tool_User_Guide/build/CvitekFlashPartitionToolUserGuide_zh.pdf)
 
-## 8.16 SPI NAND Programmer Burn-in User Guide
+## 7.16 SPI NAND Programmer Burn-in User Guide
 
 This documentation outlines procedures for SPI NAND file burning.
 
 - [SPI NAND Programmer Burn-in User Guide](https://doc.sophgo.com/cvitek-develop-docs/master/docs_latest_release/CV180x_CV181x/zh/01.software/BSP/SPI_NAND_Programmer_Burn-in_User_Guide/build/SPINANDProgrammerBurn-inUserGuide_zh.pdf)
 
-## 8.17 Wi-Fi User Guide
+## 7.17 Wi-Fi User Guide
 
 On Linux, different Wi-Fi chips may share drivers and configuration. This documetation outlines procedures on how to configure, port, and debug Realtek Wi-Fi solutions on different interfaces (USB and SDIO, for instance).
 
 - [Wi-Fi User Guide](https://doc.sophgo.com/cvitek-develop-docs/master/docs_latest_release/CV180x_CV181x/zh/01.software/BSP/Wi-Fi_User_Guide/build/Wi-FiUserGuide_zh.pdf)
 
-## 8.18 Secure Boot User Guide
+## 7.18 Secure Boot User Guide
 
 This documentation outlines procedures on how to generate secure images and make use of the secure boot processor.
 
 - [Secure Boot User Guide](https://doc.sophgo.com/cvitek-develop-docs/master/docs_latest_release/CV180x_CV181x/zh/01.software/BSP/Secure_Boot_User_Guide/build/SecureBootUserGuide_zh.pdf)
 
-## 8.19 Peripheral Drivers User Guide
+## 7.19 Peripheral Drivers User Guide
 
 This documentation outlines usage for peripheral devices, such as Ethernet, USB, SD/MMC cards, GPIO, UART, Watchdog, PWM, ADC, etc.
 
 - [Peripheral Drivers User Guide](https://doc.sophgo.com/cvitek-develop-docs/master/docs_latest_release/CV180x_CV181x/zh/01.software/BSP/Peripheral_Driver/build/PeripheralDriver_zh.pdf)
 
-## 8.20 RTC Application Guide
+## 7.20 RTC Application Guide
 
 RTC (Real-Time Clock) is the hardware clock to keep and provide timing data for operating systems. The Linux Kernel uses the RTC time to initialize and synchronize the system clock.
 
 - [RTC Application Guide](https://doc.sophgo.com/cvitek-develop-docs/master/docs_latest_release/CV180x_CV181x/zh/01.software/BSP/RTC_Application_Guide/build/RTCApplicationGuide_zh.pdf)
 
-## 8.21 ISP Development Reference
+## 7.21 ISP Development Reference
 
 This documentation outlines the ISP user interface from aspects of the system control, 3A, and ISP modules.
 
 - [ISP Development Reference](https://doc.sophgo.com/cvitek-develop-docs/master/docs_latest_release/CV180x_CV181x/zh/01.software/ISP/ISP_Development_Reference/build/ISPDevelopmentReference_zh.pdf)
 
-## 8.22 ISP Tuning Guide
+## 7.22 ISP Tuning Guide
 
 This documentation guides users to perform image signal processing (ISP) tuning, including descriptions on basic concepts and procedures. It is recommended to read this guide in conjunction with the "CviPQ Tools User Guide" below.
 
 - [ISP Tuning Guide](https://doc.sophgo.com/cvitek-develop-docs/master/docs_latest_release/CV180x_CV181x/zh/01.software/ISP/ISP_Tuning_Guide/build/ISPTuningGuide_zh.pdf)
 
-## 8.23 CviPQ Tools User Guide
+## 7.23 CviPQ Tools User Guide
 
 The CviPQ Tool is a professional-grade image quality debugging suite. It provides real-time debugging for each ISP modules with visualization; it also provides ISP calibration functionalities, generating calibration data and tunables for users to tune for optimal image quality. This documentation provides detailed usage instructions for CviPQ Tools.
 
 - [CviPQ Tools User Guide](https://doc.sophgo.com/cvitek-develop-docs/master/docs_latest_release/CV180x_CV181x/zh/01.software/ISP/PQ_Tools_User_Guide/build/PQToolsUserGuide_zh.pdf)
 
-## 8.24 Production Burn-In User Guide
+## 7.24 Production Burn-In User Guide
 
 This documentation outlines procedures to burn-in single board computer systems using cviDownloadTool. This solution uses USB to communicate with the target production board, which guarantees quick burning speeds and low costs.
 
 - [Production Burn-In User Guide](https://doc.sophgo.com/cvitek-develop-docs/master/docs_latest_release/CV180x_CV181x/zh/01.software/BSP/Production_Burning_User_Guide/build/ProductionBurningUserGuide_zh.pdf)
 
-# 9. Appendix: Download Links for Extra Tools
+# 8. Appendix: Download Links for Extra Tools
 
-## 9.1 Clock Timing Calculator for MIPI Panels
+## 8.1 Clock Timing Calculator for MIPI Panels
 
 [Download Clock Timing Calculator for MIPI Panels](https://doc.sophgo.com/cvitek-develop-docs/master/docs_latest_release/CV180x_CV181x/zh/01.software/MPI/Clock_Timing_Calculator_for_MIPI_Panels/build/MIPI_Time_Calculator.csv)
 
-## 9.2 CviPQ Tool
+## 8.2 CviPQ Tool
 
 [Download CviPQ Tool](https://github.com/jzlynn/sg-accessories/blob/master/CAM-GC2083/Software/CviPQtool_20230306.zip)
 
-## 9.3 CviDownload Tool
+## 8.3 CviDownload Tool
 
 [Download CviDownload Tool](https://github.com/jzlynn/sg-accessories/blob/master/CAM-GC2083/Software/cviDownloadTool.zip)
