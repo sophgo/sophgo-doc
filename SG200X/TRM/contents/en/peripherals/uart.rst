@@ -6,41 +6,41 @@ Overview
 
 UART (Universal Asynchronous Receiver Transmitter) is an asynchronous serial communication interface. Its main function is to convert data from peripheral devices to serial and then transfer it to the internal bus, and to convert data from parallel to serial and then output it to external devices. The main function of UART is to interface with the UART of an external chip to achieve communication between the two chips.
 
-This chip provides 5 UART controllers. The relevant overview is as follows:
+This chip provides 5 UART controllers. The relevant overview is as follows. Note: Please refer to the specific pin output definition before use. Due to different chip packages (QFN/BGA), some functions may not be exported. For pin definition, refer to :ref:`section_pinmux_pinctrl`.
 
 .. This table is relatively small, so there is no need to include a separate file.
 
 .. _table_uart_io_infodescribe:
 .. table:: UART IO pin information
-	:widths: 1 1 3
+	:widths: 1 1
 
-	+------------+-------------+----------------------------------------------+
-	| Controller | Mode        | IO Pin                                       |
-	+============+=============+==============================================+
-	| UART0      | 2-line UART | UART0_TX/UART0_RX                            |
-	+------------+-------------+----------------------------------------------+
-	| UART1      |2/4-line UART| UART1_TX/UART1_RX/UART1_CTS/UART1_RTS        |
-	|            |             +----------------------------------------------+
-	|            |             | XGPIOA[20]/ XGPIOA[21]/ XGPIOA[22]/          |
-	|            |             | XGPIOA[26]                                   |
-	+------------+-------------+----------------------------------------------+
-	| UART2      |2/4-line UART| UART2_TX/UART2_RX/UART2_CTS/UART2_RTS        |
-	|            |             +----------------------------------------------+
-	|            |             | XGPIOA[20]/ XGPIOA[21]/ XGPIOA[22]/          |
-	|            |             | XGPIOA[26]                                   |
-	|            |             +----------------------------------------------+
-	|            |             | IIC2_SDA/IIC2_SCL                            |
-	+------------+-------------+----------------------------------------------+
-	| UART3      |2/4-line UART| SPI0_CS_X/SPI0_SCK/SPI0_SDI/SPI0_SDO         |
-	|            |             +----------------------------------------------+
-	|            |             | VI_DATA22/VI_DATA21/VI_DATA24/VI_DATA23      |
-	|            |             +----------------------------------------------+
-	|            |             | PWM3/PWM2                                    |
-	+------------+-------------+----------------------------------------------+
-	| UART4      | 2-line UART | XGPIOA[22]/ XGPIOA[26]                       |
-	|            |             +----------------------------------------------+
-	|            |             | UART1_RTS/UART1_CTS                          |
-	+------------+-------------+----------------------------------------------+
+	+------------+-------------+
+	| Controller | Mode        |
+	+============+=============+
+	| UART0      | 2-line UART |
+	+------------+-------------+
+	| UART1      |2/4-line UART|
+	|            |             +
+	|            |             |
+	|            |             |
+	+------------+-------------+
+	| UART2      |2/4-line UART|
+	|            |             +
+	|            |             |
+	|            |             |
+	|            |             +
+	|            |             |
+	+------------+-------------+
+	| UART3      |2/4-line UART|
+	|            |             +
+	|            |             |
+	|            |             +
+	|            |             |
+	+------------+-------------+
+	| UART4      | 2-line UART |
+	|            |             +
+	|            |             |
+	+------------+-------------+
 
 Features
 ~~~~~~~~
