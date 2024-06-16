@@ -1,3 +1,5 @@
+.. _section_reset_configure_registers:
+
 复位配置寄存器 
 --------------
 

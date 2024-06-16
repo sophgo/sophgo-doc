@@ -1,3 +1,5 @@
+.. _section_reset_configure_registers:
+
 Reset configuration register
 ----------------------------
 
