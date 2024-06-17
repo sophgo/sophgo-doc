@@ -11,8 +11,8 @@ BUILDDIR      = build
 PROJECT      = sg2000
 DOC_TYPE     = trm
 DOC_LANG     = en
-RELEASE      = 1.0-beta
-RELEASE_DATE = 2024-03-22
+RELEASE      = 1.0
+RELEASE_DATE = 2024-06-17
 COPYRIGHT    = "2024 SOPHGO Co., Ltd"
 AUTHOR       = Sophgo
 

@@ -12,6 +12,7 @@ SG2002 Technical Reference Manual
 	===============   ============     =====================================
 	1.0-alpha         2023/11/23       Initial Version
 	1.0-beta          2024/02/26       Converted to reStructuredText
+	1.0               2024/06/17       Fixed cumulative issues and officially released v1.0
 	===============   ============     =====================================
 
 
