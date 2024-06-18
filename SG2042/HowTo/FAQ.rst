@@ -194,29 +194,22 @@ For example, We would like to set the network port ``eth0`` to:
 
     DNS: ``8.8.8.8``
 
-* Add a new connection:
+* Add a new connection, set the IPv4 configuration method to manual, rather than DHCP.
+  Set static ipv4 address, mask and gateway.
 
 .. highlights::
 
     .. code:: sh
 
-        sudo nmcli connection add type ethernet con-name 'static-ip' ifname eth0
+        sudo nmcli connection add type ethernet con-name 'static-ip' ifname eth0 ipv4.method manual ipv4.addresses 192.168.20.24/24 gw4 192.168.20.1
 
-* Set the IPv4 configuration method to manual, rather than DHCP:
-
-.. highlights::
-
-    .. code:: sh
-
-        sudo nmcli connection modify 'static-ip' ipv4.method manual
-
-* Set static ipv4 address, mask, gateway and dns:
+* Set static ipv4 dns:
 
 .. highlights::
 
     .. code:: sh
 
-        sudo nmcli connection modify 'static-ip' ipv4.addresses 192.168.20.24/24 gw4 192.168.20.1 ipv4.dns 8.8.8.8
+        sudo nmcli connection modify 'static-ip' ipv4.dns 8.8.8.8
 
 * Bring up the ``static-ip`` connection:
 
