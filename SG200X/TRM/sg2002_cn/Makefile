@@ -11,9 +11,9 @@ BUILDDIR      = build
 PROJECT      = sg2002
 DOC_TYPE     = trm
 DOC_LANG     = cn
-RELEASE      = 1.0
-RELEASE_DATE = 2024-06-17
-COPYRIGHT    = "2023 SOPHGO Co., Ltd"
+RELEASE      = 1.01
+RELEASE_DATE = 2024-07-05
+COPYRIGHT    = "2024 SOPHGO Co., Ltd"
 AUTHOR       = Sophgo
 
 PDF_FILENAME = $(PROJECT)_$(DOC_TYPE)_$(DOC_LANG).pdf
