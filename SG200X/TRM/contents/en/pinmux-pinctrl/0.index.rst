@@ -3,8 +3,10 @@
 PinMux and PinCtrl
 ==================
 
-.. toctree::
-	:maxdepth: 2
+.. only:: sg2002
 
-	./pinmux.rst
-	./pinctrl.rst
+	For information on pin multiplexing and pin control, please refer directly to the online table: https://github.com/sophgo/sophgo-hardware/blob/master/SG200X/04_SG2002/04_SG2002_PINOUT.xlsx
+
+.. only:: sg2000
+
+	For information on pin multiplexing and pin control, please refer directly to the online table: https://github.com/sophgo/sophgo-hardware/blob/master/SG200X/03_SG2000/04_SG2000_PINOUT.xlsx

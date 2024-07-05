@@ -8,7 +8,7 @@ SARADC is an analog signal to digital conversion controller. This chip has up to
 
 .. only:: sg2002
 
-	**Note:** The chip does not bring out all ADC channels on the pins for the controller under Active Domain. For details, please refer to :ref:`table_inf_signal_pin_fmux_adc_sg2002`.
+	**Note:** The chip does not bring out all ADC channels on the pins for the controller under Active Domain. For details, please refer to the description of the ADC interface in the “Function Signal Table” in :ref:`section_pinmux_pinctrl`.
 
 Features
 ~~~~~~~~
