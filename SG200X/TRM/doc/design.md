@@ -17,6 +17,7 @@
 - [编译方法](#编译方法)
 	- [自动化脚本 `build.sh` 方式](#自动化脚本-buildsh-方式)
 	- [手动 make 方式](#手动-make-方式)
+- [发布版本](#发布版本)
 
 <!-- /TOC -->
 
@@ -324,6 +325,52 @@ cd SG200X/TRM/sg2002_cn
 ```
 
 生成的 pdf 文件的位置是：`SG200X/TRM/sg2002_cn/build/latex/sg2002.pdf`(FIXME: Windows 下还没有和 Linux 下操作统一。)
+
+# 发布版本
+
+SG200x TRM 的版本格式定义为 `X.YY`。
+
+- `X`: 大版本号，1 位十进制数字，有非常重大的改动才会升级，或者当小版本 `YY` 达到 最大值时。目前考虑对于 TRM 这类文档项目，1 位十进制数字应该足够用了。
+- `YY`: 小版本号，2 位十进制数字，除了第一个 `0` 不写成 `00`，其余当数字小于 `10` 时都补足两位，譬如 `01`，`02` .....。最大 `99`。
+
+发布新版本时，需要针对 TRM 下的每个子项目，sg2000_cn/sg2000_en/... 都修改如下文件， 下面是一个例子：
+
+```diff
+diff --git a/SG200X/TRM/sg2000_cn/Makefile b/SG200X/TRM/sg2000_cn/Makefile
+index d68207c..44b1a29 100644
+--- a/SG200X/TRM/sg2000_cn/Makefile
++++ b/SG200X/TRM/sg2000_cn/Makefile
+@@ -11,8 +11,8 @@ BUILDDIR      = build
+ PROJECT      = sg2000
+ DOC_TYPE     = trm
+ DOC_LANG     = cn
+-RELEASE      = 1.0-beta
+-RELEASE_DATE = 2024-03-22
++RELEASE      = 1.0
++RELEASE_DATE = 2024-06-17
+ COPYRIGHT    = "2024 SOPHGO Co., Ltd"
+ AUTHOR       = Sophgo
+ 
+diff --git a/SG200X/TRM/sg2000_cn/source/index.rst b/SG200X/TRM/sg2000_cn/source/index.rst
+index 70844b8..57c527d 100644
+--- a/SG200X/TRM/sg2000_cn/source/index.rst
++++ b/SG200X/TRM/sg2000_cn/source/index.rst
+@@ -12,6 +12,7 @@ SG2000 技术参考手册
+        ===============   ============     =====================================
+        1.0-alpha         2023/11/23       初稿
+        1.0-beta          2024/03/22       转化为 reStructuredText 格式
++       1.0               2024/06/17       修复累积问题，正式发布 v1.0
+        ===============   ============     =====================================
+```
+
+修改提交后，需要给该 commit 打上 tag, tag 不需要分中文版和英文版，只要具体到 product 即可，格式为 `<product>-trm-v<X.YY>`。譬如：
+
+- sg2002-trm-v1.0
+- sg2000-trm-v1.0
+
+tag 打好后记得推送到 github 仓库。
+
+最后登录 github 仓库：<https://github.com/sophgo/sophgo-doc/>, 在 Release 页面发布，发布时选择上面新建的对应 tag。具体操作参考 github 有关 release 的在线帮助。
 
 
 [1]: https://stackoverflow.com/questions/44563794/how-to-correctly-include-other-rest-files-in-a-sphinx-project
