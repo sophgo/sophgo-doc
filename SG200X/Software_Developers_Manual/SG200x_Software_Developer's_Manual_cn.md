@@ -141,7 +141,7 @@ git config --global http.postBuffer 2147483648
 ### 3.2.1 自动化脚本拉取
 - 本 SDK 仓库采用自动化脚本的方式管理子仓库，在拉取 SDK 时请使用如下的命令：
 ```
-git clone https://github.com/sophgo/sophpi.git -b sg200x-evb
+git clone https://github.com/kubuds/sophpi/tree/sg200x-evb
 cd sophpi
 ./scripts/repo_clone.sh --gitclone scripts/subtree.xml
 ```
@@ -162,28 +162,28 @@ cd sophpi
 
 ```
 mkdir sophpi -p && cd sophpi
-git clone https://github.com/sophgo/host-tools.git
-git clone https://github.com/sophgo/build -b sg200x-dev
-git clone https://github.com/sophgo/freertos -b sg200x-dev
-git clone https://github.com/sophgo/FreeRTOS-Kernel -b sg200x-dev freertos/Source
-git clone https://github.com/sophgo/Lab-Project-FreeRTOS-POSIX -b sg200x-dev freertos/Source/FreeRTOS-Plus-POSIX
-git clone https://github.com/sophgo/fsbl -b sg200x-dev
-git clone https://github.com/sophgo/isp_tuning -b sg200x-dev
-git clone https://github.com/sophgo/linux_5.10 -b sg200x-dev
-git clone https://github.com/sophgo/middleware -b sg200x-dev
-git clone https://github.com/sophgo/SensorSupportList middleware/v2/component/isp
-git clone https://github.com/sophgo/opensbi -b sg200x-dev
-git clone https://github.com/sophgo/osdrv -b sg200x-dev
-git clone https://github.com/sophgo/oss
-git clone https://github.com/sophgo/ramdisk -b sg200x-dev
-git clone https://github.com/sophgo/u-boot-2021.10 -b sg200x-dev
-git clone https://github.com/sophgo/buildroot-2021.05.git
-git clone https://github.com/sophgo/cvimath.git
-git clone https://github.com/sophgo/cvibuilder.git
-git clone https://github.com/sophgo/cviruntime.git
-git clone https://github.com/sophgo/cvikernel.git
-git clone https://github.com/sophgo/cnpy.git
-git clone https://github.com/sophgo/flatbuffers.git
+git clone https://github.com/kubuds/host-tools/tree/master
+git clone https://github.com/kubuds/buildroot-2021.05/tree/sg200x-dev
+git clone https://github.com/kubuds/build/tree/sg200x-dev
+git clone https://github.com/kubuds/oss/tree/master
+git clone https://github.com/kubuds/freertos/tree/sg200x-dev
+git clone https://github.com/kubuds/Lab-Project-FreeRTOS-POSIX/tree/sg200x-dev freertos/Source/FreeRTOS-Plus-POSIX
+git clone https://github.com/kubuds/FreeRTOS-Kernel/tree/sg200x-dev freertos/Source
+git clone https://github.com/kubuds/fsbl/tree/sg200x-dev
+git clone https://github.com/kubuds/opensbi/tree/sg200x-dev
+git clone https://github.com/kubuds/u-boot-2021.10/tree/sg200x-dev
+git clone https://github.com/kubuds/linux_5.10/tree/sg200x-dev
+git clone https://github.com/kubuds/osdrv/tree/sg200x-dev
+git clone https://github.com/kubuds/ramdisk/tree/sg200x-dev
+git clone https://github.com/kubuds/middleware/tree/sg200x-dev
+git clone https://github.com/kubuds/isp_tuning/tree/sg200x-dev
+git clone https://github.com/kubuds/SensorSupportList/tree/sg200x-dev
+git clone https://github.com/kubuds/cvimath/tree/sg200x-dev
+git clone https://github.com/kubuds/cvikernel/tree/sg200x-dev
+git clone https://github.com/kubuds/cviruntime/tree/sg200x-dev
+git clone https://github.com/kubuds/cvibuilder/tree/sg200x-dev
+git clone https://github.com/kubuds/flatbuffers/tree/master
+git clone https://github.com/kubuds/cnpy/tree/tpu
 ```
 之后按照即可按照正常程序获取 SDK 并编译。
 
