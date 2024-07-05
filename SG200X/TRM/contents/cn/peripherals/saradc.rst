@@ -8,7 +8,7 @@ SARADC 为模拟信号数字转换控制器。本芯片有最多 2 个 SARADC �
 
 .. only:: sg2002
 
-	**注意：** 芯片并没有在管脚上为 Active Domain 下的控制器引出所有的 ADC 通道，具体参考 :ref:`table_inf_signal_pin_fmux_adc_sg2002`。
+	**注意：** 芯片并没有在管脚上为 Active Domain 下的控制器引出所有的 ADC 通道，具体参考 :ref:`section_pinmux_pinctrl` 中 “功能信号表” 中 ADC 接口的描述。
 
 特点
 ~~~~
