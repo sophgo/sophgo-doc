@@ -782,7 +782,7 @@ SG200x列处理器在主板上 Bootloader 采用 U-boot-2021.10。当配置的�
 - 其他操作细节请参考文档：[U-BOOT 移植应用开发指南](https://doc.sophgo.com/cvitek-develop-docs/master/docs_latest_release/CV180x_CV181x/zh/01.software/BSP/U-boot_Porting_Development_Guide/build/U-bootPortingDevelopmentGuide_zh.pdf)
 
 ## 7.4 IVE 软件开发
-IVE(Intelligent Video Engine)是一种使用应减去加速电脑视觉算法的模块，用户利用IVE 开发智能分析方案可以加速智能分析的运算，降低 RISC-V 占用。当前 IVE 所提供的算子可以支撑开发影像或视频的智能分析方案。
+IVE(Intelligent Video Engine)是一种使用硬件去加速电脑视觉算法的模块，用户利用IVE 开发智能分析方案可以加速智能分析的运算，降低 RISC-V 占用。当前 IVE 所提供的算子可以支撑开发影像或视频的智能分析方案。
 - 具体操作细节请参考文档[IVE 软件开发指南](https://doc.sophgo.com/cvitek-develop-docs/master/docs_latest_release/CV180x_CV181x/zh/01.software/MPI/IVEAPI_Reference/build/IVEAPIReference_zh.pdf)
 
 ## 7.5 LDC 调试
