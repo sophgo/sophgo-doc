@@ -29,6 +29,8 @@ The SG200x SDK is designed for the SG200x series of SoCs and any development boa
 - cvikernel: A library for TPU instruction generation, serving as assembly.
 - flatbuffers: 3rd-party open source libraries.
 - cnpy: A tool that provides c++ interface to read and write npy, npz data format
+- cvi_rtsp: A library for multiplexing and packetizing multimedia transport streams.
+- tdl_sdk: AI tool kit for algorithms integration
 - install: Artifact directory for built system images.
 
 # 2. Deploying the SDK
@@ -190,10 +192,10 @@ git config --global http.postBuffer 2147483648
 
 ### 3.2.1 Using the Automated Scripts
 
-- The SDK repository manages its child repositories with an automatic script. Use the following command to fetch the SDK:
+The SDK repository `sophpi` manages its child repositories with an automatic script. Use the following command to fetch the SDK:
 
 ```
-git clone https://github.com/kubuds/sophpi/tree/sg200x-evb
+git clone https://github.com/kubuds/sophpi.git
 cd sophpi
 ./scripts/repo_clone.sh --gitclone scripts/subtree.xml
 ```
@@ -217,28 +219,30 @@ If using the automated script is not an option, please fetch the repositories ma
 
 ```
 mkdir sophpi -p && cd sophpi
-git clone https://github.com/kubuds/host-tools/tree/master
-git clone https://github.com/kubuds/buildroot-2021.05/tree/sg200x-dev
-git clone https://github.com/kubuds/build/tree/sg200x-dev
-git clone https://github.com/kubuds/oss/tree/master
-git clone https://github.com/kubuds/freertos/tree/sg200x-dev
-git clone https://github.com/kubuds/Lab-Project-FreeRTOS-POSIX/tree/sg200x-dev freertos/Source/FreeRTOS-Plus-POSIX
-git clone https://github.com/kubuds/FreeRTOS-Kernel/tree/sg200x-dev freertos/Source
-git clone https://github.com/kubuds/fsbl/tree/sg200x-dev
-git clone https://github.com/kubuds/opensbi/tree/sg200x-dev
-git clone https://github.com/kubuds/u-boot-2021.10/tree/sg200x-dev
-git clone https://github.com/kubuds/linux_5.10/tree/sg200x-dev
-git clone https://github.com/kubuds/osdrv/tree/sg200x-dev
-git clone https://github.com/kubuds/ramdisk/tree/sg200x-dev
-git clone https://github.com/kubuds/middleware/tree/sg200x-dev
-git clone https://github.com/kubuds/isp_tuning/tree/sg200x-dev
-git clone https://github.com/kubuds/SensorSupportList/tree/sg200x-dev
-git clone https://github.com/kubuds/cvimath/tree/sg200x-dev
-git clone https://github.com/kubuds/cvikernel/tree/sg200x-dev
-git clone https://github.com/kubuds/cviruntime/tree/sg200x-dev
-git clone https://github.com/kubuds/cvibuilder/tree/sg200x-dev
-git clone https://github.com/kubuds/flatbuffers/tree/master
-git clone https://github.com/kubuds/cnpy/tree/tpu
+git clone https://github.com/kubuds/host-tools.git
+git clone -b develop https://github.com/kubuds/build.git
+git clone https://github.com/kubuds/freertos.git
+git clone -b sg200x-dev https://github.com/kubuds/Lab-Project-FreeRTOS-POSIX.git freertos/Source/FreeRTOS-Plus-POSIX
+git clone -b sg200x-dev https://github.com/kubuds/FreeRTOS-Kernel.git freertos/Source
+git clone https://github.com/kubuds/fsbl.git
+git clone https://github.com/kubuds/opensbi.git
+git clone https://github.com/kubuds/u-boot-2021.10.git
+git clone -b develop https://github.com/kubuds/linux_5.10.git
+git clone -b develop https://github.com/kubuds/osdrv.git
+git clone https://github.com/kubuds/ramdisk.git
+git clone https://github.com/kubuds/oss.git
+git clone -b develop https://github.com/kubuds/middleware.git
+git clone https://github.com/kubuds/isp_tuning.git
+git clone -b develop https://github.com/kubuds/SensorSupportList.git middleware/v2/component/isp/
+git clone https://github.com/kubuds/cvimath.git
+git clone https://github.com/kubuds/cvikernel.git
+git clone https://github.com/kubuds/cviruntime.git
+git clone https://github.com/kubuds/cvibuilder.git
+git clone https://github.com/kubuds/flatbuffers.git
+git clone -b tpu https://github.com/kubuds/cnpy.git
+git clone -b sg200x-dev https://github.com/kubuds/buildroot-2021.05.git
+git clone https://github.com/kubuds/cvi_rtsp.git
+git clone https://github.com/kubuds/tdl_sdk.git
 ```
 
 After which, you may use the normal procedures to fetch and build the SDK.
@@ -280,13 +284,12 @@ chmod +x yourscript.sh
 
 ## 3.4 Reporting SDK Issues
 
-If you have any questions or feedback for the SDK repositories, please get in touch with us via e-mail:
+Please check and make sure you are at the `develop` branch of our SDK repository by `git branch` command. If you have any questions or feedback for the SDK repositories, you're very welcome for creating Issues or pull requests. Or you could directly get in touch with us via e-mail:
 
 - [kenneth.liu@sophgo.com](kenneth.liu@sophgo.com)
-- [sijie.wang@sophgo.com](sijie.wang@sophgo.com)
-- [runze.lin@sophgo.com](runze.lin@sophgo.com)
+- [jinglin.zhong@sophgo.com](jinglin.zhong@sophgo.com)
 
-The repository maintainers will review and act upon your suggestions to help users carry out their development work.
+The repository maintainers will review and act upon your suggestions to help users carry out your development work.
 
 # 4 Building the SDK
 
@@ -405,19 +408,36 @@ Following the instructions at the bottom of the screen, you may navigate the con
 
 - To choose the SoC: Enter the "Chip selection" menu to select the appropriate model.
 - To switch the architecture: Enter the "Arch define" menu to, input "riscv" or "arm" to select your target architecture.
-- ROOTFS configuration: Enter the "ROOTFS Options" menu, and make sure you select the `Enable buildroot generate rootfs` to enable the buildroot construction.
+- ROOTFS configuration: Enter the "ROOTFS Options" menu, and select the `Enable buildroot generate rootfs` to enable the buildroot construction for the file system. It is not enabled by default.
+
+### 4.2.3 Enable the TPU, TDL SDK compilation option
+
+TPU is an AI acceleration engine for deep learning neural networks, which can be used to accelerate image classification, object detection, face detection and recognition, segmentation, LSTM, and more. The main function of TPU is to offload CPU work and accelerate computer vision and voice-related operations.
+
+TDL SDK (Turnkey Deep Learning) is a toolkit integrating algorithms to shorten the time required for application development. This architecture implements the algorithms needed for TDL, including pre-processing and post-processing, and provides a unified and convenient programming interface. The TDL_SDK is based on self-developed Middleware and TPU SDK, including two main internal modules (Core and Service), algorithm C interfaces, and algorithm applications(Application). Check repository's README for more details.
+
+Currently, the TDL SDK includes algorithms for motion detection,face detection, face recognition, face landmark detection, fall detection, semantic segmentation, license plate detection, license plate recognition, liveness detection, sound classification， human keypoints detection, lane detection, object tracking, gesture detection, gesture recognition, text detection, text recognition and so on.
+
+If users want to use the demo in the TPU SDK or TDL SDK, they only need to set:
+```
+export TPU_REL=1
+```
+That is, the compilation of TPU SDK and TDL SDK will be enabled during compilation.
 
 ## 4.3 Building A Complete SDK
-
-After configuring the SDK, you may use the `clean_all && build_all` command to start building the SDK. After the compilation completes, you may find the built system package `upgrade.zip` under the `install/` directory.
-
-By running in addition the `pack_burn_image` command, the build system will generate a system image, such as `sophpi-duo-XXX.img`. Should the build process fail with an error, please make sure that your files are complete, whether you needed to update your repositories, and perform the build process as instructed.
 
 ```
 clean_all && build_all
 pack_burn_image
 ```
-> Notice: However you choose to configure the SDK, please always use `menuconfig` command to check if `Enable buildroot generate rootfs` option is selected. If not, the system may fail to boot.
+
+After configuring the SDK, you may use the `clean_all && build_all` command to start building the SDK. After the compilation completes, you may find the built system package `upgrade.zip` under the `install/` directory.
+
+By running in addition the `pack_burn_image` command, the build system will generate a system image, such as `sophpi-duo-XXX.img`. Should the build process fail with an error, please make sure that your files are complete, whether you needed to update your repositories, and perform the build process as instructed.
+
+If the `TPU_REL` variable has enabled in the previous step, a subfolder named tpu_musl_riscv64 (RISC-V) or tpu_64bit (ARM) will appear in this directory. In this folder, there will be corresponding directories called `cvitek_ai_sdk` and `cvitek_tpu_sdk`, which contain the compiled demos of various algorithms.
+
+> Notice: However you choose to configure the SDK, please always use `menuconfig` command to check if `Enable buildroot generate rootfs` option is selected. If not, the  the file system is not enabled.
 
 ## 4.4 Building SDK Components
 
@@ -435,7 +455,7 @@ After configuring U-Boot using `$ menuconfig_uboot`, the resulted configuration 
 
 `./u-boot-2021.10/build/"$CHIP"_"$BOARD"/.config`
 
-Switch to the project root and run the following command to generate a `flip.bin` in the `install/` directory:
+Switch to the project root and run the following command to generate a `fip.bin` in the `install/` directory:
 
 `$ build_uboot`
 
@@ -511,6 +531,8 @@ You would need the following before burning your target boards:
 - Place the image in the SD card (raw image or `upgrade.zip`).
 - Insert the SD card in the EVB's SD card slot.
 - Reset the platform.
+
+> Notice: Please use the serial port to test your firmware.
 
 #### 5.1.3.1 Writing the Raw Image
 

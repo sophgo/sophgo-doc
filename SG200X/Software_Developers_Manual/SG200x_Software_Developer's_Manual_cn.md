@@ -25,6 +25,8 @@ SG200x SDK支持Linux、FreeRTOs两个系统，适用于SG200x系列芯片及搭
 - cvikernel: 用于生成TPU指令
 - flatbuffers: 第三方开源库
 - cnpy: 提供可读写npy、npz数据格式的c++接口
+- cvi_rtsp: 用于视频推流等
+- tdl_sdk: 算法集成工具包
 - install: 执行一次完整编译后，镜像的存放路径
 
 # 2. SDK开发环境搭建
@@ -139,9 +141,10 @@ git config --global http.postBuffer 2147483648
 
 ## 3.2 SDK获取
 ### 3.2.1 自动化脚本拉取
-- 本 SDK 仓库采用自动化脚本的方式管理子仓库，在拉取 SDK 时请使用如下的命令：
+首先我们获取我们的SDK主仓库`sophpi`，本仓库采用自动化脚本的方式管理子仓库，在拉取 SDK 时请使用如下的命令：
+
 ```
-git clone https://github.com/kubuds/sophpi/tree/sg200x-evb
+git clone https://github.com/kubuds/sophpi.git
 cd sophpi
 ./scripts/repo_clone.sh --gitclone scripts/subtree.xml
 ```
@@ -153,6 +156,7 @@ cd sophpi
 修改为
 `REMOTE_URL=$(grep -o '<remote.*/>' ${dir} | sed 's/.*fetch="\([^"]*\)".*/\1/' | sed "s/git@\(.*\):/https:\/\/\1\//")` 即可。
 
+
 在修改脚本后，请对照SDK工程目录章节，确保是否成功克隆了所有的子仓库。如果您的GitHub账户启用了2FA，可能需要额外使用Personal Access Token来代替密码进行认。在这种情况下，Git 会提示你输入用户名和密码，你的用户名就是你的 GitHub 用户名，密码则是你的 PAT。
 
 > 注意：我们更推荐您使用SSH的方式拉取代码，SSH协议在发送数据时会对数据进行加密操作，数据传输更安全，有效减少拉取失败的风险。
@@ -162,28 +166,30 @@ cd sophpi
 
 ```
 mkdir sophpi -p && cd sophpi
-git clone https://github.com/kubuds/host-tools/tree/master
-git clone https://github.com/kubuds/buildroot-2021.05/tree/sg200x-dev
-git clone https://github.com/kubuds/build/tree/sg200x-dev
-git clone https://github.com/kubuds/oss/tree/master
-git clone https://github.com/kubuds/freertos/tree/sg200x-dev
-git clone https://github.com/kubuds/Lab-Project-FreeRTOS-POSIX/tree/sg200x-dev freertos/Source/FreeRTOS-Plus-POSIX
-git clone https://github.com/kubuds/FreeRTOS-Kernel/tree/sg200x-dev freertos/Source
-git clone https://github.com/kubuds/fsbl/tree/sg200x-dev
-git clone https://github.com/kubuds/opensbi/tree/sg200x-dev
-git clone https://github.com/kubuds/u-boot-2021.10/tree/sg200x-dev
-git clone https://github.com/kubuds/linux_5.10/tree/sg200x-dev
-git clone https://github.com/kubuds/osdrv/tree/sg200x-dev
-git clone https://github.com/kubuds/ramdisk/tree/sg200x-dev
-git clone https://github.com/kubuds/middleware/tree/sg200x-dev
-git clone https://github.com/kubuds/isp_tuning/tree/sg200x-dev
-git clone https://github.com/kubuds/SensorSupportList/tree/sg200x-dev
-git clone https://github.com/kubuds/cvimath/tree/sg200x-dev
-git clone https://github.com/kubuds/cvikernel/tree/sg200x-dev
-git clone https://github.com/kubuds/cviruntime/tree/sg200x-dev
-git clone https://github.com/kubuds/cvibuilder/tree/sg200x-dev
-git clone https://github.com/kubuds/flatbuffers/tree/master
-git clone https://github.com/kubuds/cnpy/tree/tpu
+git clone https://github.com/kubuds/host-tools.git
+git clone -b develop https://github.com/kubuds/build.git
+git clone https://github.com/kubuds/freertos.git
+git clone -b sg200x-dev https://github.com/kubuds/Lab-Project-FreeRTOS-POSIX.git freertos/Source/FreeRTOS-Plus-POSIX
+git clone -b sg200x-dev https://github.com/kubuds/FreeRTOS-Kernel.git freertos/Source
+git clone https://github.com/kubuds/fsbl.git
+git clone https://github.com/kubuds/opensbi.git
+git clone https://github.com/kubuds/u-boot-2021.10.git
+git clone -b develop https://github.com/kubuds/linux_5.10.git
+git clone -b develop https://github.com/kubuds/osdrv.git
+git clone https://github.com/kubuds/ramdisk.git
+git clone https://github.com/kubuds/oss.git
+git clone -b develop https://github.com/kubuds/middleware.git
+git clone https://github.com/kubuds/isp_tuning.git
+git clone -b develop https://github.com/kubuds/SensorSupportList.git middleware/v2/component/isp/
+git clone https://github.com/kubuds/cvimath.git
+git clone https://github.com/kubuds/cvikernel.git
+git clone https://github.com/kubuds/cviruntime.git
+git clone https://github.com/kubuds/cvibuilder.git
+git clone https://github.com/kubuds/flatbuffers.git
+git clone -b tpu https://github.com/kubuds/cnpy.git
+git clone -b sg200x-dev https://github.com/kubuds/buildroot-2021.05.git
+git clone https://github.com/kubuds/cvi_rtsp.git
+git clone https://github.com/kubuds/tdl_sdk.git
 ```
 之后按照即可按照正常程序获取 SDK 并编译。
 
@@ -215,11 +221,11 @@ done
 `chmod +x yourscript.sh`
 
 ## 3.4 SDK问题反馈
-如果您对仓库有任何的疑问或者反馈，请通过邮箱联系：
+您可以通过`git branch`来查看当前分支，请确认您处于我们的开发者分支`develop`。若您在开发过程中发现了任何的故障，或是有新功能的修改建议，我们欢迎您通过Issues或者提交PR的方式与我们交流。或者您也可以直接通过邮箱联系我们：
 - [kenneth.liu@sophgo.com](kenneth.liu@sophgo.com)
-- [sijie.wang@sophgo.com](sijie.wang@sophgo.com)
-- [runze.lin@sophgo.com](runze.lin@sophgo.com)
+- [jinglin.zhong@sophgo.com](jinglin.zhong@sophgo.com)
 仓库维护者会及时对问题进行维护和处理，帮助客户更好的进行开发工作。
+
 
 # 4. SDK编译
 SDK基于操作系统可分为ARM和RISC-V两种版本。用户可以根据需求对应选择配置进行编译使用。
@@ -326,17 +332,31 @@ cv1812cp - cv1812cp_sophpi_duo_sd [C906B + EMMC 8192MB + BGA SIP 256MB]
 
 - 选择芯片：进入Chip selection，对应选择芯片型号
 - 切换架构：进入Arch define, 输入对应架构riscv或者arm即可切换
-- ROOTFS设置：进入ROOTFS Options， 请注意勾选`Enable buildroot generate rootfs`来确保镜像的成功构建
+- ROOTFS设置：进入ROOTFS Options， 勾选`Enable buildroot generate rootfs`，则会在编译中由buildroot构建得到文件系统。默认不开启。
 
+### 4.2.3 开启TPU、TDL SDK的编译选项
+TPU 是深度学习神经网络的 AI 加速引擎，可用于加速图像分类、物体检测、人脸检测与识别、分割、LSTM 等。TPU 的主要功能是分担 CPU 工作， 加速计算机视觉和语音相关操作。
+
+TDL SDK (Turnkey deep learning) 是一套算能提供的集成算法，用以缩短应用程序开发所需的时间。此架构实现了TDL所需算法包含其前后处理，提供统一且便捷的编程的接口。TDL_SDK基于算能自研的Middleware和TPU SDK，包括内部两大模块（Core和Service）、算法C接口、算法应用（Application）。关于TDL_SDK的更多细节，可以从该仓库内的README里获取。
+
+当前TDL SDK内包含了移动侦测，人脸检测，人脸识别，人脸关键点检测，跌倒检测，语义分割，车牌检测， 车牌辨识，活体识别，声音分类， 人体关键点检测， 车道线识别，目标追踪，手势侦测，手势识别，文字检测，文本识别等多个算法demo。
+用户如想使用TPU或TDL SDK内的demo，只需在编译前设置：
+```
+export TPU_REL=1
+```
+即会在编译时开启对TPU SDK和TDL SDK的编译。
 
 ## 4.3 编译完整SDK文档
-完成以上编译组态的设定后，输入 `clean_all && build_all` 开始自动编译，编译成功后即可在install目录下看到可用于烧录的upgrade.zip压缩包。 若继续执行`pack_burn_image`即可直接生成镜像sophpi-duo-XXX.img。若编译出现问题，请检查是否有文件缺失，重新拉取相应仓库，并重新按步骤编译。
-
 ```
 clean_all && build_all
 pack_burn_image
 ```
-> 注意：无论用以上哪种方式进行组态设定，都请使用`menuconfig`来确认您已经勾选`Enable buildroot generate rootfs`，否则系统可能会启动失败。
+
+完成以上编译组态的设定后，输入 `clean_all && build_all` 开始自动编译，编译成功后即可在install/对应目录下看到可用于烧录的upgrade.zip压缩包。 若继续执行`pack_burn_image`即可直接生成镜像sophpi-duo-XXX.img。若编译出现问题，请检查是否有文件缺失，重新拉取相应仓库，并重新按步骤编译。
+
+如果您在上一步骤中开启了TPU/TDL的编译选项，则在该目录下会出现tpu_musl_riscv64 (RISC-V)或tpu_64bit (ARM)的子文件夹。该文件夹下则会有对应的`cvitek_ai_sdk`及`cvitek_tpu_sdk`目录，内含编译得到的各算法demo。
+
+> 注意：无论用以上哪种方式进行组态设定，都请使用`menuconfig`来确认您已经勾选`Enable buildroot generate rootfs`，否则不启用文件系统。
 
 ## 4.4 编译部分SDK文档
 ### 4.4.1 U-boot单独编译
@@ -350,7 +370,7 @@ pack_burn_image
 
 进入工程根目录，执行编译
 `$ build_uboot`
-完成后会在instal路径下生成flip.bin
+完成后会在instal路径下生成fip.bin
 
 ### 4.4.2 Kernel单独编译
 修改 kernel (ex: *.dts, *.c), 重新编译 Linux kernel image。
@@ -408,6 +428,8 @@ pack_burn_image
 - 将烧录档案放到SD卡中。(可选择直接使用镜像，或者使用upgrade.zip两种方式)
 - 将SD卡插入EVB的SD卡槽中。
 - 将平台重开机。
+
+> 注意：请使用串口来调试您的固件。
 
 #### 5.1.3.1 使用镜像
 - 在 Windows 下，可以使用 `balenaEtcher`，`Rufus` 或 `Win32 Disk Imager` 等工具将生成的镜像写入 SD 卡中。
