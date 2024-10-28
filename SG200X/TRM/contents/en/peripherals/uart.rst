@@ -118,7 +118,7 @@ Baud Rate Configuration
 
 - UART working clock (UART_SCLK) configuration
 
-  You can refer to the CLK_DIV CRG register description to configure clk_sel_0_9~ clk_sel_0_13 to select the working clock of uart0~uart4. The default is 1: XTAL 25MHz. If configured as 0, the UART PLL divided clock source is selected. The PLL frequency division clock source is preset to 187.5MHz. If necessary, you can configure the frequency division register div_clk_187p5m to adjust the PLL frequency division clock to 1500/NMHz, up to 187.5MHz.
+  You can refer to the CLK_DIV CRG register description to configure clk_sel_0_9~ clk_sel_0_13 to select the working clock of uart0~uart4. The default is 1: XTAL 25MHz. If configured as 0, the UART PLL divided clock source is selected. The PLL frequency division clock source is preset to 187.5MHz. If necessary, you can configure the frequency division register div_clk_cam0_200 to adjust the PLL frequency division clock to 1500/NMHz, up to 187.5MHz.
 
 - UART baud rate configuration
 

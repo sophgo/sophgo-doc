@@ -118,7 +118,7 @@ UART 是一普遍通用之点对点物理层传输协议，可以用来对接各
 
 - UART 工作时钟 (UART_SCLK) 配置
 
-  可参考 CLK_DIV CRG 寄存器描述，配置 clk_sel_0_9~ clk_sel_0_13 选择 uart0~uart4 的工作时钟。预设为 1: XTAL 25MHz，配置为 0 即选择 UART PLL 分频时钟源。 PLL 分频时钟源预设为 187.5MHz ，若有需要可以配置分频寄存器 div_clk_187p5m 调整 PLL 分频时钟为 1500/NMHz，最高达 187.5MHz。
+  可参考 CLK_DIV CRG 寄存器描述，配置 clk_sel_0_9~ clk_sel_0_13 选择 uart0~uart4 的工作时钟。预设为 1: XTAL 25MHz，配置为 0 即选择 UART PLL 分频时钟源。 PLL 分频时钟源预设为 187.5MHz ，若有需要可以配置分频寄存器 div_clk_cam0_200 调整 PLL 分频时钟为 1500/NMHz，最高达 187.5MHz。
 
 - UART 波特率配置
 
