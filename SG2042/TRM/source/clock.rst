@@ -46,7 +46,7 @@ logic's clock requirements.
 
 * MPLL: the name is short for Main PLL. The output clocks of this PLL are mainly used in RP subsystem and AP subsystem.
 * FPLL: the name is shoft for Fixed PLL. This PLL generates fixed frequency clock, with output clock at 1.0 GHz. The output clocks of this PLL are mainly used in data and configuraiton bus.
-* DPLL0/1: the name is short for DDR PLL. The output clocks of thes PLLs are mainly used in DDR subsystem.
+* DPLL0/1: the name is short for DDR PLL. The output clocks of these PLLs are mainly used in DDR subsystem.
 
 
 And in order to reconfigure PLL clock frequency on the fly,
