@@ -9,7 +9,7 @@ This section describes the programmable registers of the DW_apb_gpio.
 Bus Interface
 ^^^^^^^^^^^^^
 
-The DW_apb_gpio peripheral has a standard AMBA 2.0 APB interface for reading and writing the interna registers. This peripheral supports APB data bus widths of 8, 16, or 32 bits, which is set with the
+The DW_apb_gpio peripheral has a standard AMBA 2.0 APB interface for reading and writing the internal registers. This peripheral supports APB data bus widths of 8, 16, or 32 bits, which is set with the
 APB_DATA_WIDTH parameter.
 
 Figure 1 shows the read/write busses between the DW_apb and the APB slave.
@@ -58,13 +58,13 @@ Table 1 shows the memory map for the DW_apb_gpio peripheral.
    |                 |        |            |    +                                            +
    |                 |        |            |    | GPIO_PORTA_SINGLE_CTL = 0                  |
    +-----------------+--------+------------+----+--------------------------------------------+
-   | gpio_swporta_dr | 0x0c   | See        | R/W| Port B data register                       |
+   | gpio_swportb_dr | 0x0c   | See        | R/W| Port B data register                       |
    |                 |        |            |    +                                            +
    |                 |        | Description|    | Width: GPIO_PWIDTH_B                       |
    |                 |        |            |    +                                            +
    |                 |        |            |    | Reset Value: GPIO_SWPORTB_RESET            |
    +-----------------+--------+------------+----+--------------------------------------------+
-   | gpio_swporta_ddr| 0x10   | See        | R/W| Port B data direction register             |
+   | gpio_swportb_ddr| 0x10   | See        | R/W| Port B data direction register             |
    |                 |        |            |    +                                            +
    |                 |        | Description|    | Width: GPIO_PWIDTH_B                       |
    |                 |        |            |    +                                            +
@@ -186,7 +186,7 @@ Table 1 shows the memory map for the DW_apb_gpio peripheral.
    |                 |        |            |    +                                            +
    |                 |        |            |    | Reset Value: 0x0                           |
    +-----------------+--------+------------+----+--------------------------------------------+
-   | gpio_ext_porta  | 0x50   | See        | R  | Port A clear interrupt register            |
+   | gpio_ext_porta  | 0x50   | See        | R  | Port A external interrupt register         |
    |                 |        |            |    +                                            +
    |                 |        | Description|    | Width: GPIO_PWIDTH_A                       |
    |                 |        |            |    +                                            +
