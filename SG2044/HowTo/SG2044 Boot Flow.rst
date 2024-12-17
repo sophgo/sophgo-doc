@@ -20,7 +20,7 @@ SG2044's original firmware boot process:
 
 - **ZSBL (Zero-Stage BootLoader)**
 
-  Mainly load DTB, binaries of OpenSBI, and EDK II from microSD card or SPI Nor Flash into memory.
+  Mainly load configuration file (``conf.ini``), DTB, binaries of OpenSBI, and EDK II from microSD card or SPI Nor Flash into memory.
 
 - **OpenSBI (RISC-V Open Source Supervisor Binary Interface)**
 
@@ -38,7 +38,7 @@ SG2044's original firmware boot process:
 
 - **Linux**
 
-  Supported Linux distributions: Ubuntu 24.04.1, OpenEuler 24.03.
+  Supported Linux distributions: Ubuntu 24.04.1, openEuler 24.03.
 
-  Supported Linux Kernel Version: 6.6.50.
+  Supported Linux Kernel Version: 6.12.
 
