@@ -1,0 +1,28 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36" version="25.0.1">
+  <diagram name="Page-1" id="GJZcdP-uPZ1s3mMH_IL9">
+    <mxGraphModel dx="1144" dy="659" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="8mw6TKa8VExpaAhbKWRQ-1" value="CPU 密集型基准测试套件" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="128" y="118" width="82" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="8mw6TKa8VExpaAhbKWRQ-2" value="SPEC2006" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="257" y="62" width="82" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="8mw6TKa8VExpaAhbKWRQ-3" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="214" y="128" as="sourcePoint" />
+            <mxPoint x="264" y="78" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="8mw6TKa8VExpaAhbKWRQ-4" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="214" y="128" as="sourcePoint" />
+            <mxPoint x="264" y="186" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
