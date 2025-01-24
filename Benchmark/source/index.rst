@@ -25,3 +25,5 @@ SG2042测试手册
    10_stress_ng.rst
    11_fio.rst
    12_redis.rst
+   13_memoryreadlatency.rst
+   14_dhrystone.rst

@@ -24,8 +24,19 @@ sysbench工具使用方法
 
 .. code:: bash
 
+   # ubuntu
    sudo apt install sysbench
-   sysbench [options] [test] [command]
+   # openEuler
+   sudo dnf install sysbench
+
+命令格式如下：
+
+``sysbench [options] [test] [command]``
+
+常用测试命令：
+
+.. code:: bash
+
    sysbench cpu --cpu-max-prime=20000 run #测试 CPU 计算质数的性能
    sysbench memory --memory-block-size=1M --memory-total-size=10G run #测试内存读取和写入的性能
    sysbench fileio --file-total-size=10G prepare
@@ -40,12 +51,22 @@ sysbench工具使用方法
    sysbench oltp_read_only --db-driver=mysql 
             --mysql-host=localhost --mysql-user=root --mysql-password=your_password cleanup
 
+一般可使用CPU计算质数的性能，作为当前测试项的测试结果，所使用的命令为：
+
+.. code:: bash
+
+    # 测试cpu计算质数的性能（1 thread）
+    sysbench cpu --cpu-max-prime=20000 --threads=1 run
+
+    # 测试cpu计算质数的性能（64 thread）
+    sysbench cpu --cpu-max-prime=20000 --threads=64 run
+
 运行结果示例
 ^^^^^^^^^^^^^^^^^
 
 .. figure:: sysbench.png
    :alt: sysbench
-   :scale: 20
+   :scale: 60
    :align: center
 
 sysbench测试结果
@@ -56,19 +77,19 @@ sysbench测试结果
 
 测试环境
 
-- ``SG2042 EVB``
-- ``32GB * 4 DDR``
-- ``Fedora38``
-- ``64 core C920@2.0GHz``
+- ``SG2044 EVB``
+- ``dual-rank 128GB DDR``
+- ``OpenEuler24.03 (LTS) Linux6.12.6``
+- ``64 core C920@2.8GHz``
 
-+---------------------+--------------+
-| performance metrics | test result  |
-+=====================+==============+
-| events per seconds  | 76559.75     |
-+---------------------+--------------+
-| latency avg         | 0.83ms       |
-+---------------------+--------------+
-| latency max         | 64.85ms      |
-+---------------------+--------------+
-| latency min         | 0.82ms       |
-+---------------------+--------------+
++---------------------+-----------------------+------------------------+
+| performance metrics | test result(1 thread) | test result(64 thread) |
++=====================+=======================+========================+
+| events per seconds  | 729.57 ms             | 46626.37 ms            |
++---------------------+-----------------------+------------------------+
+| latency avg         | 1.37 ms               | 1.37 ms                |
++---------------------+-----------------------+------------------------+
+| latency max         | 1.43 ms               | 11.39 ms               |
++---------------------+-----------------------+------------------------+
+| latency min         | 1.37 ms               | 1.36 ms                |
++---------------------+-----------------------+------------------------+

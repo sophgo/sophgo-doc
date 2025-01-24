@@ -15,7 +15,7 @@ coremark工具介绍
 coremark工具使用方法
 >>>>>>>>>>>>>>>>>>>>>>>
 
-详细步骤
+测试方法 1
 ^^^^^^^^^^^^^^^^^
 
 .. code:: bash
@@ -29,20 +29,39 @@ coremark工具使用方法
    make PORT_DIR=<platform>  #编译生成coremark.rvexe
    ./coremark.rvexe #运行coremark.rvexe
 
+测试方法 2
+^^^^^^^^^^^^^^^^^
+
+可以直接在待测设备上，下载 ``coremark`` 测试文件，然后在该设备上进行编译运行，具体步骤如下：
+
+.. code:: bash
+
+    git clone https://github.com/eembc/coremark.git
+    cd coremark/
+    # 使用 POSIX Threads API 编译在 1 个核心上执行的基准测试
+    make clean
+    make XCFLAGS="-DMULTITHREAD=1 -DUSE_PTHREAD -pthread"
+
+    # 使用 POSIX Threads API 编译在 64 个核心上执行的基准测试
+    make clean
+    make XCFLAGS="-DMULTITHREAD=64 -DUSE_PTHREAD -pthrea
+
+每次测试运行结束后，都会生成 ``run1.log`` ，在该文件中可以找到 ``coremark`` 测试结果。
+
 具体使用方法参考(https://github.com/eembc/coremark)
 
 运行结果示例
 ^^^^^^^^^^^^^^^^^
 
 .. figure:: coremark.png
-   :alt: unixbench
-   :scale: 20
+   :alt: 单核Coremark测试结果
+   :scale: 70
    :align: center
+
+   单核Coremark测试结果
 
 coremark测试结果
 >>>>>>>>>>>>>>>>>>
-
-
 
 测试环境:
 

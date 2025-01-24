@@ -15,16 +15,27 @@ redis测试步骤
 
 .. code:: bash
 
-   sudo apt-get install redis-server #安装Redis
-   redis-benchmark -h #安装Redis后,Redis-benchmark通常会自动安装,检查是否已安装Redis-benchmark
-   redis-benchmark -n 100000  -q #示例,-n:指定要执行的请求总数,-q: 以安静模式运行,只输出最终统计信息。
+   # 安装Redis
+   # ubuntu
+   sudo apt-get install redis-server
+   # openEuler
+   sudo dnf install redis
+
+   # 验证服务是否启动，如成功启动，则会在输出中看到“active (running)”
+   systemctl status redis
+
+   # 安装Redis后,Redis-benchmark通常会自动安装,检查是否已安装Redis-benchmark
+   redis-benchmark -h
+
+   # 示例,-n:指定要执行的请求总数,-q: 以安静模式运行,只输出最终统计信息
+   redis-benchmark -n 100000  -q
 
 运行结果示例
 ^^^^^^^^^^^^^^^^^
 
 .. figure:: redis_benchmark.png
    :alt: redis
-   :scale: 20
+   :scale: 60
    :align: center
 
 
