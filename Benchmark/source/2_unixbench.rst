@@ -5,7 +5,7 @@ unixbench工具介绍
 >>>>>>>>>>>>>>>>>>>>>>>
 
 ``unixbench`` 是一个用于测试unix系统性能的工具,测试的结果是一个指数值。
-这个值是测试系统的测试结果与一个基线系统测试结果比较得到的指数值，
+这个值是测试系统的测试结果与一个基线系统测试结果比较得到的指数值。
 
 ``unixbench`` 由许多针对特定领域的单独测试组成,其包含的测试有:
 
@@ -33,7 +33,24 @@ BYTE UNIX Benchmark工具使用方法
 
    git clone https://github.com/kdlucas/byte-unixbench
    cd byte-unixbench/UnixBench
-   ./Run -i -c -q/-v  #-i迭代次数,-c并发进程数，-q/-c输出模式(silent/details)
+
+   # 运行测试
+   ./Run
+
+命令格式： ``Run [ -q | -v ] [-i <n> ] [-c <n> [-c <n> ...]] [test ...]``
+
+参数介绍：
+
+- ``-q``  以安静模式运行。
+
+- ``-v``  在详细模式下运行。
+
+- ``-i <count>``  对每个测试运行<count>迭代，较慢的测试使用<count>为3，但至少为1。默认值为10（慢速测试为3）。
+
+- ``-c <n>``  并行运行每个测试的<n>个副本。
+
+如果待测设备有多个CPU，默认行为是运行所选的测试两次，即先运行一个测试程序副本，然后再运行N个测试程序副本，其中N是CPU的数量。
+这里也可以使用 ``-c`` 选项来指定确切的并行运行副本数。
 
 参数和测试分数计算结果详情可查阅(https://www.alibabacloud.com/blog/unixbench-score-an-introduction_594677)
 
@@ -42,7 +59,7 @@ BYTE UNIX Benchmark工具使用方法
 
 .. figure:: unix_benchmark.png
    :alt: unixbench
-   :scale: 20
+   :scale: 80
    :align: center
 
 BYTE UNIX Benchmark结果

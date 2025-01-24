@@ -6,11 +6,11 @@ stream工具介绍
 
 ``Stream`` 测试是内存测试中业界公认的内存带宽性能测试基准工具。
 Stream算法将某个内存块之间的数据读取出来,经过简单的运算放入另一个内存块。
-从而可以得到:内存带宽=搬运的内存大小/耗时
+从而可以得到： ``内存带宽=搬运的内存大小/耗时``
 
 .. figure:: stream_alg.png
    :alt: stream algorithm
-   :scale: 20
+   :scale: 60
    :align: center
 
 共有4种测试模式: ``copy`` , ``Scale`` , ``Add`` , ``Triad`` 
@@ -24,30 +24,43 @@ stream工具使用方法
 
 .. code:: bash
 
-   git clone https://github.com/jeffhammond/STREAM.git
-   gcc -O3 -fopenmp -DSTREAM_ARRAY_SIZE=8388608 -DNTIMES=20 stream.c -o stream #编译基准测试代码
-   ./stream #运行基准测试
+    git clone https://github.com/jeffhammond/STREAM.git
 
-Array size (用于指定在程序中使用的数组大小)(单位为double, 8个byte)
-当Array size为slc(system level cache=64MB)的三倍时,stream跑分最大。
+    # 编译基准测试代码
+    gcc -O3 -fopenmp -DSTREAM_ARRAY_SIZE=80000000 -DNTIMES=20 stream.c -o stream
+
+    # 运行基准测试
+    ./stream
+
+在编译时，需要使用参数 ``-DSTREAM_ARRAY_SIZE`` 指定 ``Array size`` 的大小。
+如果 ``Array size`` 较小时，cpu会直接从cache里存取数据，而不是从DDR中获取，这会导致测试DDR带宽性能测试结果失真。
+
+根据测试代码中的说明，可以通过待测设备的 L3 cache 大小来计算参数 ``-DSTREAM_ARRAY_SIZE`` 的 **最小值**，计算公式如下：
+
+ :math:`DSTREAM\_ARRAY\_SIZE = Cache * 4 * CPU路数 / 8 * 10^6`
+
+公式中， ``Cache`` 的单位是 ``MB``。
+
+根据上面的公式，可以计算如下两个示例的取值：
+
+1. 一个L3 cache为8MB的单核设备进行当前测试时，参数 ``-DSTREAM_ARRAY_SIZE`` 的最小值应为 4 million（4*10^6）。
+
+2. 一个L3 cache为20MB的双核设备进行当前测试时，参数 ``-DSTREAM_ARRAY_SIZE`` 的最小值应为 20 million（20*10^6）。
 
 参数说明:
 
-- fopenmp:
-	启用OpenMP,适应多处理器环境,更能得到内存带宽实际最大值。开启后,程序默认运行线程为CPU线程数
+1.  ``-fopenmp`` ：启用OpenMP,适应多处理器环境,更能得到内存带宽实际最大值。开启后,程序默认运行线程为CPU线程数
 
-- Array size (用于指定在程序中使用的数组大小)(单位为double, 8个byte)
-  当Array size为slc(system level cache=64MB)的三倍时,stream跑分最大。
+2. ``-DSTREAM_ARRAY_SIZE`` ：用于指定在程序中使用的数组大小(单位为double, 8个byte)。
 
-- DNTIMES=10:
-	执行的次数,并从这些结果中选最优值。
+3. ``-DNTIMES`` ：设置执行的次数，并从这些结果中选最优值。
 
 运行结果示例
 ^^^^^^^^^^^^^^^^^
 
 .. figure:: stream.png
    :alt: stream测试结果
-   :scale: 20
+   :scale: 80
    :align: center
 
 
