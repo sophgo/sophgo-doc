@@ -574,6 +574,8 @@ Register Overview
 
 Table :ref:`table_sdmmc_register_overview` is the SDMMC register overview (the base address of EMMC is 0x0430_0000, SDIO0 is 0x0431_0000, SDIO1 is 0x0500_0000)
 
+Note: Default offset address 0x200 is configured for P_VENDOR_SPECIFIC_AREA, so the address offset values from EMMC_CTRL to PHY_CONFIG are based on the value of P_VENDOR_SPECIFIC_AREA plus a relative offset value (multiple of 4), for example, EMMC_CTRL = 0x200 + 0x0, EMMC_BOOT_CTL = 0x200 + 0x4, and so on.
+
 .. include:: ../../contents-share/peripherals/sdmmc_register_overview.table.rst
 
 Register Description

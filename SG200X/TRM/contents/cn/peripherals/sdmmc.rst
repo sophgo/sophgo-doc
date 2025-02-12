@@ -575,6 +575,8 @@ ADMA 数据传输模式程序如图表 :ref:`diagram_adma_data_transfer`，详�
 
 表格 :ref:`table_sdmmc_register_overview` 为 SDMMC 寄存器概览( EMMC 的基本位址为 0x0430_0000, SDIO0 为 0x0431_0000, SDIO1 为 0x0500_0000 )
 
+注意：P_VENDOR_SPECIFIC_AREA 配置了默认偏移地址 0x200，所以从 EMMC_CTRL 开始到 PHY_CONFIG，其地址偏移值分别是在 P_VENDOR_SPECIFIC_AREA 的值的基础上加上了一个相对偏移值 (4 的倍数)，譬如 EMMC_CTRL = 0x200 + 0x0，EMMC_BOOT_CTL = 0x200 + 0x4 ,以此类推。
+
 .. include:: ./sdmmc_register_overview.table.rst
 
 寄存器描述
