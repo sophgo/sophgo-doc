@@ -7,11 +7,11 @@
 
 - 密码运算单元 (Crypto DMA)
 
-- 真随机产生单元 (True Random Number Generator)
+- 真随机数产生单元 (True Random Number Generator)
 
 - 安全除错保护单元 (Secure Debug Protection)
 
-密码运算单元 (CryptoDMA) 提供对称密钥加解密及哈希 (Hash) 的硬件加速，安全 eFuse 单元负责提供系统安全设置及安全密钥给安全子系统使用，真乱数产生单元提供具合格乱度的随机数供安全系统使用。
+密码运算单元 (CryptoDMA) 提供对称密钥加解密及哈希 (Hash) 的硬件加速，安全 eFuse 单元负责提供系统安全设置及安全密钥给安全子系统使用，真随机数产生单元提供合格的随机数供安全系统使用。
 
 .. _diagram_security_module:
 .. figure:: ../../../../media/image143.png
@@ -23,6 +23,7 @@
 	:maxdepth: 2
 
 	./cryptodma.rst
+	./trng.rst
 	./firewall.rst
 	./efuse.rst
 
