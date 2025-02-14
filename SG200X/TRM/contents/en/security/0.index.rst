@@ -11,7 +11,7 @@ The safety subsystem module includes the following safety function modules
 
 - Secure Debug Protection
 
-The cryptographic operation unit (CryptoDMA) provides hardware acceleration of symmetric key encryption, decryption and hashing (Hash). The security eFuse unit is responsible for providing system security settings and security keys for use by the security subsystem. The true random number generation unit provides qualified random numbers. Random numbers are used by security systems.
+The cryptographic operation unit (CryptoDMA) provides hardware acceleration of symmetric key encryption, decryption and hashing (Hash). The security eFuse unit is responsible for providing system security settings and security keys for use by the security subsystem. The true random number generation unit provides qualified random numbers used by security systems.
 
 .. _diagram_security_module:
 .. figure:: ../../../../media/image143.png
@@ -23,6 +23,7 @@ The cryptographic operation unit (CryptoDMA) provides hardware acceleration of s
 	:maxdepth: 2
 
 	./cryptodma.rst
+	./trng.rst
 	./firewall.rst
 	./efuse.rst
 
