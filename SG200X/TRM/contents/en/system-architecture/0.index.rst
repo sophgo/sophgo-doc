@@ -4,6 +4,7 @@ System Architecture
 .. toctree::
 	:maxdepth: 2
 
+	./processors.rst
 	./interrupts.rst
 	./memorymap.rst
 	./package_pin.rst
