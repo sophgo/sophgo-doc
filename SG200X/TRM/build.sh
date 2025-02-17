@@ -1,5 +1,7 @@
 #! /bin/bash
 
+set -e
+
 ROOT=$(pwd)
 
 document_list=(
@@ -25,8 +27,7 @@ build_pdf() {
     
 	make -C $1 pdf
     
-	mkdir -p out/$1
-	mv $1/build/*.pdf ${ROOT}/out/$1
+	mv $1/build/*.pdf ${ROOT}/out/
 
 	make -C $1 clean
 }

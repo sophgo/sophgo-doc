@@ -9,25 +9,31 @@ on:
 
 jobs:
   build-trm:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
-      - name: "Update APT sources && Install Deps"
+      - uses: actions/checkout@v4
+
+      - name: "Prepare"
         run: |
           sudo apt update
-          sudo apt install -y python3-sphinx texlive-latex-recommended texlive-latex-extra latexmk
+          sudo apt install -y python3-sphinx texlive-full texlive-xetex texlive-latex-recommended texlive-latex-extra latexmk
+          mkdir -p ${GITHUB_WORKSPACE}/artifacts/
 
-      - uses: actions/checkout@v3
+      - name: "Compile TRM for SG200X"
+        run: |
+          cd SG200X/TRM && bash build.sh
+          cp -av out/*.pdf ${GITHUB_WORKSPACE}/artifacts/
 
-      - name: "Compile TRM"
+      - name: "Compile TRM for SG2042"
         run: |
           build_tiemstamp=$(date "+%Y%m%d%H%M")
           cd SG2042/TRM && make latexpdf
           cp -av build/latex/sg2042technicalreferencemanual.pdf \
-            ${GITHUB_WORKSPACE}/SG2042TechnicalReferenceManual_${build_tiemstamp}.pdf
+            ${GITHUB_WORKSPACE}/artifacts/SG2042TechnicalReferenceManual_${build_tiemstamp}.pdf
 
-      - name: "Upload TRM Artifact"
-        uses: actions/upload-artifact@v3
+      - name: "Upload Artifact"
+        uses: actions/upload-artifact@v4
         with:
-          name: SG2042TechnicalReferenceManual
-          path: SG2042TechnicalReferenceManual_*.pdf
+          name: TechnicalReferenceManual
+          path: artifacts/*.pdf
           retention-days: 60
