@@ -16,7 +16,7 @@ RELEASE_DATE = 2024-07-05
 COPYRIGHT    = "2024 SOPHGO Co., Ltd"
 AUTHOR       = Sophgo
 
-PDF_FILENAME = $(PROJECT)_$(DOC_TYPE)_$(DOC_LANG).pdf
+PDF_FILENAME = $(PROJECT)_$(DOC_TYPE)_$(DOC_LANG)_v$(RELEASE).pdf
 
 BUILD_CONFIG  = \
 	CONFIG_PROJECT=$(PROJECT) \
@@ -37,11 +37,6 @@ help:
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
 %: Makefile
 	@$(BUILD_CONFIG) $(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
-
-PROJECT = sg2002
-DOC_TYPE = trm
-DOC_LANG = cn
-PDF_FILENAME = $(PROJECT)_$(DOC_TYPE)_$(DOC_LANG).pdf
 
 pdf: latexpdf
 	@mv $(BUILDDIR)/latex/$(PROJECT).pdf $(BUILDDIR)/"${PDF_FILENAME}"

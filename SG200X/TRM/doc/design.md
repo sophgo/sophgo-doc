@@ -282,15 +282,10 @@ $ ./build.sh
 ```bash
 ......
 ├── out
-│   └── TRM
-│       ├── sg2000_cn
-│       │   └── sg2000_trm_cn.pdf
-│       ├── sg2000_en
-│       │   └── sg2000_trm_en.pdf
-│       ├── sg2002_cn
-│       │   └── sg2002_trm_cn.pdf
-│       └── sg2002_en
-│           └── sg2002_trm_en.pdf
+    ├── sg2000_trm_cn_vX.YY.pdf
+    ├── sg2000_trm_en_vX.YY.pdf
+    ├── sg2002_trm_cn_vX.YY.pdf
+    └── sg2002_trm_en_vX.YY.pdf
 ......
 ```
 
@@ -314,7 +309,7 @@ cd SG200X/TRM/sg2002_cn
 make clean
 make pdf
 ```
-生成的 pdf 文件的位置是：`SG200X/TRM/sg2002_cn/build/sg2002_trm_cn.pdf`
+生成的 pdf 文件的位置是：`SG200X/TRM/sg2002_cn/build/sg2002_trm_cn_vX.YY.pdf`
 
 - 在 Windows 下
 
